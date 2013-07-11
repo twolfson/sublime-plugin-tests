@@ -12,8 +12,6 @@ The initial [tweet that started it all][tweet]:
 
 TODO: Links
 
-TODO: Move this all into a makefile?
-
 1. Install `pip`, a Python package manager
 
 2. `pip install virtualenvwrapper` (`sudo` may be needed). This installs `virtualenvwrapper`, a virtual environment for all Python packages related to this repo
@@ -24,10 +22,14 @@ TODO: Move this all into a makefile?
 
 > For resuming work, you may want to add `source /usr/local/bin/virtualenvwrapper.sh` to your `~/.bashrc` or `~/.bash_profile`
 
-TODO: Record nosetests to requirements.txt
-
 ## Running tests
-Once you have completed the steps in [Getting started][getting], tests can be run via `make test`.
+1. Complete [Getting started][getting] section
+
+2. `make bootstrap`, install/update dependencies
+
+3. `make test`, runs tests via `nosetests`
+
+[getting]: #getting-started
 
 ## License
 Copyright (c) 2013 Todd Wolfson
