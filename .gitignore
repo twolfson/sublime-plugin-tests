@@ -1,2 +1,2 @@
-TestPlugin.pyc
+*.pyc
 .vagrant/

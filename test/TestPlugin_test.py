@@ -1,6 +1,7 @@
 import unittest
+import subprocess
 
 
 class BasicTest(unittest.TestCase):
     def test_one_is_one(self):
-        self.assertEqual(1, 1)
+        subprocess.call(['sublime_text', '--command', 'test_plugin'])
