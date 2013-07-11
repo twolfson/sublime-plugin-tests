@@ -9,4 +9,4 @@ class BasicTest(unittest.TestCase):
             f.write('hello')
         '''
         print cmd
-        subprocess.call(['sublime_text', '--command', 'exec {"cmd": "touch": "args": "abc"}' % cmd])
+        subprocess.call(['sublime_text', '--command', 'exec' % cmd])
