@@ -1,5 +1,6 @@
 import unittest
 import subprocess
+import sublime_plugin
 
 # TODO: Current vision...
 # nosetests loads a test runner file
@@ -13,6 +14,15 @@ import subprocess
 # this is necessary because I don't think we can force selection in a quick panel listing
 
 
+# TODO: This will be part of the framework
 class BasicTest(unittest.TestCase):
     def test_one_is_one(self):
         subprocess.call(['sublime_text', '--command', 'write_to_file'])
+
+
+# TODO: This will be a test itself
+# TODO: Figure out how to run tests here. we might need our own assertion suite?
+class TestCommand(sublime_plugin.WindowCommand):
+    def run(self):
+        with open('tmp.txt', 'w') as f:
+            f.write('hello')
