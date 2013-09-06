@@ -15,6 +15,10 @@ class ScratchView:
         # Generate and save new view
         self.view = window.new_file()
 
+    def run_command(self, *args, **kwargs):
+        """ Run command `run_command` against view """
+        return self.view.run_command(*args, **kwargs)
+
     def clear_content(self):
         """ Clear out view content """
         # Localize view
@@ -38,12 +42,23 @@ class ScratchView:
         view.insert(edit, 0, content)
         view.end_edit(edit)
 
+    def get_content(self):
+        """ Get view content """
+        # Localize view
+        view = self.view
+
+        # Generate a region for the entire file
+        file_region = sublime.Region(0, view.size())
+
+        # Return the text contained by the file region
+        return view.substr(file_region)
+
     def clear_sel(self):
         """ Clear out view selection """
         self.view.sel().clear()
 
     def set_sel(self, regions):
-        """ Set out view selection via RegionSet """
+        """ Set view selection via RegionSet """
         # Clear out selection
         self.clear_sel()
 
@@ -52,6 +67,21 @@ class ScratchView:
         sel = self.view.sel()
         for region in regions:
             sel.add(region)
+
+    def get_sel(self):
+        """ Get view selection """
+        return self.view.sel()
+
+    def destroy(self):
+        """ Close view """
+        # Clear out content
+        # DEV: Empty the view to prevent a prompt on close
+        self.clear_content()
+
+        # Focus and close view
+        view = self.view
+        view.window().focus_view(view)
+        view.window().run_command('close')
 
 
 class TmpTestCommand(sublime_plugin.ApplicationCommand):
@@ -97,15 +127,16 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         content = input_obj['content']
 
         # Generate new scratch file
-        view = ScratchView()
+        scratch_view = ScratchView()
 
         # Output single.input to scratch
-        view.set_content(content)
+        scratch_view.set_content(content)
 
         # Update selection
+        scratch_view.set_sel(target_sel)
 
         # Run command
-        view.run_command('left_delete')
+        scratch_view.run_command('left_delete')
 
         # Load in single.output
         with open(__dir__ + '/example/left_delete/test_files/single.output.py') as f:
@@ -117,18 +148,13 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         expected_content = expected_obj['content']
 
         # Assert input to output
-        file_region = sublime.Region(0, view.size())
-        actual_content = view.substr(file_region)
+        actual_content = scratch_view.get_content()
         print expected_content == actual_content
 
         # Assert current selection to output selection
-        actual_sel = view.sel()
+        actual_sel = scratch_view.get_sel()
         print expected_sel[0] == actual_sel[0]
 
         # TODO: Move this into a finally of try/except block
         # Close the view
-        # DEV: Empty the view to prevent a prompt on close
-        edit = view.begin_edit()
-        view.erase(edit, Region(0, view.size()))
-        view.end_edit(edit)
-        view.window().run_command('close')
+        scratch_view.destroy()
