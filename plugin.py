@@ -158,9 +158,11 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
             actual_sel = scratch_view.get_sel()
             error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
             assert expected_sel[0] == actual_sel[0], error_msg
+
+            # TODO: Write out success
         except Exception as err:
-        # If an error occurs, panic.
-            # TODO: Panic
+        # If an error occurs, record it
+            # TODO: Write out failure + error
             print err
         finally:
         # Always, close the view
