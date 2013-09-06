@@ -84,4 +84,8 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         print expected_sel[0] == actual_sel[0]
 
         # Close the view
-
+        # DEV: Empty the view to prevent a prompt on close
+        edit = view.begin_edit()
+        view.erase(edit, Region(0, view.size()))
+        view.end_edit(edit)
+        view.window().run_command('close')
