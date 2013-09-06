@@ -1,26 +1,46 @@
+from os import path
 import re
 import sublime
 import sublime_plugin
 
+__dir__ = path.dirname(path.abspath(__file__))
+Region = sublime.Region
+
 class TmpTestCommand(sublime_plugin.ApplicationCommand):
     @classmethod
     def split_sel(cls, input):
+        # Create a placeholder selection
+        # TODO: Consider moving to RegionSet over list
+        sel = []
+
         # Find all indications for selection
-        # TODO: Robustify with larger selection and escaping
-        # TODO: We will prob need to iterate in reverse to handle clipping
-        print re.findall(r'\|', input)
-        # for match in re.finditer(r'\|', input):
-        #     print match.group(0)
+        while True:
+            # Find the next matching selection
+            # TODO: Robustify with multi-char selection and escaping
+            match = re.search(r'\|', input)
+
+            # If there was a match
+            if match:
+                # Save the selection
+                start = match.start(0)
+                sel.append(Region(start, start))
+
+                # Remove the match from the input
+                input = input[:start] + input[match.end(0):]
+
+            # Otherwise, break
+            else:
+                break
 
         # Return a selection and content
         return {
-            'sel': [],
+            'sel': sel,
             'content': input
         }
 
     def run(self):
         # Load in single.input
-        with open('example/left_delete/test_files/single.input.py') as f:
+        with open(__dir__ + '/example/left_delete/test_files/single.input.py') as f:
             input = f.read()
 
         print self.__class__.split_sel(input)
@@ -52,7 +72,7 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         # view.run_command('left_delete')
 
         # Load in single.output
-        with open('example/left_delete/test_files/single.output.py') as f:
+        with open(__dir__ + '/example/left_delete/test_files/single.output.py') as f:
             expected_content = f.read()
 
         # Break up expected selection from content
