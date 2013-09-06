@@ -1,7 +1,7 @@
 import subprocess
 
 def main():
-    print 'hi'
+    subprocess.call(['sublime_text', '--command', 'left_delete'])
 
 if __name__ == '__main__':
     main()
