@@ -7,6 +7,13 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         with open('example/left_delete/test_files/single.input.py') as f:
             content = f.read()
 
+        # Break up target selection from content
+        target_sel = [sublime.Region(7, 7)]
+        # content = """
+        # def abc():
+        #     pass
+        # """
+
         # Generate new scratch file
         # view = sublime.active_window().new_file()
         view = sublime.active_window().active_view()
@@ -17,18 +24,30 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         # view.end_edit(edit)
 
         # Update selection
-        target_sels = [sublime.Region(7, 7)]
-        # content = """
-        # def abc():
-        #     pass
-        # """
         # DEV: Attribution to sublime-invert-selection
         view.sel().clear()
-        for target_sel in target_sels:
-            view.sel().add(target_sel)
+        for region in target_sel:
+            view.sel().add(region)
 
-        # TODO: Run command
-        # TODO: Load in single.output
+        # Run command
+        view.run_command('left_delete')
+
+        # Load in single.output
+        with open('example/left_delete/test_files/single.output.py') as f:
+            expected_content = f.read()
+
+        # Break up expected selection from content
+        expected_sel = [sublime.Region(6, 6)]
+        expected_content = """
+        def ab():
+            pass
+        """
+
         # TODO: Assert input to output
+        file_region = sublime.Region(0, view.size())
+        actual_content = view.substr(file_region)
+        print expected_content == actual_content
+
         # TODO: Assert current selection to output selection
-        pass
+        actual_sel = view.sel()
+        print expected_sel == actual_sel
