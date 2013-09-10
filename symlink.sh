@@ -1,1 +1,1 @@
-ln -s $PWD ~/.config/sublime-text-2/Packages/TestPlugin
+ln -s $PWD ~/.config/sublime-text-2/Packages/tmp-plugin-tests

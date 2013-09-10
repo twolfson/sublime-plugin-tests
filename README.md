@@ -1,37 +1,35 @@
-# sublime-plugin-tests [![Donate on Gittip](http://badgr.co/gittip/twolfson.png)](https://www.gittip.com/twolfson/)
+# sublime-plugin-tests
 
-Experiment for testing Sublime Text plugins.
+Testing framework for Sublime plugins
 
-The initial [tweet that started it all][tweet]:
+## Getting Started
+Install the module with: `npm install sublime-plugin-tests`
 
-> Idea for testing Sublime Text plugins: Flat files to fixture projects/file state + Vagrant for cross-version and non-UI-blocking tests
+```javascript
+var sublime_plugin_tests = require('sublime-plugin-tests');
+sublime_plugin_tests.awesome(); // "awesome"
+```
 
-[tweet]: https://twitter.com/twolfsn/status/355117682032521218
+## Documentation
+_(Coming soon)_
 
-## Getting started
+## Examples
+_(Coming soon)_
 
-TODO: Links
+## Donating
+Support this project and [others by twolfson][gittip] via [gittip][].
 
-1. Install `pip`, a Python package manager
+[![Support via Gittip][gittip-badge]][gittip]
 
-2. `pip install virtualenvwrapper` (`sudo` may be needed). This installs `virtualenvwrapper`, a virtual environment for all Python packages related to this repo
+[gittip-badge]: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
+[gittip]: https://www.gittip.com/twolfson/
 
-3. `source /usr/local/bin/virtualenvwrapper.sh`, load in helper functions to your shell
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via [grunt](https://github.com/gruntjs/grunt) and test via `npm test`.
 
-4. `mkvirtualenv sublime-plugin`, create a virtual environment for this repo
+## Unlicense
+As of Sep 05 2013, Todd Wolfson has released this repository and its contents to the public domain.
 
-> For resuming work, you may want to add `source /usr/local/bin/virtualenvwrapper.sh` to your `~/.bashrc` or `~/.bash_profile`
+It has been released under the [UNLICENSE][].
 
-## Running tests
-1. Complete [Getting started][getting] section
-
-2. `make bootstrap`, install/update dependencies
-
-3. `make test`, runs tests via `nosetests`
-
-[getting]: #getting-started
-
-## License
-Copyright (c) 2013 Todd Wolfson
-
-Licensed under the MIT license.
+[UNLICENSE]: UNLICENSE
