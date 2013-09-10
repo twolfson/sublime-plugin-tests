@@ -67,6 +67,11 @@ class ScratchView:
         # DEV: Attribution to sublime-invert-selection
         sel = self.view.sel()
         for region in regions:
+            # If the region is not a region, upcast it as one
+            if isinstance(tuple, region) or isinstance(list, region):
+                region = Region(region[0], region[1])
+
+            # Add the region
             sel.add(region)
 
     def get_sel(self):
