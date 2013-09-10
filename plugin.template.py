@@ -1,10 +1,8 @@
-from os import path
 import sys
 import traceback
 import sublime
 import sublime_plugin
 
-__dir__ = path.dirname(path.abspath(__file__))
 Region = sublime.Region
 
 class ScratchView:
@@ -138,7 +136,7 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
             output = 'SUCCESS' if success else 'FAILURE'
             if err:
                 output += '\n%s' % err
-            with open(__dir__ + '/output-0001.txt', 'w') as f:
+            with open("{{output_file}}", 'w') as f:
                 f.write(output)
 
             # Close the view

@@ -1,9 +1,14 @@
+# Load in core dependencies
 import re
 import os
 import shutil
 # import subprocess
 
+# Load in 3rd party dependencies
 from jinja2 import Template
+
+# Set up constants
+__dir__ = os.path.dirname(os.path.abspath(__file__))
 
 # Define utility method
 def split_sel(input):
@@ -62,10 +67,11 @@ def main():
         plugin = template.render(target_sel=target_sel,
                                  content=content,
                                  expected_sel=expected_sel,
-                                 expected_content=expected_content)
+                                 expected_content=expected_content,
+                                 output_file=__dir__ + '/output-0001.txt')
 
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
-    scratch_dir = '~/.config/sublime-text-2/Packages/tmp-plugin-tests'
+    scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
 
     # TODO: If the scratch plugins directory already exists, scrap it
     if os.path.exists(scratch_dir):
@@ -74,7 +80,10 @@ def main():
     # Generate scratch plugins directory
     os.makedirs(scratch_dir)
 
-    # TODO: Output plugin to directory
+    # Output plugin to directory
+    with open(scratch_dir + '/plugin.py', 'w') as f:
+        f.write(plugin)
+
     # TODO: Start a subprocess to run the plugin
     # TODO: Direct the output to a local file
     # subprocess.call(['sublime_text', '--command', 'left_delete'])
