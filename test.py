@@ -1,5 +1,6 @@
 import re
 import os
+import shutil
 # import subprocess
 
 from jinja2 import Template
@@ -68,10 +69,10 @@ def main():
 
     # TODO: If the scratch plugins directory already exists, scrap it
     if os.path.exists(scratch_dir):
-        pass
+        shutil.rmtree(scratch_dir)
 
     # Generate scratch plugins directory
-    os.mkdir(scratch_dir)
+    os.makedirs(scratch_dir)
 
     # TODO: Output plugin to directory
     # TODO: Start a subprocess to run the plugin
