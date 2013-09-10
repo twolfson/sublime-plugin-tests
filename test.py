@@ -95,6 +95,7 @@ def main():
     sleep(5)
 
     # Start a subprocess to run the plugin
+    # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
     subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
     # TODO: Read in the output
