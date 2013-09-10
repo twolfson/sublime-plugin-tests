@@ -1,5 +1,7 @@
 import re
-import subprocess
+import os
+# import subprocess
+
 from jinja2 import Template
 
 # Define utility method
@@ -53,14 +55,30 @@ def main():
     expected_content = expected_obj['content']
 
     # Template plugin
+    plugin = None
     with open('plugin.template.py') as f:
         template = Template(f.read())
-        print template.render(target_sel=target_sel,
-                              content=content,
-                              expected_sel=expected_sel,
-                              expected_content=expected_content)
+        plugin = template.render(target_sel=target_sel,
+                                 content=content,
+                                 expected_sel=expected_sel,
+                                 expected_content=expected_content)
 
+    # TODO: It would be nice to pull directory location from Sublime but it isn't critical
+    scratch_dir = '~/.config/sublime-text-2/Packages/tmp-plugin-tests'
+
+    # TODO: If the scratch plugins directory already exists, scrap it
+    if os.path.exists(scratch_dir):
+        pass
+
+    # Generate scratch plugins directory
+    os.mkdir(scratch_dir)
+
+    # TODO: Output plugin to directory
+    # TODO: Start a subprocess to run the plugin
+    # TODO: Direct the output to a local file
     # subprocess.call(['sublime_text', '--command', 'left_delete'])
+
+    # TODO: Read in the output
 
 if __name__ == '__main__':
     main()
