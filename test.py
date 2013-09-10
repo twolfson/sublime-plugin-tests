@@ -91,6 +91,9 @@ def main():
     with open(scratch_dir + '/plugin.py', 'w') as f:
         f.write(plugin)
 
+    from time import sleep
+    sleep(5)
+
     # Start a subprocess to run the plugin
     subprocess.call(['sublime_text', '--command', 'tmp_test'])
 

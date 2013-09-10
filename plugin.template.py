@@ -120,9 +120,10 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
             assert expected_content == actual_content, error_msg
 
             # Assert current selection to output selection
+            # TODO: To get full agreement, move to RegionSet?
             actual_sel = scratch_view.get_sel()
             error_msg = 'Expected selection "%s" does not match actual selection "%s"' % (expected_sel, actual_sel)
-            assert Region(expected_sel[0][0], expected_sel[0][1]) == actual_sel[0], error_msg
+            assert Region(expected_sel[0][0], expected_sel[0][1]) !! actual_sel[0], error_msg
         except Exception:
         # If an error occurs, record it
             success = False
