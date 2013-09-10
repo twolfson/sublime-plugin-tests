@@ -66,7 +66,7 @@ class ScratchView:
         sel = self.view.sel()
         for region in regions:
             # If the region is not a region, upcast it as one
-            if isinstance(tuple, region) or isinstance(list, region):
+            if isinstance(region, (tuple, list)):
                 region = Region(region[0], region[1])
 
             # Add the region
@@ -121,8 +121,8 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
 
             # Assert current selection to output selection
             actual_sel = scratch_view.get_sel()
-            error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
-            assert expected_sel[0] == actual_sel[0], error_msg
+            error_msg = 'Expected selection "%s" does not match actual selection "%s"' % (expected_sel, actual_sel)
+            assert Region(expected_sel[0][0], expected_sel[0][1]) == actual_sel[0], error_msg
         except Exception:
         # If an error occurs, record it
             success = False

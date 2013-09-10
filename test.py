@@ -2,7 +2,7 @@
 import re
 import os
 import shutil
-# import subprocess
+import subprocess
 
 # Load in 3rd party dependencies
 from jinja2 import Template
@@ -71,22 +71,28 @@ def main():
                                  output_file=__dir__ + '/output-0001.txt')
 
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
+    # Determine the scratch plugin directory
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
 
-    # TODO: If the scratch plugins directory already exists, scrap it
-    if os.path.exists(scratch_dir):
-        shutil.rmtree(scratch_dir)
+    # # If the scratch plugins directory already exists, scrap it
+    # if os.path.exists(scratch_dir):
+    #     shutil.rmtree(scratch_dir)
 
-    # Generate scratch plugins directory
-    os.makedirs(scratch_dir)
+    # # Generate scratch plugins directory
+    # os.makedirs(scratch_dir)
+
+    # If the scratch plugins directory does not exist, create it
+    if not os.path.exists(scratch_dir):
+        os.makedirs(scratch_dir)
+
+    # TODO: Need to force-reload plugin. Auto-reload is too slow / hard to detect.
 
     # Output plugin to directory
     with open(scratch_dir + '/plugin.py', 'w') as f:
         f.write(plugin)
 
-    # TODO: Start a subprocess to run the plugin
-    # TODO: Direct the output to a local file
-    # subprocess.call(['sublime_text', '--command', 'left_delete'])
+    # Start a subprocess to run the plugin
+    subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
     # TODO: Read in the output
 
