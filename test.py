@@ -1,8 +1,9 @@
 import re
 import subprocess
+from jinja2 import Template
 
 # Define utility method
-def split_sel(cls, input):
+def split_sel(input):
     # Create a placeholder selection
     # TODO: Consider moving to RegionSet over list
     sel = []
@@ -17,8 +18,6 @@ def split_sel(cls, input):
         if match:
             # Save the selection
             start = match.start(0)
-            # sel.append(Region(start, start))
-            # TODO: Must cast all tuples to Regions
             sel.append((start, start))
 
             # Remove the match from the input
@@ -36,7 +35,7 @@ def split_sel(cls, input):
 
 def main():
     # Load in single.input
-    with open(__dir__ + '/example/left_delete/test_files/single.input.py') as f:
+    with open('example/left_delete/test_files/single.input.py') as f:
         input = f.read()
 
     # Break up target selection from content
@@ -45,13 +44,21 @@ def main():
     content = input_obj['content']
 
     # Load in single.output
-    with open(__dir__ + '/example/left_delete/test_files/single.output.py') as f:
+    with open('example/left_delete/test_files/single.output.py') as f:
         expected_output = f.read()
 
     # Break up expected selection from content
     expected_obj = split_sel(expected_output)
     expected_sel = expected_obj['sel']
     expected_content = expected_obj['content']
+
+    # Template plugin
+    with open('plugin.template.py') as f:
+        template = Template(f.read())
+        print template.render(target_sel=target_sel,
+                              content=content,
+                              expected_sel=expected_sel,
+                              expected_content=expected_content)
 
     # subprocess.call(['sublime_text', '--command', 'left_delete'])
 
