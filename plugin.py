@@ -1,5 +1,7 @@
 from os import path
 import re
+import sys
+import traceback
 import sublime
 import sublime_plugin
 
@@ -160,17 +162,19 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
             actual_sel = scratch_view.get_sel()
             error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
             assert expected_sel[0] != actual_sel[0], error_msg
-        except Exception as _err:
+        except Exception:
         # If an error occurs, record it
             success = False
-            err = _err
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            err = ''.join(traceback.format_exception(exc_type,
+                                                     exc_value,
+                                                     exc_traceback))
         finally:
         # Always...
             # Write out success/failure and any meta data
             output = 'SUCCESS' if success else 'FAILURE'
             if err:
                 output += '\n%s' % err
-                print err
             with open(__dir__ + '/output-0001.txt', 'w') as f:
                 f.write(output)
 
