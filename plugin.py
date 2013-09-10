@@ -148,6 +148,8 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         expected_content = expected_obj['content']
 
         # Run assertions (catching errors)
+        success = True
+        err = None
         try:
             # Assert input to output
             actual_content = scratch_view.get_content()
@@ -157,13 +159,20 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
             # Assert current selection to output selection
             actual_sel = scratch_view.get_sel()
             error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
-            assert expected_sel[0] == actual_sel[0], error_msg
-
-            # TODO: Write out success
-        except Exception as err:
+            assert expected_sel[0] != actual_sel[0], error_msg
+        except Exception as _err:
         # If an error occurs, record it
-            # TODO: Write out failure + error
-            print err
+            success = False
+            err = _err
         finally:
-        # Always, close the view
+        # Always...
+            # Write out success/failure and any meta data
+            output = 'SUCCESS' if success else 'FAILURE'
+            if err:
+                output += '\n%s' % err
+                print err
+            with open(__dir__ + '/output-0001.txt', 'w') as f:
+                f.write(output)
+
+            # Close the view
             scratch_view.destroy()
