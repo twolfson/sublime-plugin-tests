@@ -87,6 +87,7 @@ def main():
 
     # TODO: Need to force-reload plugin. Auto-reload is too slow / hard to detect.
     # TODO: Try out command that re-imports a module (the dynamic file) and runs it
+    # TODO: The ultimate test is outputting a random number every time at the top level
 
     # Output plugin to directory
     with open(scratch_dir + '/plugin.py', 'w') as f:
