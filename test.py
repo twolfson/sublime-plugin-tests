@@ -3,6 +3,7 @@ import re
 import os
 import shutil
 import subprocess
+import tempfile
 
 # Load in 3rd party dependencies
 from jinja2 import Template
@@ -117,7 +118,7 @@ class TestSuite():
         for test in self.tests:
             # TODO: Consider using tempfile
             # TODO: Otherwise, generate output in test suite folder (not framework when we break it out)
-            __dir__ + '/output-0001.txt'
+            output_file = tempfile.mkstemp()[1]
 
             # Template plugin
             plugin = None
@@ -127,9 +128,7 @@ class TestSuite():
                                          content=test['content'],
                                          expected_sel=test['expected_sel'],
                                          expected_content=test['expected_content'],
-                                         # TODO: Use enumerated outputs
-                                         # TODO: Use a namespace (i.e. folder)
-                                         output_file=)
+                                         output_file=output_file)
 
             # # Output plugin to directory
             with open(self.__class__.scratch_dir + '/plugin.py', 'w') as f:
@@ -140,7 +139,10 @@ class TestSuite():
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
             subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
-            # TODO: Read in the output
+            print output_file
+            # # Read in the output
+            # with open(output_file) as f:
+            #     print f.read()
 
 if __name__ == '__main__':
     suite = TestSuite()
