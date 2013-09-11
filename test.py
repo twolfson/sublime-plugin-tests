@@ -81,9 +81,9 @@ def main():
     # # Generate scratch plugins directory
     # os.makedirs(scratch_dir)
 
-    # # If the scratch plugins directory does not exist, create it
-    # if not os.path.exists(scratch_dir):
-    #     os.makedirs(scratch_dir)
+    # If the scratch plugins directory does not exist, create it
+    if not os.path.exists(scratch_dir):
+        os.makedirs(scratch_dir)
 
     # TODO: Need to force-reload plugin. Auto-reload is too slow / hard to detect.
     # TODO: Try out command that re-imports a module (the dynamic file) and runs it
