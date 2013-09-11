@@ -90,6 +90,7 @@ class TestSuite():
 
     def add_test(self):
         # TODO: This needs more thought...
+        # TODO: Break up framework from add_test. The tests and the framework should be separate notions
         # Load in single.input
         with open('example/left_delete/test_files/single.input.py') as f:
             input = f.read()
@@ -114,6 +115,10 @@ class TestSuite():
 
     def run_tests(self):
         for test in self.tests:
+            # TODO: Consider using tempfile
+            # TODO: Otherwise, generate output in test suite folder (not framework when we break it out)
+            __dir__ + '/output-0001.txt'
+
             # Template plugin
             plugin = None
             with open('plugin.template.py') as f:
@@ -124,7 +129,7 @@ class TestSuite():
                                          expected_content=test['expected_content'],
                                          # TODO: Use enumerated outputs
                                          # TODO: Use a namespace (i.e. folder)
-                                         output_file=__dir__ + '/output-0001.txt')
+                                         output_file=)
 
             # # Output plugin to directory
             with open(self.__class__.scratch_dir + '/plugin.py', 'w') as f:
