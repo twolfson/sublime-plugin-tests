@@ -94,6 +94,7 @@ class Test():
         scratch_view = ScratchView()
 
         # Injection point for input variables
+        # TODO: For linting, it might be good to place variables in separate template that are imported
         content = """{{content}}"""
         target_sel = {{target_sel}}
 

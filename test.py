@@ -13,7 +13,6 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 # Define utility method
 def split_sel(input):
     # Create a placeholder selection
-    # TODO: Consider moving to RegionSet over list
     sel = []
 
     # Find all indications for selection
