@@ -102,7 +102,7 @@ class Test():
 
         # Update selection
         scratch_view.set_sel(target_sel)
-        print 'hi'
+        print 'hi2'
         # Run command
         scratch_view.run_command('left_delete')
 

@@ -90,7 +90,8 @@ def main():
     # TODO: The ultimate test is outputting a random number every time at the top level
 
     # Copy the command.py to call our test
-    shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
+    if not os.path.exists(scratch_dir + '/command.py'):
+        shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
 
     # Output plugin to directory
     with open(scratch_dir + '/plugin.py', 'w') as f:
