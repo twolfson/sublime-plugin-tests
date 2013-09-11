@@ -90,6 +90,9 @@ class ScratchView:
 
 class Test():
     def run(self):
+        import random
+        print 'x%s' % random.randint(0, 10000)
+
         # Generate new scratch file
         scratch_view = ScratchView()
 
