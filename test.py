@@ -89,10 +89,17 @@ def main():
     # TODO: Try out command that re-imports a module (the dynamic file) and runs it
     # TODO: The ultimate test is outputting a random number every time at the top level
 
-    # # Copy the command.py to call our test
-    # # if not os.path.exists(scratch_dir + '/command.py'):
-    # if True:
-    #     shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
+    # If command.py doesn't exist, copy it
+    if not os.path.exists(scratch_dir + '/command.py'):
+        shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
+    else:
+    # Otherwise...
+        # If there are updates for command.py
+        pass
+
+            # Update the file
+
+            # and notify the user we must restart Sublime
 
     # # Output plugin to directory
     with open(scratch_dir + '/plugin.py', 'w') as f:
