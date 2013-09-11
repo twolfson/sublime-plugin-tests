@@ -91,6 +91,7 @@ def main():
 
     # Copy the command.py to call our test
     if not os.path.exists(scratch_dir + '/command.py'):
+    # if True:
         shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
 
     # Output plugin to directory
