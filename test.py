@@ -95,8 +95,8 @@ def main():
     #     shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
 
     # # Output plugin to directory
-    # with open(scratch_dir + '/plugin.py', 'w') as f:
-    #     f.write(plugin)
+    with open(scratch_dir + '/plugin.py', 'w') as f:
+        f.write(plugin)
 
     # Start a subprocess to run the plugin
     # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
