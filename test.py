@@ -86,6 +86,7 @@ def main():
         os.makedirs(scratch_dir)
 
     # TODO: Need to force-reload plugin. Auto-reload is too slow / hard to detect.
+    # TODO: Try out command that re-imports a module (the dynamic file) and runs it
 
     # Output plugin to directory
     with open(scratch_dir + '/plugin.py', 'w') as f:
