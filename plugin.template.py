@@ -90,9 +90,6 @@ class ScratchView:
 
 class Test():
     def run(self):
-        import random
-        print 'x%s' % random.randint(0, 10000)
-
         # Generate new scratch file
         scratch_view = ScratchView()
 
@@ -105,7 +102,7 @@ class Test():
 
         # Update selection
         scratch_view.set_sel(target_sel)
-        print 'hi2'
+
         # Run command
         scratch_view.run_command('left_delete')
 
@@ -120,7 +117,7 @@ class Test():
             # Assert input to output
             actual_content = scratch_view.get_content()
             error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
-            assert expected_content == actual_content, error_msg
+            assert expected_content != actual_content, error_msg
 
             # Assert current selection to output selection
             # TODO: To get full agreement, move to RegionSet?

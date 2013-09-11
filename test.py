@@ -74,32 +74,31 @@ def main():
     # Determine the scratch plugin directory
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
 
-    # # If the scratch plugins directory already exists, scrap it
-    # if os.path.exists(scratch_dir):
-    #     shutil.rmtree(scratch_dir)
-
-    # # Generate scratch plugins directory
-    # os.makedirs(scratch_dir)
-
     # If the scratch plugins directory does not exist, create it
     if not os.path.exists(scratch_dir):
         os.makedirs(scratch_dir)
 
-    # TODO: Need to force-reload plugin. Auto-reload is too slow / hard to detect.
-    # TODO: Try out command that re-imports a module (the dynamic file) and runs it
-    # TODO: The ultimate test is outputting a random number every time at the top level
-
     # If command.py doesn't exist, copy it
+    orig_command_path = __dir__ + '/tmp/command.py'
+    dest_command_path = scratch_dir + '/command.py'
     if not os.path.exists(scratch_dir + '/command.py'):
-        shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
+        shutil.copyfile(orig_command_path, dest_command_path)
     else:
     # Otherwise...
         # If there are updates for command.py
-        pass
-
+        expected_command = None
+        with open(orig_command_path) as f:
+            expected_command = f.read()
+        actual_command = None
+        with open(dest_command_path) as f:
+            actual_command = f.read()
+        if expected_command != actual_command:
             # Update the file
+            shutil.copyfile(orig_command_path, dest_command_path)
 
             # and notify the user we must restart Sublime
+            print 'We had to update the test launcher plugin. You must close or restart Sublime to continue testing.'
+            return
 
     # # Output plugin to directory
     with open(scratch_dir + '/plugin.py', 'w') as f:
