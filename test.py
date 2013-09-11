@@ -89,12 +89,12 @@ def main():
     # TODO: Try out command that re-imports a module (the dynamic file) and runs it
     # TODO: The ultimate test is outputting a random number every time at the top level
 
+    # Copy the command.py to call our test
+    shutil.copyfile(__dir__ + '/tmp/command.py', scratch_dir + '/command.py')
+
     # Output plugin to directory
     with open(scratch_dir + '/plugin.py', 'w') as f:
         f.write(plugin)
-
-    from time import sleep
-    sleep(5)
 
     # Start a subprocess to run the plugin
     # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)

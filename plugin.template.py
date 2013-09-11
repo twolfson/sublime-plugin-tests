@@ -88,7 +88,7 @@ class ScratchView:
         view.window().run_command('close')
 
 
-class TmpTestCommand(sublime_plugin.ApplicationCommand):
+class Test():
     def run(self):
         # Generate new scratch file
         scratch_view = ScratchView()
@@ -102,7 +102,7 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
 
         # Update selection
         scratch_view.set_sel(target_sel)
-
+        print 'hi'
         # Run command
         scratch_view.run_command('left_delete')
 
@@ -123,7 +123,7 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
             # TODO: To get full agreement, move to RegionSet?
             actual_sel = scratch_view.get_sel()
             error_msg = 'Expected selection "%s" does not match actual selection "%s"' % (expected_sel, actual_sel)
-            assert Region(expected_sel[0][0], expected_sel[0][1]) !! actual_sel[0], error_msg
+            assert Region(expected_sel[0][0], expected_sel[0][1]) == actual_sel[0], error_msg
         except Exception:
         # If an error occurs, record it
             success = False
