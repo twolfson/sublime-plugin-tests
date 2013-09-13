@@ -166,6 +166,8 @@ class TestSuite():
 
         # TODO: Exit appropriately based on results
 
+        # TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
+
 if __name__ == '__main__':
     suite = TestSuite()
     suite.add_test()
