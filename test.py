@@ -127,6 +127,7 @@ class TestSuite():
         # For each of the tests
         for i, test in enumerate(self.tests):
             # TODO: Move to tempfile (couldn't get working in first draft)
+            # TODO: Forced re-import seems to be lagging behind still ;_;
             output_file = '%s/%d.txt' % (self.__class__.output_dir, random.randint(0, 10000))
 
             # Template plugin
@@ -146,6 +147,8 @@ class TestSuite():
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
+            import time
+            time.sleep(0.1)
             subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
             print output_file
