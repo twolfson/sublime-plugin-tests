@@ -128,8 +128,9 @@ class TestSuite():
         # For each of the tests
         for i, test in enumerate(self.tests):
             # TODO: Move to tempfile (couldn't get working in first draft)
-            # TODO: Forced re-import seems to be lagging behind still ;_;
-            output_file = '%s/%d.txt' % (self.__class__.output_dir, random.randint(0, 10000))
+            # TODO: It should work now with sleep to detect file changes
+            # output_file = '%s/%d.txt' % (self.__class__.output_dir, random.randint(0, 10000))
+            output_file = '%s/%04d.txt' % (self.__class__.output_dir, i)
 
             # Template plugin
             plugin = None
@@ -154,10 +155,9 @@ class TestSuite():
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
             subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
-            print output_file
-            # # Read in the output
-            # with open(output_file) as f:
-            #     print f.read()
+            # Read in the output
+            with open(output_file) as f:
+                print f.read()
 
 if __name__ == '__main__':
     suite = TestSuite()
