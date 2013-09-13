@@ -117,6 +117,7 @@ class TestSuite():
     def run_tests(self):
         for test in self.tests:
             # Get temporary file to write to
+            # TODO: Still debugging why output won't save to /tmp file
             output_file = None
             with tempfile.NamedTemporaryFile() as f:
                 output_file = f.name
