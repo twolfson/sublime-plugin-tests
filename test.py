@@ -4,6 +4,7 @@ import random
 import re
 import shutil
 import subprocess
+import time
 
 # Load in 3rd party dependencies
 from jinja2 import Template
@@ -144,11 +145,13 @@ class TestSuite():
             with open(self.__class__.scratch_dir + '/plugin.py', 'w') as f:
                 f.write(plugin)
 
+            # Force a delay to allow f.write changes to be picked up
+            # TODO: If the delay becomes too significant, attempt batch write -> delay -> batch test
+            time.sleep(0.1)
+
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
-            import time
-            time.sleep(0.1)
             subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
             print output_file
