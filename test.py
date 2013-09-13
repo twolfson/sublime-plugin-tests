@@ -157,7 +157,14 @@ class TestSuite():
 
             # Read in the output
             with open(output_file) as f:
+                # TODO: Interpret result
                 print f.read()
+
+                # TODO: Consider breaking early (might be option for run_tests)
+
+        # TODO: Output success/error for each case
+
+        # TODO: Exit appropriately based on results
 
 if __name__ == '__main__':
     suite = TestSuite()
