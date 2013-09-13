@@ -1,6 +1,7 @@
 # Load in core dependencies
-import re
 import os
+import random
+import re
 import shutil
 import subprocess
 
@@ -126,7 +127,7 @@ class TestSuite():
         # For each of the tests
         for i, test in enumerate(self.tests):
             # TODO: Move to tempfile (couldn't get working in first draft)
-            output_file = '%s/%04d.txt' % (self.__class__.output_dir, i)
+            output_file = '%s/%d.txt' % (self.__class__.output_dir, random.randint(0, 10000))
 
             # Template plugin
             plugin = None
