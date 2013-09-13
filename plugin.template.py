@@ -90,8 +90,11 @@ class ScratchView:
 
 class Test():
     def run(self):
+        # Placeholder for success and error info
         success = True
         err = None
+
+        # Attempt to perform actions and catch *any* exception
         try:
             # Generate new scratch file
             scratch_view = ScratchView()
@@ -117,7 +120,7 @@ class Test():
             # Assert input to output
             actual_content = scratch_view.get_content()
             error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
-            assert expected_content != actual_content, error_msg
+            assert expected_content == actual_content, error_msg
 
             # Assert current selection to output selection
             # TODO: To get full agreement, move to RegionSet?
