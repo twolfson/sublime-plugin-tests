@@ -142,8 +142,6 @@ class Test():
                 output += '\n%s' % err
             with open('{{output_file}}', 'w') as f:
                 f.write(output)
-            with open('/home/todd/github/sublime-plugin-tests/output-01.txt', 'w') as f:
-                f.write(output)
 
             # Close the view
             scratch_view.destroy()
