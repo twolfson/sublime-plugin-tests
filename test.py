@@ -3,7 +3,6 @@ import re
 import os
 import shutil
 import subprocess
-import tempfile
 
 # Load in 3rd party dependencies
 from jinja2 import Template
@@ -15,6 +14,7 @@ class TestSuite():
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
+    output_dir = __dir__ + '/output'
 
     @classmethod
     def split_sel(cls, input):
@@ -60,9 +60,9 @@ class TestSuite():
         cls.ensure_scratch_dir()
 
         # If command.py doesn't exist, copy it
-        orig_command_path = __dir__ + '/tmp/command.py'
+        orig_command_path = __dir__ + '/lib/command.py'
         dest_command_path = cls.scratch_dir + '/command.py'
-        if not os.path.exists(cls.scratch_dir + '/command.py'):
+        if not os.path.exists(dest_command_path):
             shutil.copyfile(orig_command_path, dest_command_path)
         else:
         # Otherwise...
@@ -84,6 +84,11 @@ class TestSuite():
 
         # Notify the user that the launcher exists
         return True
+
+    @classmethod
+    def ensure_output_dir(cls):
+        if not os.path.exists(cls.output_dir):
+            os.makedirs(cls.output_dir)
 
     def __init__(self):
         # Create a placeholder for tests
@@ -115,16 +120,17 @@ class TestSuite():
         })
 
     def run_tests(self):
-        for test in self.tests:
-            # Get temporary file to write to
-            # TODO: Still debugging why output won't save to /tmp file
-            output_file = None
-            with tempfile.NamedTemporaryFile() as f:
-                output_file = f.name
+        # Guarantee there is an output directory
+        self.__class__.ensure_output_dir()
+
+        # For each of the tests
+        for i, test in enumerate(self.tests):
+            # TODO: Move to tempfile (couldn't get working in first draft)
+            output_file = '%s/%04d.txt' % (self.__class__.output_dir, i)
 
             # Template plugin
             plugin = None
-            with open('plugin.template.py') as f:
+            with open('lib/plugin.template.py') as f:
                 template = Template(f.read())
                 plugin = template.render(target_sel=test['target_sel'],
                                          content=test['content'],
