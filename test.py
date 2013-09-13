@@ -116,9 +116,10 @@ class TestSuite():
 
     def run_tests(self):
         for test in self.tests:
-            # TODO: Consider using tempfile
-            # TODO: Otherwise, generate output in test suite folder (not framework when we break it out)
-            output_file = tempfile.mkstemp()[1]
+            # Get temporary file to write to
+            output_file = None
+            with tempfile.NamedTemporaryFile() as f:
+                output_file = f.name
 
             # Template plugin
             plugin = None
