@@ -90,31 +90,30 @@ class ScratchView:
 
 class Test():
     def run(self):
-        # Generate new scratch file
-        scratch_view = ScratchView()
-
-        # Injection point for input variables
-        # TODO: For linting, it might be good to place variables in separate template that are imported
-        content = """{{content}}"""
-        target_sel = {{target_sel}}
-
-        # Output single.input to scratch
-        scratch_view.set_content(content)
-
-        # Update selection
-        scratch_view.set_sel(target_sel)
-
-        # Run command
-        scratch_view.run_command('left_delete')
-
-        # Injection point for assertion variables
-        expected_content = """{{expected_content}}"""
-        expected_sel = {{expected_sel}}
-
-        # Run assertions (catching errors)
         success = True
         err = None
         try:
+            # Generate new scratch file
+            scratch_view = ScratchView()
+
+            # Injection point for input variables
+            # TODO: For linting, it might be good to place variables in separate template that are imported
+            content = """{{content}}"""
+            target_sel = {{target_sel}}
+
+            # Output single.input to scratch
+            scratch_view.set_content(content)
+
+            # Update selection
+            scratch_view.set_sel(target_sel)
+
+            # Run command
+            scratch_view.run_command('left_delete')
+
+            # Injection point for assertion variables
+            expected_content = """{{expected_content}}"""
+            expected_sel = {{expected_sel}}
+
             # Assert input to output
             actual_content = scratch_view.get_content()
             error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
@@ -138,7 +137,9 @@ class Test():
             output = 'SUCCESS' if success else 'FAILURE'
             if err:
                 output += '\n%s' % err
-            with open("{{output_file}}", 'w') as f:
+            with open('{{output_file}}', 'w') as f:
+                f.write(output)
+            with open('/home/todd/github/sublime-plugin-tests/output-01.txt', 'w') as f:
                 f.write(output)
 
             # Close the view
