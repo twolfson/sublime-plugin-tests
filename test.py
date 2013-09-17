@@ -4,6 +4,7 @@ import random
 import re
 import shutil
 import subprocess
+import sys
 import time
 
 # Load in 3rd party dependencies
@@ -187,8 +188,8 @@ class TestSuite():
 
         # TODO: Exit appropriately based on results
         result_failures = map(lambda x: not result['success'], results)
-        suite_failed = any(result_failures)
-        print suite_failed
+        exit_code = 1 if any(result_failures) else 0
+        sys.exit(exit_code)
 
         # TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
 
