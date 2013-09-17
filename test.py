@@ -1,4 +1,5 @@
 # TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
+# TODO: I strongly dislike not having a loose single file BDD framework (e.g. mocha, jasmine)
 from framework import TestSuite
 
 class TestLeftDelete(TestSuite):
@@ -8,14 +9,14 @@ class TestLeftDelete(TestSuite):
             input = f.read()
 
         # Break up target selection from content
-        input_obj = self.__class__.split_sel(input)
+        input_obj = self.split_sel(input)
 
         # Load in single.output
         with open('example/left_delete/test_files/single.output.py') as f:
             expected_output = f.read()
 
         # Break up expected selection from content
-        expected_obj = self.__class__.split_sel(expected_output)
+        expected_obj = self.split_sel(expected_output)
 
         # Save a test reference for later
         self.add_test({

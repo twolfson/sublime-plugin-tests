@@ -104,6 +104,7 @@ class TestSuite():
         self.tests.append(test)
 
     # TODO: Move to descriptor so it can be used with Python.unittest
+    # TODO: Actually, a set up would be perfect
     def run_tests(self):
         # TODO: Make this a beforeModule hook?
         # Guarantee there is an output directory
