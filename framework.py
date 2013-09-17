@@ -95,15 +95,16 @@ class TestCase(unittest.TestCase):
             os.makedirs(cls.output_dir)
 
 
-    def __call__(self, a):
-        print 'hi'
+    # def __call__(self, a):
+    #     print 'hi'
 
-        # Call the original function
-        # super(self.__class__).__call__()
+    #     # Call the original function
+    #     print super(self.__class__)
+    #     # super(self.__class__).__call__()
 
     # TODO: Move to descriptor so it can be used with Python.unittest
     # TODO: Actually, a set up would be perfect
-    def tearDown(self):
+    def noop(self):
         # TODO: Make this a beforeModule hook?
         # Guarantee there is an output directory
         self.__class__.ensure_output_dir()

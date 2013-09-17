@@ -20,7 +20,7 @@ class TestLeftDelete(TestCase):
 
         # Save a test reference for later
         print ({
-            'name': self.add_single_test.__name__,
+            'name': 'test_left_delete_single',
             'target_sel': input_obj['sel'],
             'content': input_obj['content'],
             'expected_sel': expected_obj['sel'],
