@@ -97,7 +97,8 @@ class TestCase(unittest.TestCase):
 
     def __call__(self, result=None):
         # Call the original function
-        print 'AAAAAAAAAAAAAAAAAAAAAA'
+
+        print super(TestCase).__call__
         unittest.TestCase.__call__(self, result)
 
     # TODO: Move to descriptor so it can be used with Python.unittest
