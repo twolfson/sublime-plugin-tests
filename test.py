@@ -157,8 +157,11 @@ class TestSuite():
 
             # Read in the output
             with open(output_file) as f:
-                # TODO: Interpret result
-                print f.read()
+                result_lines = f.read().split('\n')
+                success = result_lines[0] == 'SUCCESS'
+                meta_info = result_lines[1:]
+
+                print success, meta_info
 
                 # TODO: If the result is bad
                     # TODO: Consider breaking early (might be option for run_tests)
