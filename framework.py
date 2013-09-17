@@ -103,7 +103,9 @@ class TestSuite():
         # TODO: Scratch that. We *need* to be able to specify output_file as the test itself is run in parallel
         self.tests.append(test)
 
+    # TODO: Move to descriptor so it can be used with Python.unittest
     def run_tests(self):
+        # TODO: Make this a beforeModule hook?
         # Guarantee there is an output directory
         self.__class__.ensure_output_dir()
 
