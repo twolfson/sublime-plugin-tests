@@ -181,12 +181,13 @@ class TestSuite():
         # Output success/error for each case
         for i, result in enumerate(results):
             # Output the result and its info
-            print '#%d %s: %s' % (i + 1, result['name'], result['success_str'])
+            print '%s: %s' % (result['success_str'], result['name'])
             for line in result['meta_info']:
                 print '  %s' % line
 
         # TODO: Exit appropriately based on results
-        suite_failed = any(results, lambda x: result['success'])
+        result_failures = map(lambda x: not result['success'], results)
+        suite_failed = any(result_failures)
         print suite_failed
 
         # TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
