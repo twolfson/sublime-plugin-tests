@@ -20,6 +20,7 @@ class TestLeftDelete(TestSuite):
 
         # Save a test reference for later
         self.add_test({
+            'name': self.add_single_test.__name__,
             'target_sel': input_obj['sel'],
             'content': input_obj['content'],
             'expected_sel': expected_obj['sel'],

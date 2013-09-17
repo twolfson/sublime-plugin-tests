@@ -152,8 +152,7 @@ class TestSuite():
 
                 # Save the info
                 results.append({
-                    # 'name': test['name'],
-                    'name': 'left_delete/test_files/single',
+                    'name': test['name'],
                     'success_str': result_lines[0],
                     'success': success,
                     'meta_info': result_lines[1:],
