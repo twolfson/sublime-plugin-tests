@@ -1,0 +1,1 @@
+nosetests test.py --nocapture
