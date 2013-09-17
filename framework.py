@@ -14,6 +14,8 @@ from jinja2 import Template
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
+# TODO: Break this up into the core (split_sel, run_test) and unittest.TestCase
+
 class TestCase(unittest.TestCase):
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
@@ -94,16 +96,17 @@ class TestCase(unittest.TestCase):
         if not os.path.exists(cls.output_dir):
             os.makedirs(cls.output_dir)
 
-
     def __call__(self, result=None):
-        # Call the original function
+        # For each test, wrap it
+        loader = unittest.TestLoader
+        print loader.getTestCaseNames(self.__class__)
 
-        print super(TestCase).__call__
+        # Call the original function
         unittest.TestCase.__call__(self, result)
 
     # TODO: Move to descriptor so it can be used with Python.unittest
     # TODO: Actually, a set up would be perfect
-    def noop(self):
+    def _wrap_test(self):
         # TODO: Make this a beforeModule hook?
         # Guarantee there is an output directory
         self.__class__.ensure_output_dir()
