@@ -115,9 +115,12 @@ class TestCase(unittest.TestCase):
         # Guarantee there is an output directory
         self.__class__.ensure_output_dir()
 
-        # For each of the tests
-        results = []
-        for i, test in enumerate(self.tests):
+        # TODO: Build a counter
+        i = 0
+        def wrapped_fn():
+            # Get the test info
+            test = test_fn()
+
             # TODO: Move to tempfile (couldn't get working in first draft)
             # TODO: It should work now with sleep to detect file changes
             # output_file = '%s/%d.txt' % (self.__class__.output_dir, random.randint(0, 10000))
@@ -153,26 +156,10 @@ class TestCase(unittest.TestCase):
                 # Read and parse the result
                 result = f.read()
                 result_lines = result.split('\n')
-                successful = result_lines[0] == 'SUCCESS'
+                success = result_lines[0] == 'SUCCESS'
+                failure_reason = '\n'.join(result_lines[1:] or ['Test failed'])
 
-                # If we were unsuccessful
-                if not successful:
-                    # Fallback the meta info
-                    meta_info = result_lines[1:] or ['Test failed']
+                # Assert we were successful
+                self.assertTrue(success, failure_reason)
+        return wrapped_fn
 
-                    # Raise an exception with the meta info
-
-
-        # TODO: The following behavior should be conditional on options. We can return results for further exploration
-        # TODO: It would be practical to use a reporter here (e.g. TAP, xunit)
-        # Output success/error for each case
-        for i, result in enumerate(results):
-            # Output the result and its info
-            print '%s: %s' % (result['success_str'], result['name'])
-            for line in result['meta_info']:
-                print '  %s' % line
-
-        # TODO: Exit appropriately based on results
-        result_failures = map(lambda x: not result['success'], results)
-        exit_code = 1 if any(result_failures) else 0
-        sys.exit(exit_code)

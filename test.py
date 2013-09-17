@@ -19,10 +19,10 @@ class TestLeftDelete(TestCase):
         expected_obj = self.split_sel(expected_output)
 
         # Save a test reference for later
-        print ({
+        return {
             'name': 'test_left_delete_single',
             'target_sel': input_obj['sel'],
             'content': input_obj['content'],
             'expected_sel': expected_obj['sel'],
             'expected_content': expected_obj['content'],
-        })
+        }
