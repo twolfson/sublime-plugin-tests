@@ -126,6 +126,7 @@ class TestSuite():
         self.__class__.ensure_output_dir()
 
         # For each of the tests
+        results = []
         for i, test in enumerate(self.tests):
             # TODO: Move to tempfile (couldn't get working in first draft)
             # TODO: It should work now with sleep to detect file changes
@@ -157,18 +158,36 @@ class TestSuite():
 
             # Read in the output
             with open(output_file) as f:
-                result_lines = f.read().split('\n')
+                # Read and parse the result
+                result = f.read()
+                result_lines = result.split('\n')
                 success = result_lines[0] == 'SUCCESS'
-                meta_info = result_lines[1:]
 
-                print success, meta_info
+                # Save the info
+                results.append({
+                    # 'name': test['name'],
+                    'name': 'left_delete/test_files/single',
+                    'success_str': result_lines[0],
+                    'success': success,
+                    'meta_info': result_lines[1:],
+                    'raw_result': result,
+                })
 
                 # TODO: If the result is bad
                     # TODO: Consider breaking early (might be option for run_tests)
 
-        # TODO: Output success/error for each case
+        # TODO: The following behavior should be conditional on options. We can return results for further exploration
+        # TODO: It would be practical to use a reporter here (e.g. TAP, xunit)
+        # Output success/error for each case
+        for i, result in enumerate(results):
+            # Output the result and its info
+            print '#%d %s: %s' % (i + 1, result['name'], result['success_str'])
+            for line in result['meta_info']:
+                print '  %s' % line
 
         # TODO: Exit appropriately based on results
+        suite_failed = any(results, lambda x: result['success'])
+        print suite_failed
 
         # TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
 
