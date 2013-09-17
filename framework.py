@@ -97,16 +97,20 @@ class TestCase(unittest.TestCase):
             os.makedirs(cls.output_dir)
 
     def __call__(self, result=None):
-        # For each test, wrap it
+        # For each test
         loader = unittest.TestLoader()
-        print loader.getTestCaseNames(self.__class__)
+        for test_name in loader.getTestCaseNames(self.__class__):
+            # Wrap the function
+            test_fn = getattr(self, test_name)
+            wrapped_test = self._wrap_test(test_fn)
+            setattr(self, test_name, wrapped_test)
 
         # Call the original function
         unittest.TestCase.__call__(self, result)
 
     # TODO: Move to descriptor so it can be used with Python.unittest
     # TODO: Actually, a set up would be perfect
-    def _wrap_test(self):
+    def _wrap_test(self, test_fn):
         # TODO: Make this a beforeModule hook?
         # Guarantee there is an output directory
         self.__class__.ensure_output_dir()
@@ -149,19 +153,15 @@ class TestCase(unittest.TestCase):
                 # Read and parse the result
                 result = f.read()
                 result_lines = result.split('\n')
-                success = result_lines[0] == 'SUCCESS'
+                successful = result_lines[0] == 'SUCCESS'
 
-                # Save the info
-                results.append({
-                    'name': test['name'],
-                    'success_str': result_lines[0],
-                    'success': success,
-                    'meta_info': result_lines[1:],
-                    'raw_result': result,
-                })
+                # If we were unsuccessful
+                if not successful:
+                    # Fallback the meta info
+                    meta_info = result_lines[1:] or ['Test failed']
 
-                # TODO: If the result is bad
-                    # TODO: Consider breaking early (might be option for run_tests)
+                    # Raise an exception with the meta info
+
 
         # TODO: The following behavior should be conditional on options. We can return results for further exploration
         # TODO: It would be practical to use a reporter here (e.g. TAP, xunit)
