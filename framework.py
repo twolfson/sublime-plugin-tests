@@ -109,8 +109,8 @@ class TestCase(unittest.TestCase):
         unittest.TestCase.__call__(self, result)
 
     def _wrap_test(self, test_fn):
-        # Guarantee there is an output directory
-        self.ensure_output_dir()
+        # Guarantee there is an output directory and launcher
+        self.ensure_launcher()
 
         # Generate a wrapped function
         def wrapped_fn():
