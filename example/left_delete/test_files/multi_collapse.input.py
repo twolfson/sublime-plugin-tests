@@ -1,0 +1,2 @@
+def ab|c|():
+    pass
