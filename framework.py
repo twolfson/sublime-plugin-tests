@@ -133,17 +133,7 @@ class TestCase(unittest.TestCase):
 
             # Output plugin to directory
             with open(self.scratch_dir + '/plugin.py', 'w') as f:
-                # f.write(plugin)
-                f.write("""
-class Test():
-    def run(self):
-        print(%s)
-                """ % random.randint(0, 1000))
-
-            # Force a delay to allow f.write changes to be picked up
-            # TODO: If the delay becomes too significant, attempt batch write -> delay -> batch test
-            # TODO: Consider using read + eval
-            # time.sleep(0.3)
+                f.write(plugin)
 
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
@@ -151,7 +141,6 @@ class Test():
             subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
             # TODO: How does this work if `tmp_test` is theoretically run in parallel
-            # time.sleep(1)
 
             # Read in the output
             with open(output_file) as f:
@@ -163,7 +152,7 @@ class Test():
 
                 # Assert we were successful
                 # TODO: Rather than asserting, move this function elsewhere and return a reason to assert against
-                # self.assertTrue(success, failure_reason)
+                self.assertTrue(success, failure_reason)
 
         # Return the wrapped function
         return wrapped_fn

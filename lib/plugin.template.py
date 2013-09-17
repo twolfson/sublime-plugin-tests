@@ -140,7 +140,6 @@ class Test():
             output = 'SUCCESS' if success else 'FAILURE'
             if err:
                 output += '\n%s' % err
-            print '{{output_file}}'
             with open('{{output_file}}', 'w') as f:
                 f.write(output)
 
