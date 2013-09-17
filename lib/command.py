@@ -11,7 +11,6 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         # On every run, re-import the test class
         # DEV: If we overwrote command.py, Sublime would refuse to run `tmp_test`
         sublime_plugin.reload_plugin(__dir__ + '/plugin.py')
-        print 'hi'
         from plugin import Test
         test = Test()
         test.run()
