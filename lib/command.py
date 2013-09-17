@@ -10,9 +10,7 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
     def run(self):
         # On every run, re-import the test class
         # DEV: If we overwrote command.py, Sublime would refuse to run `tmp_test`
-        # sublime_plugin.reload_plugin(__dir__ + '/plugin.py')
-        with open(__dir__ + '/plugin.py') as f:
-            eval(f.read())
-        from plugin import Test
-        test = Test()
-        test.run()s
+        plugin_dict = {}
+        execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
+        test = plugin_dict['Test']()
+        test.run()
