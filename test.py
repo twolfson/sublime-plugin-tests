@@ -160,7 +160,8 @@ class TestSuite():
                 # TODO: Interpret result
                 print f.read()
 
-                # TODO: Consider breaking early (might be option for run_tests)
+                # TODO: If the result is bad
+                    # TODO: Consider breaking early (might be option for run_tests)
 
         # TODO: Output success/error for each case
 
