@@ -136,7 +136,7 @@ class TestCase(unittest.TestCase):
 
             # Force a delay to allow f.write changes to be picked up
             # TODO: If the delay becomes too significant, attempt batch write -> delay -> batch test
-            time.sleep(0.3)
+            # TODO: Consider using read + eval
 
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
