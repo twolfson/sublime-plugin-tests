@@ -98,7 +98,7 @@ class TestCase(unittest.TestCase):
 
     def __call__(self, result=None):
         # For each test, wrap it
-        loader = unittest.TestLoader
+        loader = unittest.TestLoader()
         print loader.getTestCaseNames(self.__class__)
 
         # Call the original function
