@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 import time
+import unittest
 
 # Load in 3rd party dependencies
 from jinja2 import Template
@@ -13,7 +14,7 @@ from jinja2 import Template
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
-class TestSuite():
+class TestCase(unittest.TestCase):
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
@@ -93,19 +94,16 @@ class TestSuite():
         if not os.path.exists(cls.output_dir):
             os.makedirs(cls.output_dir)
 
-    def __init__(self):
-        # Create a placeholder for tests
-        self.tests = []
 
-    def add_test(self, test):
-        # TODO: Assert content exists for template?
-        # TODO: Maybe template now to allow for running *anything* as test?
-        # TODO: Scratch that. We *need* to be able to specify output_file as the test itself is run in parallel
-        self.tests.append(test)
+    def __call__(self, a):
+        print 'hi'
+
+        # Call the original function
+        # super(self.__class__).__call__()
 
     # TODO: Move to descriptor so it can be used with Python.unittest
     # TODO: Actually, a set up would be perfect
-    def run_tests(self):
+    def tearDown(self):
         # TODO: Make this a beforeModule hook?
         # Guarantee there is an output directory
         self.__class__.ensure_output_dir()

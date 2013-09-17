@@ -1,9 +1,9 @@
 # TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
 # TODO: I strongly dislike not having a loose single file BDD framework (e.g. mocha, jasmine)
-from framework import TestSuite
+from framework import TestCase
 
-class TestLeftDelete(TestSuite):
-    def add_single_test(self):
+class TestLeftDelete(TestCase):
+    def test_left_delete_single(self):
         # Load in single.input
         with open('example/left_delete/test_files/single.input.py') as f:
             input = f.read()
@@ -19,16 +19,10 @@ class TestLeftDelete(TestSuite):
         expected_obj = self.split_sel(expected_output)
 
         # Save a test reference for later
-        self.add_test({
+        print ({
             'name': self.add_single_test.__name__,
             'target_sel': input_obj['sel'],
             'content': input_obj['content'],
             'expected_sel': expected_obj['sel'],
             'expected_content': expected_obj['content'],
         })
-
-
-if __name__ == '__main__':
-    suite = TestLeftDelete()
-    suite.add_single_test()
-    suite.run_tests()
