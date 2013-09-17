@@ -85,7 +85,7 @@ class TestCase(unittest.TestCase):
 
                 # and notify the user we must restart Sublime
                 # TODO: We might want to make this even more loud
-                print 'We had to update the test launcher plugin. You must close or restart Sublime to continue testing.'
+                raise Exception('We had to update the test launcher plugin. You must close or restart Sublime to continue testing.')
                 return False
 
         # Notify the user that the launcher exists
@@ -144,6 +144,7 @@ class TestCase(unittest.TestCase):
             subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
             # TODO: How does this work if `tmp_test` is theoretically run in parallel
+            time.sleep(0.3)
 
             # Read in the output
             with open(output_file) as f:
