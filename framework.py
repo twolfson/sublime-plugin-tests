@@ -1,10 +1,10 @@
 # Load in core dependencies
 import os
-import random
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 import unittest
 
@@ -108,23 +108,17 @@ class TestCase(unittest.TestCase):
         # Call the original function
         unittest.TestCase.__call__(self, result)
 
-    # TODO: Move to descriptor so it can be used with Python.unittest
-    # TODO: Actually, a set up would be perfect
     def _wrap_test(self, test_fn):
-        # TODO: Make this a beforeModule hook?
         # Guarantee there is an output directory
-        self.__class__.ensure_output_dir()
+        self.ensure_output_dir()
 
-        # TODO: Build a counter
-        i = 0
+        # Generate a wrapped function
         def wrapped_fn():
             # Get the test info
             test = test_fn()
 
-            # TODO: Move to tempfile (couldn't get working in first draft)
-            # TODO: It should work now with sleep to detect file changes
-            # output_file = '%s/%d.txt' % (self.__class__.output_dir, random.randint(0, 10000))
-            output_file = '%s/%04d.txt' % (self.__class__.output_dir, i)
+            # Reserve an output file
+            output_file = tempfile.mkstemp()[1]
 
             # Template plugin
             plugin = None
@@ -136,8 +130,8 @@ class TestCase(unittest.TestCase):
                                          expected_content=test['expected_content'],
                                          output_file=output_file)
 
-            # # Output plugin to directory
-            with open(self.__class__.scratch_dir + '/plugin.py', 'w') as f:
+            # Output plugin to directory
+            with open(self.scratch_dir + '/plugin.py', 'w') as f:
                 f.write(plugin)
 
             # Force a delay to allow f.write changes to be picked up
@@ -160,6 +154,9 @@ class TestCase(unittest.TestCase):
                 failure_reason = '\n'.join(result_lines[1:] or ['Test failed'])
 
                 # Assert we were successful
+                # TODO: Rather than asserting, move this function elsewhere and return a reason to assert against
                 self.assertTrue(success, failure_reason)
+
+        # Return the wrapped function
         return wrapped_fn
 
