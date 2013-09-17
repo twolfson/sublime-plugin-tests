@@ -95,12 +95,10 @@ class TestCase(unittest.TestCase):
             os.makedirs(cls.output_dir)
 
 
-    # def __call__(self, a):
-    #     print 'hi'
-
-    #     # Call the original function
-    #     print super(self.__class__)
-    #     # super(self.__class__).__call__()
+    def __call__(self, result=None):
+        # Call the original function
+        print 'AAAAAAAAAAAAAAAAAAAAAA'
+        unittest.TestCase.__call__(self, result)
 
     # TODO: Move to descriptor so it can be used with Python.unittest
     # TODO: Actually, a set up would be perfect
