@@ -85,9 +85,7 @@ class TestCase(unittest.TestCase):
                 shutil.copyfile(orig_command_path, dest_command_path)
 
                 # and notify the user we must restart Sublime
-                # TODO: We might want to make this even more loud
                 raise Exception('We had to update the test launcher plugin. You must close or restart Sublime to continue testing.')
-                return False
 
         # Notify the user that the launcher exists
         return True
