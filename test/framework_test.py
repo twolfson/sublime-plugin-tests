@@ -1,6 +1,9 @@
 # Load in core dependencies
 import os
 
+# Load in 3rd party dependencies
+from jinja2 import Template
+
 # Load in local dependencies
 from sublime_plugin_tests import framework
 from sublime_plugin_tests.utils.selection import split_selection
@@ -11,7 +14,7 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 # Define our class
 class TestLeftDelete(framework.TestCase):
-    @framework.template(__dir__ + '/test_files/plugin.template.py')
+    # @framework.template(__dir__ + '/test_files/plugin.template.py')
     def parse_io_files(self, base_path):
         # Load in input
         with open('%s.input.py' % base_path) as f:
@@ -28,12 +31,19 @@ class TestLeftDelete(framework.TestCase):
         expected_obj = split_selection(expected_output)
 
         # Return collected information
-        return {
+        info = {
             'target_sel': input_obj['sel'],
             'content': input_obj['content'],
             'expected_sel': expected_obj['sel'],
             'expected_content': expected_obj['content'],
         }
+
+        # Template and return plugin
+        plugin = None
+        with open(__dir__ + '/test_files/plugin.template.py') as f:
+            template = Template(f.read())
+            plugin = template.render(**info)
+        return plugin
 
     def test_left_delete_single(self):
         return self.parse_io_files(__dir__ + '/test_files/single')
