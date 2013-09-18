@@ -28,6 +28,8 @@ def run():
 
         # Assert input to output
         # TODO: Move to self.assertEqual
+        # TODO: One method - Move run to class + run, inherit from unittest.TestCase
+        # TODO: Another method - pass in `assert` via param
         actual_content = scratch_view.get_content()
         error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
         assert expected_content == actual_content, error_msg
