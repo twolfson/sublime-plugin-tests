@@ -67,7 +67,7 @@ class TestCase(unittest.TestCase):
         cls.ensure_scratch_dir()
 
         # If command.py doesn't exist, copy it
-        orig_command_path = __dir__ + '/lib/command.py'
+        orig_command_path = __dir__ + '/command.py'
         dest_command_path = cls.scratch_dir + '/command.py'
         if not os.path.exists(dest_command_path):
             shutil.copyfile(orig_command_path, dest_command_path)
@@ -88,7 +88,8 @@ class TestCase(unittest.TestCase):
                 raise Exception('We had to update the test launcher plugin. You must close or restart Sublime to continue testing.')
 
         # TODO: Use similar copy model minus the exception
-        shutil.copytree(__dir__ + '/lib/utils', cls.scratch_dir + '/utils')
+        if not os.path.exists(cls.scratch_dir + '/utils'):
+            shutil.copytree(__dir__ + '/utils', cls.scratch_dir + '/utils')
 
         # Notify the user that the launcher exists
         return True
@@ -124,7 +125,7 @@ class TestCase(unittest.TestCase):
 
             # Template plugin
             plugin_runner = None
-            with open('lib/templates/plugin_runner.py') as f:
+            with open(__dir__ + '/templates/plugin_runner.py') as f:
                 runner_template = Template(f.read())
                 plugin_runner = runner_template.render(output_file=output_file)
 
