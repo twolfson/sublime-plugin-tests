@@ -12,6 +12,26 @@ from jinja2 import Template
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 
+# Set up helper fn
+def template(fn, tmpl_path):
+    """ Decorator that templates the returned content. """
+    # Pre-emptively read in the template
+    tmpl = None
+    with open(tmpl_path) as f:
+        tmpl = Template(f.read())
+
+    # Define our templating wrapper fn
+    def templator_fn(*args, **kwargs):
+        # Run the normal function
+        data = fn(*args, **kwargs)
+
+        # Render the info
+        return tmpl.render(**data)
+
+    # Return templator_fn
+    return templator_fn
+
+
 class Base(object):
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
@@ -118,9 +138,9 @@ class TestCase(unittest.TestCase, Base):
 
     def _wrap_test(self, test_fn):
         # Generate a wrapped function
-        def wrapped_fn():
+        def wrapped_fn(*args, **kwargs):
             # Get the test info
-            test_str = test_fn()
+            test_str = test_fn(*args, **kwargs)
 
             # Run the test and process the result
             result = self._run_test(test_str)
