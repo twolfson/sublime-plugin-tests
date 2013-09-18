@@ -19,10 +19,9 @@ setup(
     ],
     author='Todd Wolfson',
     author_email='todd@twolfson.com',
-    author_url='http://twolfson.com/',
+    # author_url='http://twolfson.com/',
     url='https://github.com/twolfson/sublime-plugin-tests',
-    packages=find_packages('lib'),
-    package_dir={'':'lib'},
+    packages=find_packages(),
     license='UNLICENSE',
     install_requires=read_requirements(),
     classifiers=[
