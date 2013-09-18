@@ -3,6 +3,7 @@ import os
 # TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
 # TODO: I strongly dislike not having a loose single file BDD framework (e.g. mocha, jasmine)
 from sublime_plugin_tests.framework import TestCase
+from sublime_plugin_tests.utils.selection import split_selection
 
 # Load in 3rd party dependencies
 from jinja2 import Template
@@ -17,7 +18,7 @@ class TestLeftDelete(TestCase):
             input = f.read()
 
         # Break up target selection from content
-        input_obj = self.split_sel(input)
+        input_obj = split_selection(input)
 
         # Load in single.output
         with open('%s.output.py' % base_path) as f:

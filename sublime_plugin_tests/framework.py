@@ -1,12 +1,8 @@
 # Load in core dependencies
 import os
-import re
-import random
 import shutil
 import subprocess
-import sys
 import tempfile
-import time
 import unittest
 
 # Load in 3rd party dependencies
@@ -24,39 +20,6 @@ class Base(object):
     # TODO: Rename scratch_dir
     # TODO: Rename tmp-plugin-tests
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
-
-    @classmethod
-    def split_sel(cls, input):
-        """ Break up input string with selection delimiters into selection and content. """
-
-        # Create a placeholder selection
-        sel = []
-
-        # Find all indications for selection
-        while True:
-            # Find the next matching selection
-            # TODO: Robustify with multi-char selection and escaping
-            # TODO: Take notes from CSV and template engines (e.g. ejs) to proper handle escaped delimiters
-            match = re.search(r'\|', input)
-
-            # If there was a match
-            if match:
-                # Save the selection
-                start = match.start(0)
-                sel.append((start, start))
-
-                # Remove the match from the input
-                input = input[:start] + input[match.end(0):]
-
-            # Otherwise, break
-            else:
-                break
-
-        # Return a selection and content
-        return {
-            'sel': sel,
-            'content': input
-        }
 
     @classmethod
     def ensure_scratch_dir(cls):
