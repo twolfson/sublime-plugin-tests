@@ -9,7 +9,6 @@ def run():
     scratch_view = ScratchView()
     try:
         # Injection point for input variables
-        # TODO: For linting, it might be good to place variables in separate template that are imported
         content = """{{content}}"""
         target_sel = {{target_sel}}
 
@@ -29,7 +28,6 @@ def run():
         # Assert input to output
         # TODO: Move to self.assertEqual
         # TODO: One method - Move run to class + run, inherit from unittest.TestCase
-        # TODO: Another method - pass in `assert` via param
         actual_content = scratch_view.get_content()
         error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
         assert expected_content == actual_content, error_msg
@@ -42,7 +40,5 @@ def run():
         assert Region(expected_sel[0][0], expected_sel[0][1]) == actual_sel[0], error_msg
     finally:
         # No matter what happens, close the view
-        # TODO: I would like the case of sugar to take care of this automatically
-        # TODO: Maybe we keep track of views on ScratchView at the class level and auto-clean on complete
         scratch_view.destroy()
 
