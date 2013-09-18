@@ -87,6 +87,9 @@ class TestCase(unittest.TestCase):
                 # and notify the user we must restart Sublime
                 raise Exception('We had to update the test launcher plugin. You must close or restart Sublime to continue testing.')
 
+        # TODO: Use similar copy model minus the exception
+        shutil.copytree(__dir__ + '/lib/utils', cls.scratch_dir + '/utils')
+
         # Notify the user that the launcher exists
         return True
 
@@ -120,18 +123,14 @@ class TestCase(unittest.TestCase):
             output_file = tempfile.mkstemp()[1]
 
             # Template plugin
-            plugin = None
-            with open('lib/plugin.template.py') as f:
-                template = Template(f.read())
-                plugin = template.render(target_sel=test['target_sel'],
-                                         content=test['content'],
-                                         expected_sel=test['expected_sel'],
-                                         expected_content=test['expected_content'],
-                                         output_file=output_file)
+            plugin_runner = None
+            with open('lib/templates/plugin_runner.py') as f:
+                runner_template = Template(f.read())
+                plugin_runner = runner_template.render(output_file=output_file)
 
-            # Output plugin to directory
-            with open(self.scratch_dir + '/plugin.py', 'w') as f:
-                f.write(plugin)
+            # Output plugin_runner to directory
+            with open(self.scratch_dir + '/plugin_runner.py', 'w') as f:
+                f.write(plugin_runner)
 
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
