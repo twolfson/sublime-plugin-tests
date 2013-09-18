@@ -20,6 +20,8 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 class TestCase(unittest.TestCase):
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
+    # TODO: Go about this by sniffing the known directory locations =D. If it exists, use it. (ST3 over ST2).
+    # TODO: Allow for overrides via __init__?
     # TODO: Rename scratch_dir
     # TODO: Rename tmp-plugin-tests
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
