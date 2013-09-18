@@ -20,8 +20,8 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 class TestCase(unittest.TestCase):
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
+    # TODO: Rename scratch_dir
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
-    output_dir = __dir__ + '/output'
 
     @classmethod
     def split_sel(cls, input):
@@ -94,11 +94,6 @@ class TestCase(unittest.TestCase):
         # Notify the user that the launcher exists
         return True
 
-    @classmethod
-    def ensure_output_dir(cls):
-        if not os.path.exists(cls.output_dir):
-            os.makedirs(cls.output_dir)
-
     def __call__(self, result=None):
         # For each test
         loader = unittest.TestLoader()
@@ -140,6 +135,7 @@ class TestCase(unittest.TestCase):
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
+            # TODO: Rename tmp_test command
             subprocess.call(['sublime_text', '--command', 'tmp_test'])
 
             # TODO: How does this work if `tmp_test` is theoretically run in parallel
