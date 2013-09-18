@@ -1,6 +1,8 @@
 import sublime
 import sublime_plugin
 
+Region = sublime.Region
+
 class ScratchView:
     def __init__(self, window=None):
         # Fallback window to active window

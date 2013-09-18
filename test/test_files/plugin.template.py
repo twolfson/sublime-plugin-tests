@@ -1,3 +1,9 @@
+import sublime
+
+from utils.scratch_view import ScratchView
+
+Region = sublime.Region
+
 def run():
     # Generate new scratch file
     scratch_view = ScratchView()
