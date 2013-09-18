@@ -122,11 +122,9 @@ class TestCase(unittest.TestCase, Base):
     def __call__(self, result=None):
         # For each test
         loader = unittest.TestLoader()
-        print 'a'
         for test_name in loader.getTestCaseNames(self.__class__):
             # Wrap the function
             test_fn = getattr(self, test_name)
-            print test_name
             wrapped_test = self._wrap_test(test_fn)
             setattr(self, test_name, wrapped_test)
 
