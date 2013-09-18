@@ -34,22 +34,22 @@ def template(tmpl_path):
 
 class Base(object):
     # Determine the plugins directory
-    plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
+    _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
-    def ensure_plugin_test_dir(cls):
+    def _ensure_plugin_test_dir(cls):
         # If the plugin test directory does not exist, create it
-        if not os.path.exists(cls.plugin_test_dir):
-            os.makedirs(cls.plugin_test_dir)
+        if not os.path.exists(cls._plugin_test_dir):
+            os.makedirs(cls._plugin_test_dir)
 
     @classmethod
-    def ensure_launcher(cls):
+    def _ensure_launcher(cls):
         # Ensure the plugin test directory exists
-        cls.ensure_plugin_test_dir()
+        cls._ensure_plugin_test_dir()
 
         # If command.py doesn't exist, copy it
         orig_command_path = __dir__ + '/command.py'
-        dest_command_path = cls.plugin_test_dir + '/command.py'
+        dest_command_path = cls._plugin_test_dir + '/command.py'
         if not os.path.exists(dest_command_path):
             shutil.copyfile(orig_command_path, dest_command_path)
         else:
@@ -70,8 +70,8 @@ class Base(object):
 
         # TODO: Use similar copy model minus the exception
         # TODO: If we overwrite utils, be sure to wait so that changes for import get picked up
-        if not os.path.exists(cls.plugin_test_dir + '/utils'):
-            shutil.copytree(__dir__ + '/utils', cls.plugin_test_dir + '/utils')
+        if not os.path.exists(cls._plugin_test_dir + '/utils'):
+            shutil.copytree(__dir__ + '/utils', cls._plugin_test_dir + '/utils')
 
         # Notify the user that the launcher exists
         return True
@@ -79,7 +79,7 @@ class Base(object):
     @classmethod
     def _run_test(cls, test_str):
         # Guarantee there is an output directory and launcher
-        cls.ensure_launcher()
+        cls._ensure_launcher()
 
         # Reserve an output file
         output_file = tempfile.mkstemp()[1]
@@ -91,11 +91,11 @@ class Base(object):
             plugin_runner = runner_template.render(output_file=output_file)
 
         # Output plugin_runner to directory
-        with open(cls.plugin_test_dir + '/plugin_runner.py', 'w') as f:
+        with open(cls._plugin_test_dir + '/plugin_runner.py', 'w') as f:
             f.write(plugin_runner)
 
         # Output test to directory
-        with open(cls.plugin_test_dir + '/plugin.py', 'w') as f:
+        with open(cls._plugin_test_dir + '/plugin.py', 'w') as f:
             f.write(test_str)
 
         # Start a subprocess to run the plugin
