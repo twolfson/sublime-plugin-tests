@@ -37,6 +37,27 @@ class Base(object):
     _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
+    def _sync_path(cls, orig_path, dest_path):
+        # If the path exists, copy the file/dir
+        if not os.path.exists(dest_path):
+            shutil.copy(orig_path, dest_path)
+            return 'create'
+        else:
+        # Otherwise...
+            # If there are updates for command.py
+            # TODO: This will require fragmented logic. ugh... TODO or not TODO
+            expected_command = None
+            with open(orig_path) as f:
+                expected_command = f.read()
+            actual_command = None
+            with open(dest_path) as f:
+                actual_command = f.read()
+            if expected_command != actual_command:
+                # Update the file
+                shutil.copyfile(orig_path, dest_path)
+
+
+    @classmethod
     def _ensure_plugin_test_dir(cls):
         # If the plugin test directory does not exist, create it
         if not os.path.exists(cls._plugin_test_dir):
