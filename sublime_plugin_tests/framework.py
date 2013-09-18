@@ -33,20 +33,18 @@ def template(tmpl_path):
 
 
 class Base(object):
-    # TODO: It would be nice to pull directory location from Sublime but it isn't critical
-    # Determine the scratch plugin directory
-    # TODO: Go about this by sniffing the known directory locations =D. If it exists, use it. (ST3 over ST2).
+    # Determine the plugins directory
     plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
     def ensure_plugin_test_dir(cls):
-        # If the scratch plugins directory does not exist, create it
+        # If the plugin test directory does not exist, create it
         if not os.path.exists(cls.plugin_test_dir):
             os.makedirs(cls.plugin_test_dir)
 
     @classmethod
     def ensure_launcher(cls):
-        # Ensure the scratch directory exists
+        # Ensure the plugin test directory exists
         cls.ensure_plugin_test_dir()
 
         # If command.py doesn't exist, copy it

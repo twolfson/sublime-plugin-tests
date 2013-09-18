@@ -1,7 +1,7 @@
+# Load in core dependencies
 import os
 
-# TODO: Break out fixed content of `add_test` into test suite, allowing `add_test` to be dynamic
-# TODO: I strongly dislike not having a loose single file BDD framework (e.g. mocha, jasmine)
+# Load in local dependencies
 from sublime_plugin_tests import framework
 from sublime_plugin_tests.utils.selection import split_selection
 
@@ -9,6 +9,7 @@ from sublime_plugin_tests.utils.selection import split_selection
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 
+# Define our class
 class TestLeftDelete(framework.TestCase):
     @framework.template(__dir__ + '/test_files/plugin.template.py')
     def parse_io_files(self, base_path):

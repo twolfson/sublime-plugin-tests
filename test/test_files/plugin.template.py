@@ -36,6 +36,7 @@ def run():
 
         # Assert current selection to output selection
         # TODO: To get full agreement, move to RegionSet?
+        # TODO: Make this into a util? (e.g. sublime_utils.to_region_set)
         actual_sel = scratch_view.get_sel()
         error_msg = 'Expected selection "%s" does not match actual selection "%s"' % (expected_sel, actual_sel)
         assert Region(expected_sel[0][0], expected_sel[0][1]) == actual_sel[0], error_msg
