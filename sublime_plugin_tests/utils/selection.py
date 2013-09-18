@@ -1,6 +1,6 @@
 import re
 
-def split_selection(cls, input):
+def split_selection(input):
     """ Break up input string with selection delimiters into selection and content. """
 
     # Create a placeholder selection

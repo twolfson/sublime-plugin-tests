@@ -13,7 +13,7 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 
 # Set up helper fn
-def template(fn, tmpl_path):
+def template(tmpl_path):
     """ Decorator that templates the returned content. """
     # Pre-emptively read in the template
     tmpl = None
@@ -21,15 +21,15 @@ def template(fn, tmpl_path):
         tmpl = Template(f.read())
 
     # Define our templating wrapper fn
-    def templator_fn(*args, **kwargs):
-        # Run the normal function
-        data = fn(*args, **kwargs)
+    def decorator_fn(fn):
+        def templator_fn(*args, **kwargs):
+            # Run the normal function
+            data = fn(*args, **kwargs)
 
-        # Render the info
-        return tmpl.render(**data)
-
-    # Return templator_fn
-    return templator_fn
+            # Render the info
+            return tmpl.render(**data)
+        return templator_fn
+    return decorator_fn
 
 
 class Base(object):

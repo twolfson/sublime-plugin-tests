@@ -5,9 +5,6 @@ import os
 from sublime_plugin_tests import framework
 from sublime_plugin_tests.utils.selection import split_selection
 
-# Load in 3rd party dependencies
-from jinja2 import Template
-
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
@@ -27,7 +24,7 @@ class TestLeftDelete(framework.TestCase):
             expected_output = f.read()
 
         # Break up expected selection from content
-        expected_obj = self.split_sel(expected_output)
+        expected_obj = split_selection(expected_output)
 
         # Return collected information
         return {
