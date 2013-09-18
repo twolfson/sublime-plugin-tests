@@ -11,7 +11,7 @@ class Test():
         # Attempt to perform actions and catch *any* exception
         try:
             plugin_dict = {}
-            execfile(__dir__ + '/plugin_runner.py', plugin_dict, plugin_dict)
+            execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
             print plugin_dict
             plugin_dict['run']()
         except Exception:
