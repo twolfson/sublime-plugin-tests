@@ -98,7 +98,7 @@ class Base(object):
         # Notify the user that the launcher exists
         return True
 
-    def run_test(self, test_str):
+    def _run_test(self, test_str):
         # Guarantee there is an output directory and launcher
         self.ensure_launcher()
 
@@ -159,7 +159,7 @@ class TestCase(unittest.TestCase, Base):
             test_str = test_fn()
 
             # Run the test and process the result
-            result = self.run_test(test_str)
+            result = self._run_test(test_str)
             success = result['success']
             failure_reason = result['meta_info'] or 'Test failed'
 
