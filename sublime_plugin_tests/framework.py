@@ -34,6 +34,7 @@ def template(tmpl_path):
 
 class Base(object):
     # Determine the plugins directory
+    # TODO: Programmatically sniff for this (https://github.com/twolfson/sublime-plugin-tests/issues/4)
     _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
