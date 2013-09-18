@@ -37,6 +37,7 @@ class TestCase(unittest.TestCase):
         while True:
             # Find the next matching selection
             # TODO: Robustify with multi-char selection and escaping
+            # TODO: Take notes from CSV and template engines (e.g. ejs) to proper handle escaped delimiters
             match = re.search(r'\|', input)
 
             # If there was a match
