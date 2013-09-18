@@ -133,6 +133,10 @@ class TestCase(unittest.TestCase):
             with open(self.scratch_dir + '/plugin_runner.py', 'w') as f:
                 f.write(plugin_runner)
 
+            # Output test to directory
+            with open(self.scratch_dir + '/plugin.py', 'w') as f:
+                f.write(test)
+
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
