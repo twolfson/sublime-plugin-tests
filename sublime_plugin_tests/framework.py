@@ -21,6 +21,7 @@ class TestCase(unittest.TestCase):
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
     # TODO: Rename scratch_dir
+    # TODO: Rename tmp-plugin-tests
     scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
 
     @classmethod
@@ -88,6 +89,7 @@ class TestCase(unittest.TestCase):
                 raise Exception('We had to update the test launcher plugin. You must close or restart Sublime to continue testing.')
 
         # TODO: Use similar copy model minus the exception
+        # TODO: If we overwrite utils, be sure to wait so that changes for import get picked up
         if not os.path.exists(cls.scratch_dir + '/utils'):
             shutil.copytree(__dir__ + '/utils', cls.scratch_dir + '/utils')
 
