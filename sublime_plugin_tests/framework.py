@@ -36,25 +36,22 @@ class Base(object):
     # TODO: It would be nice to pull directory location from Sublime but it isn't critical
     # Determine the scratch plugin directory
     # TODO: Go about this by sniffing the known directory locations =D. If it exists, use it. (ST3 over ST2).
-    # TODO: Allow for overrides via __init__?
-    # TODO: Rename scratch_dir
-    # TODO: Rename tmp-plugin-tests
-    scratch_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/tmp-plugin-tests')
+    plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
-    def ensure_scratch_dir(cls):
+    def ensure_plugin_test_dir(cls):
         # If the scratch plugins directory does not exist, create it
-        if not os.path.exists(cls.scratch_dir):
-            os.makedirs(cls.scratch_dir)
+        if not os.path.exists(cls.plugin_test_dir):
+            os.makedirs(cls.plugin_test_dir)
 
     @classmethod
     def ensure_launcher(cls):
         # Ensure the scratch directory exists
-        cls.ensure_scratch_dir()
+        cls.ensure_plugin_test_dir()
 
         # If command.py doesn't exist, copy it
         orig_command_path = __dir__ + '/command.py'
-        dest_command_path = cls.scratch_dir + '/command.py'
+        dest_command_path = cls.plugin_test_dir + '/command.py'
         if not os.path.exists(dest_command_path):
             shutil.copyfile(orig_command_path, dest_command_path)
         else:
@@ -75,8 +72,8 @@ class Base(object):
 
         # TODO: Use similar copy model minus the exception
         # TODO: If we overwrite utils, be sure to wait so that changes for import get picked up
-        if not os.path.exists(cls.scratch_dir + '/utils'):
-            shutil.copytree(__dir__ + '/utils', cls.scratch_dir + '/utils')
+        if not os.path.exists(cls.plugin_test_dir + '/utils'):
+            shutil.copytree(__dir__ + '/utils', cls.plugin_test_dir + '/utils')
 
         # Notify the user that the launcher exists
         return True
@@ -96,11 +93,11 @@ class Base(object):
             plugin_runner = runner_template.render(output_file=output_file)
 
         # Output plugin_runner to directory
-        with open(cls.scratch_dir + '/plugin_runner.py', 'w') as f:
+        with open(cls.plugin_test_dir + '/plugin_runner.py', 'w') as f:
             f.write(plugin_runner)
 
         # Output test to directory
-        with open(cls.scratch_dir + '/plugin.py', 'w') as f:
+        with open(cls.plugin_test_dir + '/plugin.py', 'w') as f:
             f.write(test_str)
 
         # Start a subprocess to run the plugin
