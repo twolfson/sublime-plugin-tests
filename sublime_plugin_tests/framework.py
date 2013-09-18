@@ -119,9 +119,10 @@ class Base(object):
 
 
 class TestCase(unittest.TestCase, Base):
-    def __call__(self, result=None):
+    def __init__(self, result=None):
         # For each test
         loader = unittest.TestLoader()
+        print 'a'
         for test_name in loader.getTestCaseNames(self.__class__):
             # Wrap the function
             test_fn = getattr(self, test_name)
@@ -130,7 +131,7 @@ class TestCase(unittest.TestCase, Base):
             setattr(self, test_name, wrapped_test)
 
         # Call the original function
-        unittest.TestCase.__call__(self, result)
+        unittest.TestCase.__init__(self, result)
 
     def _wrap_test(self, test_fn):
         # Generate a wrapped function
