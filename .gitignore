@@ -2,3 +2,5 @@
 output-0001.txt
 output/
 sublime_plugin_tests.egg-info/
+build/
+dist/

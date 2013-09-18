@@ -21,7 +21,7 @@ setup(
     author_email='todd@twolfson.com',
     # author_url='http://twolfson.com/',
     url='https://github.com/twolfson/sublime-plugin-tests',
-    packages=find_packages(),
+    packages=['sublime_plugin_tests'],
     license='UNLICENSE',
     install_requires=read_requirements(),
     classifiers=[
