@@ -101,8 +101,7 @@ class Base(object):
         # Start a subprocess to run the plugin
         # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
         # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
-        # TODO: Rename tmp_test command
-        subprocess.call(['sublime_text', '--command', 'tmp_test'])
+        subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
 
         # TODO: How does this work if `tmp_test` is theoretically run in parallel
 

@@ -6,7 +6,7 @@ import sublime_plugin
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 
-class TmpTestCommand(sublime_plugin.ApplicationCommand):
+class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
     def run(self):
         # On every run, re-import the test class
         # DEV: If we overwrote command.py, Sublime would refuse to run `tmp_test`

@@ -30,7 +30,7 @@ def run():
         # TODO: One method - Move run to class + run, inherit from unittest.TestCase
         actual_content = scratch_view.get_content()
         error_msg = 'Expected content "%s" does not match actual content "%s"' % (expected_content, actual_content)
-        assert expected_content != actual_content, error_msg
+        assert expected_content == actual_content, error_msg
 
         # Assert current selection to output selection
         # TODO: To get full agreement, move to RegionSet?
