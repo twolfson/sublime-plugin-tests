@@ -1,16 +1,19 @@
 import sys
 import traceback
 
+
 class Test():
-    def run(self):
+    def run(self, __dir__):
         # Placeholder for success and error info
         success = True
         err = None
 
         # Attempt to perform actions and catch *any* exception
         try:
-            import plugin
-            plugin.run()
+            plugin_dict = {}
+            execfile(__dir__ + '/plugin_runner.py', plugin_dict, plugin_dict)
+            print plugin_dict
+            plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
             success = False

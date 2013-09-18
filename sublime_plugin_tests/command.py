@@ -13,4 +13,4 @@ class TmpTestCommand(sublime_plugin.ApplicationCommand):
         plugin_dict = {}
         execfile(__dir__ + '/plugin_runner.py', plugin_dict, plugin_dict)
         test = plugin_dict['Test']()
-        test.run()
+        test.run(__dir__)
