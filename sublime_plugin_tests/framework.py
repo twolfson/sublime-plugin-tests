@@ -98,9 +98,10 @@ class Base(object):
         # Notify the user that the launcher exists
         return True
 
-    def _run_test(self, test_str):
+    @classmethod
+    def _run_test(cls, test_str):
         # Guarantee there is an output directory and launcher
-        self.ensure_launcher()
+        cls.ensure_launcher()
 
         # Reserve an output file
         output_file = tempfile.mkstemp()[1]
@@ -112,11 +113,11 @@ class Base(object):
             plugin_runner = runner_template.render(output_file=output_file)
 
         # Output plugin_runner to directory
-        with open(self.scratch_dir + '/plugin_runner.py', 'w') as f:
+        with open(cls.scratch_dir + '/plugin_runner.py', 'w') as f:
             f.write(plugin_runner)
 
         # Output test to directory
-        with open(self.scratch_dir + '/plugin.py', 'w') as f:
+        with open(cls.scratch_dir + '/plugin.py', 'w') as f:
             f.write(test_str)
 
         # Start a subprocess to run the plugin
