@@ -21,7 +21,11 @@ install:
 before_script:
   # Generate a screen buffer to collect Sublime Text window
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start -extension RANDR
+  - export XVFB=/usr/bin/Xvfb
+  - export XVFBARGS=":99 -ac -screen 0 1024x768x24 +extension RANDR"
+  - export PIDFILE=/tmp/cucumber_xvfb_99.pid
+  - /sbin/start-stop-daemon --start --quiet --pidfile $PIDFILE --make-pidfile --background --exec $XVFB -- $XVFBARGS
+  # - sh -e /etc/init.d/xvfb start -extension RANDR
 
 script:
   # Run our tests
