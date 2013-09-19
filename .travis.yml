@@ -8,9 +8,10 @@ install:
   - sudo add-apt-repository ppa:webupd8team/sublime-text-2 -y
   - sudo apt-get update
   - sudo apt-get install sublime-text -y
+  - ln -s /usr/bin/sublime_text /usr/bin/subl
 
   # List Sublime Text info for debugging
-  - subl --version
+  - sublime_text --version
 
   # Install `sublime_plugin_tests`
   - python setup.py install
