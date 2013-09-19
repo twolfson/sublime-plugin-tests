@@ -12,6 +12,7 @@ install:
   # List Sublime Text info for debugging
   - ls -la /usr/lib/sublime-text-2/sublime_text
   - ls -la /usr/bin/sublime_text
+  - $PWD"/Sublime Text 2/sublime_text" --version
   - /usr/lib/sublime-text-2/sublime_text --version
   - /usr/bin/sublime_text --version
   - sublime_text --version
