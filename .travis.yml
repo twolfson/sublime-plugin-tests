@@ -10,7 +10,7 @@ install:
   - sudo apt-get install sublime-text -y
 
   # List Sublime Text info for debugging
-  - /opt/sublime_text/sublime_text --version
+  - subl --version
 
   # Install `sublime_plugin_tests`
   - python setup.py install
