@@ -10,7 +10,7 @@ install:
   - sudo ln -s /usr/lib/sublime-text-2/sublime_text /usr/bin/sublime_text
 
   # List Sublime Text info for debugging
-  - ls -la /usr/lib/sublime-text-2/sublime_text
+  - ls -la /usr/lib/sublime-text-2
   - ls -la /usr/bin/sublime_text
   - $PWD"/Sublime Text 2/sublime_text" --version
   - /usr/lib/sublime-text-2/sublime_text --version
