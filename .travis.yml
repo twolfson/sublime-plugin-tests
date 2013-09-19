@@ -20,6 +20,7 @@ before_script:
   # Generate a screen buffer to collect Sublime Text window
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - sublime_text &
 
 script:
   # Run our tests
