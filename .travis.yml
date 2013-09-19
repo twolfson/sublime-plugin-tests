@@ -8,7 +8,7 @@ install:
   - sudo add-apt-repository ppa:webupd8team/sublime-text-2 -y
   - sudo apt-get update
   - sudo apt-get install sublime-text -y
-  - ln -s /usr/bin/subl /usr/bin/sublime_text
+  - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
 
   # List Sublime Text info for debugging
   - sublime_text --version
