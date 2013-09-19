@@ -16,8 +16,6 @@ install:
   # Install `sublime_plugin_tests`
   - python setup.py install
 
-  - sudo apt-get install gtk2-engines-pixbuf -y
-
 before_script:
   # Generate a screen buffer to collect Sublime Text window
   - export DISPLAY=:99.0
