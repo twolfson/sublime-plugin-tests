@@ -19,6 +19,7 @@ install:
 before_script:
   # Generate a screen buffer to collect Sublime Text window
   - "export DISPLAY=:99.0"
+  - cat /etc/init.d/xvfb
   - "sh -e /etc/init.d/xvfb start -extension RANDR"
 
 script:
