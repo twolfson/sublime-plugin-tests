@@ -12,6 +12,10 @@ install:
   # Install `sublime_plugin_tests`
   - python setup.py install
 
+after_install:
+  - echo $PATH
+  - sublime_text --version
+
 script:
   - ./test.sh
 
