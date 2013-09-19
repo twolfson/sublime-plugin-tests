@@ -16,7 +16,13 @@ install:
   # Install `sublime_plugin_tests`
   - python setup.py install
 
+before_script:
+  # Generate a screen buffer to collect Sublime Text window
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
 script:
+  # Run our tests
   - ./test.sh
 
 notifications:
