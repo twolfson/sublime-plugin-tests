@@ -9,6 +9,8 @@ install:
   - sudo apt-get update
   - sudo apt-get install sublime-text -y
   - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
+  # TODO: Use vagrant to try to reproduce Travis CI env (see if there is documentation on closest thing)
+  # TODO: On vagrant (and eventually Travis), try to use apt-get xvfb + extension to run sublime_text
 
   # List Sublime Text info for debugging
   - sublime_text --version
