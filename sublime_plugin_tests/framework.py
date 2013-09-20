@@ -5,8 +5,6 @@ import subprocess
 import tempfile
 import unittest
 
-print os.environ
-
 # Load in 3rd party dependencies
 from jinja2 import Template
 
@@ -80,7 +78,7 @@ class Base(object):
         return True
 
     @classmethod
-    def _run_test(cls, test_str):
+    def _run_test(cls, test_str, auto_kill_sublime=False):
         # Guarantee there is an output directory and launcher
         cls._ensure_launcher()
 
@@ -91,7 +89,8 @@ class Base(object):
         plugin_runner = None
         with open(__dir__ + '/templates/plugin_runner.py') as f:
             runner_template = Template(f.read())
-            plugin_runner = runner_template.render(output_file=output_file)
+            plugin_runner = runner_template.render(output_file=output_file,
+                                                   auto_kill_sublime=auto_kill_sublime)
 
         # Output plugin_runner to directory
         with open(cls._plugin_test_dir + '/plugin_runner.py', 'w') as f:
@@ -140,7 +139,8 @@ class TestCase(unittest.TestCase, Base):
             test_str = test_fn(*args, **kwargs)
 
             # Run the test and process the result
-            result = self._run_test(test_str)
+            result = self._run_test(test_str,
+                                    auto_kill_sublime=os.environ.get('SUBLIME_TESTS_AUTO_KILL', False))
             success = result['success']
             failure_reason = result['meta_info'] or 'Test failed'
 
