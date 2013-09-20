@@ -25,7 +25,7 @@ before_script:
 
 script:
   # Run our tests
-  - ./test.sh
+  - SUBLIME_TESTS_AUTO_KILL=TRUE ./test.sh
 
 notifications:
   email: false
