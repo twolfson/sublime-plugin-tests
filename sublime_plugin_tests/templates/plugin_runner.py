@@ -1,3 +1,4 @@
+import os
 import sublime
 import sys
 import traceback
@@ -32,5 +33,6 @@ class Test():
                 f.write(output)
 
             # TODO: Figure out how to intelligently kill sublime_text (this is horrid for devs)
+            print os.environ
             print 'exit?'
             # sublime.run_command('exit')
