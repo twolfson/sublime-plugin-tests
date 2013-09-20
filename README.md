@@ -1,4 +1,4 @@
-# sublime-plugin-tests
+# sublime-plugin-tests [![Build status](https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master)](https://travis-ci.org/twolfson/sublime-plugin-tests)
 
 Testing framework for Sublime plugins
 
