@@ -32,4 +32,5 @@ class Test():
                 f.write(output)
 
             # TODO: Figure out how to intelligently kill sublime_text (this is horrid for devs)
-            sublime.run_command('exit')
+            print 'exit?'
+            # sublime.run_command('exit')
