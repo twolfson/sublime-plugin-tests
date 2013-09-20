@@ -32,10 +32,8 @@ class Test():
             with open('{{output_file}}', 'w') as f:
                 f.write(output)
 
-            # TODO: Figure out how to intelligently kill sublime_text (this is horrid for devs)
             {% if auto_kill_sublime %}
-                print 'exit?'
-            {% else %}
-                print 'do nothing'
+            # Automatically exit out of Sublime
+            # DEV: If `sublime_text` is not currently running, then we need to automatically kill the process
+            sublime.run_command('exit')
             {% endif %}
-            # sublime.run_command('exit')
