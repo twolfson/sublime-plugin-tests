@@ -1,3 +1,4 @@
+import sublime
 import sys
 import traceback
 
@@ -29,3 +30,6 @@ class Test():
                 output += '\n%s' % err
             with open('{{output_file}}', 'w') as f:
                 f.write(output)
+
+            # TODO: Figure out how to intelligently kill sublime_text (this is horrid for devs)
+            sublime.run_command('exit')
