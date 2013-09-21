@@ -72,7 +72,7 @@ split_selection(input)
 """
 ```
 
-### Example
+#### Example
 Input:
 ```python
 split_selection("""
