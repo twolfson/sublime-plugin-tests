@@ -1,9 +1,13 @@
 # sublime-plugin-tests [![Build status](https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master)](https://travis-ci.org/twolfson/sublime-plugin-tests)
 
-Testing framework for Sublime plugins
+Testing framework for Sublime Text plugins
+
+This was built to create a platform to test plugins against multiple versions of Sublime Text.
+
+![Screenshot of tests running][docs/test.png]
 
 ## Getting Started
-Install the module with: `npm install sublime-plugin-tests`
+Install the module with: `pip install sublime_plugin_tests`
 
 ```javascript
 var sublime_plugin_tests = require('sublime-plugin-tests');

@@ -9,7 +9,7 @@ def read_requirements(filename='requirements.txt'):
 setup(
     name='sublime_plugin_tests',
     version='0.1.0',
-    description='Testing framework for Sublime plugins',
+    description='Testing framework for Sublime Text plugins',
     keywords=[
         'sublime text',
         'plugin',
