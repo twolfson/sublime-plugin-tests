@@ -70,14 +70,19 @@ split_selection(input)
 @return {List} ret_obj['selection'] List of tuples for start/end position of selections
 @return {String} ret_obj['content'] Python with selection characters removed
 """
+```
 
+### Example
+Input:
+```python
 split_selection("""
 def abc|():
     pas|s
 """)
+```
 
-returns
-
+Output:
+```python
 {
   'content': """
 def ab|():
