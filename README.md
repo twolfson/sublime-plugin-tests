@@ -9,9 +9,19 @@ This was built to create a platform to test plugins against multiple versions of
 ## Getting Started
 Install the module with: `pip install sublime_plugin_tests`
 
-```javascript
-var sublime_plugin_tests = require('sublime-plugin-tests');
-sublime_plugin_tests.awesome(); // "awesome"
+```python
+# Load in test framework
+
+```
+
+```python
+$ # Run tests via nosetests
+$ nosetests
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.234s
+
+OK
 ```
 
 ## Documentation
