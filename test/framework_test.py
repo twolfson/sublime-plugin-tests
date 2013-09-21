@@ -32,11 +32,12 @@ class TestLeftDelete(framework.TestCase):
 
         # Return collected information
         info = {
-            'target_sel': input_obj['sel'],
+            'target_sel': input_obj['selection'],
             'content': input_obj['content'],
-            'expected_sel': expected_obj['sel'],
+            'expected_sel': expected_obj['selection'],
             'expected_content': expected_obj['content'],
         }
+        print info
 
         # Template and return plugin
         plugin = None

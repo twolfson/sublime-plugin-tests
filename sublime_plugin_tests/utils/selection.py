@@ -28,6 +28,6 @@ def split_selection(input):
 
     # Return a selection and content
     return {
-        'sel': sel,
+        'selection': sel,
         'content': input
     }

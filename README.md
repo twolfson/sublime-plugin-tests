@@ -54,10 +54,43 @@ OK
 ```
 
 ## Documentation
-_(Coming soon)_
+`framework.TestCase` extends [Python's unittest.TestCase][testcase]. Tests can be skipped and set up/torn down as you normally would. The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
 
-## Examples
-_(Coming soon)_
+[testcase]:
+
+`utils.selection.split_selection` break up a string by selection markers into `content` and `selection`.
+
+```python
+split_selection(input)
+"""
+@param {String} input Python to parse selection indicators out of
+@returns {Dictionary} ret_obj Container for selection and content
+@return {List} ret_obj['selection'] List of tuples for start/end position of selections
+@return {String} ret_obj['content'] Python with selection characters removed
+"""
+
+split_selection("""
+def abc|():
+    pas|s
+""")
+
+returns
+
+{
+  'content': """
+def ab|():
+    pa|s
+""",
+  'selection': [(7, 7), (18, 18)]
+}
+```
+
+## Architecture
+Framework takes each test function, wraps it in a test harness, runs it, and asserts whether the harness saw an error or not.
+
+The test harness generates a temporary Sublime Text plugin which runs your test in the context of Sublime. This harness is launched via a CLI invocation of Sublime Text.
+
+The output and assertions of each test function are reported back to `nosetests` which prints to `stdout` and exits.
 
 ## Donating
 Support this project and [others by twolfson][gittip] via [gittip][].
