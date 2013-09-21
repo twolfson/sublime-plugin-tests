@@ -54,10 +54,12 @@ OK
 ```
 
 ## Documentation
+### framework.TestCase
 `framework.TestCase` extends [Python's unittest.TestCase][testcase]. Tests can be skipped and set up/torn down as you normally would. The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
 
-[testcase]:
+[testcase]: TODO: Link me
 
+### utils.selection.split_selection
 `utils.selection.split_selection` break up a string by selection markers into `content` and `selection`.
 
 ```python
@@ -84,6 +86,10 @@ def ab|():
   'selection': [(7, 7), (18, 18)]
 }
 ```
+
+TODO: Document ScratchView
+
+TODO: Build and release
 
 ## Architecture
 Framework takes each test function, wraps it in a test harness, runs it, and asserts whether the harness saw an error or not.
