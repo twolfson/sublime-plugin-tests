@@ -46,9 +46,9 @@ def run():
 ```bash
 $ # Run tests via nosetests
 $ nosetests
-...
+.
 ----------------------------------------------------------------------
-Ran 3 tests in 0.234s
+Ran 1 test in 0.076s
 
 OK
 ```
