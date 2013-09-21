@@ -4,7 +4,7 @@ Testing framework for Sublime Text plugins
 
 This was built to create a platform to test plugins against multiple versions of Sublime Text.
 
-![Screenshot of tests running](docs/test.png)
+![Screenshot of tests running](docs/tests.png)
 
 ## Getting Started
 Install the module with: `pip install sublime_plugin_tests`
