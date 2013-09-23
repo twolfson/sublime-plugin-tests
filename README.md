@@ -174,7 +174,7 @@ Support this project and [others by twolfson][gittip] via [gittip][].
 [gittip]: https://www.gittip.com/twolfson/
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via [grunt](https://github.com/gruntjs/grunt) and test via `npm test`.
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via `./test.sh`.
 
 ## Unlicense
 As of Sep 05 2013, Todd Wolfson has released this repository and its contents to the public domain.
