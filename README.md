@@ -156,8 +156,6 @@ If you would like to access the underlying [`sublime.View`][view-docs], it can b
 tmp_view.view # sublime.View instance
 ```
 
-TODO: Build and release
-
 ## Architecture
 Framework takes each test function, wraps it in a test harness, runs it, and asserts whether the harness saw an error or not.
 
