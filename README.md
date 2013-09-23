@@ -126,7 +126,28 @@ tmp_view.get_content() # 'Hello World!'
 tmp_view.clear_content()
 ```
 
-####
+#### ScratchView#set_sel, #get_sel, #clear_sel
+Methods to adjust the selection of a `ScratchView`.
+
+```python
+# `set_sel` replaces the selection.
+# For convenience, tuples and lists are coerced to `sublime.Region`.
+tmp_view.set_sel([(6, 6), (7, 7)])
+
+# `get_sel` returns the current selection.
+tmp_view.get_sel() # RegionSet([Region(6, 6), Region(7, 7)])
+
+# `clear_sel` deselects everything.
+tmp_view.clear_sel()
+```
+
+#### ScratchView#destroy
+Closes scratch view for clean up. This also guarantees no pop-up will be run when closing.
+
+```python
+# Close `tmp_view`
+tmp_view.destroy()
+```
 
 #### ScratchView#view
 If you would like to access the underlying [`sublime.View`][view-docs], it can be accessed via the `view` attr.
