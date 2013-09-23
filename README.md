@@ -92,7 +92,48 @@ def abc():
 }
 ```
 
-TODO: Document ScratchView
+### utils.scratch_view.ScratchView
+`utils.scratch_view.ScratchView` is a class for creating a temporary view to work on. This is meant to run in the context of Sublime Text and not in the framework.
+
+When initialized, Sublime Text will open a new file in the active window (not saved to local disk). When you are done, it is strongly encouraged to run `ScratchView#destroy` to clean up your Sublime Text window.
+
+```python
+# Open temporary file inside of Sublime Text's active window
+tmp_view = ScratchView()
+```
+
+#### ScratchView#run_command
+Run a command in the context of a `ScratchView`. The function signature is the same as in the [Sublime Text documentation][view-docs].
+
+[view-docs]: http://www.sublimetext.com/docs/2/api_reference.html#sublime.View
+
+```python
+# Run `left_delete` command inside of `tmp_view`
+tmp_view.run_command('left_delete')
+```
+
+#### ScratchView#set_content, #get_content, #clear_content
+Methods to adjust the content of a `ScratchView`.
+
+```python
+# `set_content` replaces all of the content.
+tmp_view.set_content('Hello World!')
+
+# `get_content` returns the current content.
+tmp_view.get_content() # 'Hello World!'
+
+# `clear_content` deletes all of the content.
+tmp_view.clear_content()
+```
+
+####
+
+#### ScratchView#view
+If you would like to access the underlying [`sublime.View`][view-docs], it can be accessed via the `view` attr.
+
+```python
+tmp_view.view # sublime.View instance
+```
 
 TODO: Build and release
 
