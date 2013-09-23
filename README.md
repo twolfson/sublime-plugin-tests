@@ -57,7 +57,7 @@ OK
 ### framework.TestCase
 `framework.TestCase` extends [Python's unittest.TestCase][testcase]. Tests can be skipped and set up/torn down as you normally would. The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
 
-[testcase]: TODO: Link me
+[testcase]: http://docs.python.org/2/library/unittest.html#unittest.TestCase
 
 ### utils.selection.split_selection
 `utils.selection.split_selection` break up a string by selection markers into `content` and `selection`.
