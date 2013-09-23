@@ -37,7 +37,6 @@ class TestLeftDelete(framework.TestCase):
             'expected_sel': expected_obj['selection'],
             'expected_content': expected_obj['content'],
         }
-        print info
 
         # Template and return plugin
         plugin = None
