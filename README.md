@@ -85,8 +85,8 @@ Output:
 ```python
 {
   'content': """
-def ab|():
-    pa|s
+def abc():
+    pass
 """,
   'selection': [(7, 7), (18, 18)]
 }
