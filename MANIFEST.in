@@ -1,6 +1,3 @@
 recursive-include docs *
 recursive-include sublime_plugin_tests *
-include CHANGELOG.md
-include README.md
-include UNLICENSE
-include requirements.txt
+include *
