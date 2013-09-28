@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 def read_requirements(filename='requirements.txt'):
@@ -8,7 +8,7 @@ def read_requirements(filename='requirements.txt'):
 
 setup(
     name='sublime_plugin_tests',
-    version='0.1.4',
+    version='0.1.5',
     description='Testing framework for Sublime Text plugins',
     keywords=[
         'sublime text',
@@ -20,9 +20,7 @@ setup(
     author='Todd Wolfson',
     author_email='todd@twolfson.com',
     url='https://github.com/twolfson/sublime-plugin-tests',
-    packages=[
-        'sublime_plugin_tests'
-    ],
+    packages=find_packages(),
     license='UNLICENSE',
     install_requires=read_requirements(),
     classifiers=[
