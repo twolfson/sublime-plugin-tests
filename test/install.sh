@@ -8,8 +8,8 @@ if test $SUBLIME_TEXT_VERSION = "2.0"; then
   sudo apt-get install sublime-text -y
   sudo ln -s /usr/bin/subl /usr/bin/sublime_text
 elif test $SUBLIME_TEXT_VERSION = "3.0"; then
-  sudo add-apt-repository ppa:webupd8team/sublime-text-3
+  sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y
   sudo apt-get update
-  sudo apt-get install sublime-text-installer
+  sudo apt-get install sublime-text-installer -y
   sudo ln -s /usr/bin/subl /usr/bin/sublime_text
 fi
