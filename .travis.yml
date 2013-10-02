@@ -3,6 +3,7 @@ python:
   - "2.7"
 env:
   - SUBLIME_TEXT_VERSION="2.0"
+  - SUBLIME_TEXT_VERSION="3.0"
 
 install:
   # Install Sublime Text
