@@ -14,9 +14,8 @@ class Test():
         # Attempt to perform actions and catch *any* exception
         try:
             # DEV: Due to `import` not immediately picking up changes, we use `execfile` to run what is on disk
-            plugin_dict = {}
-            execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
-            plugin_dict['run']()
+            from plugin import run
+            run()
         except Exception:
         # If an error occurs, record it
             success = False
