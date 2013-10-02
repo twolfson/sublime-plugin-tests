@@ -87,18 +87,22 @@ class Base(object):
 
         # Template plugin
         plugin_runner = None
-        with open(__dir__ + '/templates/plugin_runner.py') as f:
-            runner_template = Template(f.read())
-            plugin_runner = runner_template.render(output_file=output_file,
-                                                   auto_kill_sublime=auto_kill_sublime)
+        f = open(__dir__ + '/templates/plugin_runner.py')
+        runner_template = Template(f.read())
+        plugin_runner = runner_template.render(output_file=output_file,
+                                               auto_kill_sublime=auto_kill_sublime)
+        f.close()
+        print output_file
 
         # Output plugin_runner to directory
-        with open(cls._plugin_test_dir + '/plugin_runner.py', 'w') as f:
-            f.write(plugin_runner)
+        f = open(cls._plugin_test_dir + '/plugin_runner.py', 'w')
+        f.write(plugin_runner)
+        f.close()
 
         # Output test to directory
-        with open(cls._plugin_test_dir + '/plugin.py', 'w') as f:
-            f.write(test_str)
+        f = open(cls._plugin_test_dir + '/plugin.py', 'w')
+        f.write(test_str)
+        f.close()
 
         # Start a subprocess to run the plugin
         # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)

@@ -1,16 +1,13 @@
 language: python
 python:
   - "2.7"
+env:
+  - SUBLIME_TEXT_VERSION="2.0"
+  - SUBLIME_TEXT_VERSION="3.0"
 
 install:
-  # Install Sublime Text 2
-  # http://askubuntu.com/questions/172698/how-do-i-install-sublime-text-2
-  - sudo add-apt-repository ppa:webupd8team/sublime-text-2 -y
-  - sudo apt-get update
-  - sudo apt-get install sublime-text -y
-  - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
-  # TODO: Use vagrant to try to reproduce Travis CI env (see if there is documentation on closest thing)
-  # TODO: On vagrant (and eventually Travis), try to use apt-get xvfb + extension to run sublime_text
+  # Install Sublime Text
+  - ./test/install.sh
 
   # List Sublime Text info for debugging
   - sublime_text --version
