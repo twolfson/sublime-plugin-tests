@@ -16,6 +16,6 @@ class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
         plugin_py = compile(f.read(), __dir__ + '/plugin_runner.py', 'exec')
         f.close()
         print plugin_py
-        exec(plugin_py, plugin_dict, plugin_dict)
+        eval(plugin_py, plugin_dict, plugin_dict)
         test = plugin_dict['Test']()
         test.run(__dir__)
