@@ -2,6 +2,7 @@
 import os
 import shutil
 import subprocess
+import time
 import tempfile
 import unittest
 
@@ -109,7 +110,10 @@ class Base(object):
         # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
         subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
 
-        # TODO: How does this work if `tmp_test` is theoretically run in parallel
+        # Wait for the output file to exist
+        while (not os.path.exists(output_file)) {
+            time.sleep(0.1)
+        }
 
         # Read in the output
         with open(output_file) as f:
