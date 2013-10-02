@@ -9,12 +9,21 @@ class Test():
         # Placeholder for success and error info
         success = True
         err = None
+        print '{{output_file}}'
 
         # Attempt to perform actions and catch *any* exception
         try:
             # DEV: Due to `import` not immediately picking up changes, we use `execfile` to run what is on disk
             plugin_dict = {}
-            execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
+            # TODO: Make this feature detection
+            # if getattr(__builtins__, 'execfile', None):
+            if sublime.version() < '3000':
+                execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
+            else:
+                f = open(__dir__ + '/plugin.py')
+                plugin_py = compile(f.read(), __dir__ + '/plugin.py', 'exec')
+                f.close()
+                eval(plugin_py, plugin_dict, plugin_dict)
             plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
@@ -32,6 +41,7 @@ class Test():
             with open('{{output_file}}', 'w') as f:
                 f.write(output)
 
+            print 'hiii'
             {% if auto_kill_sublime %}
             # Automatically exit out of Sublime
             # DEV: If `sublime_text` is not currently running, then we need to automatically kill the process

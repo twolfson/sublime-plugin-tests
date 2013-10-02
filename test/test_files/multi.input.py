@@ -1,2 +1,2 @@
 def abc|():
-    pas|s
+    pa|s
