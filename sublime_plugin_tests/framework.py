@@ -86,16 +86,17 @@ class Base(object):
         output_file = tempfile.mkstemp()[1]
 
         # Template plugin
-        f = open(__dir__ + '/command.py')
+        plugin_runner = None
+        f = open(__dir__ + '/templates/plugin_runner.py')
         runner_template = Template(f.read())
-        command = runner_template.render(output_file=output_file,
+        plugin_runner = runner_template.render(output_file=output_file,
                                                auto_kill_sublime=auto_kill_sublime)
         f.close()
         print output_file
 
-        # Output command to directory
-        f = open(cls._plugin_test_dir + '/command.py', 'w')
-        f.write(command)
+        # Output plugin_runner to directory
+        f = open(cls._plugin_test_dir + '/plugin_runner.py', 'w')
+        f.write(plugin_runner)
         f.close()
 
         # Output test to directory
