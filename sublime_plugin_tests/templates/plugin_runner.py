@@ -33,6 +33,7 @@ class Test():
             with open('{{output_file}}', 'w') as f:
                 f.write(output)
 
+            print 'hiii'
             {% if auto_kill_sublime %}
             # Automatically exit out of Sublime
             # DEV: If `sublime_text` is not currently running, then we need to automatically kill the process

@@ -13,7 +13,7 @@ class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
         # DEV: Once it is loaded and run once via CLI, it is locked in memory until Sublime Text is restarted
         plugin_dict = {}
         f = open(__dir__ + '/plugin_runner.py')
-        plugin_py = f.read()
+        plugin_py = compile(f.read(), __dir__ + '/plugin_runner.py', 'exec')
         f.close()
         print plugin_py
         exec(plugin_py, plugin_dict, plugin_dict)
