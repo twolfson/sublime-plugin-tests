@@ -5,6 +5,9 @@ env:
   - SUBLIME_TEXT_VERSION="2.0"
 
 install:
+  # Install Sublime Text
+  - ./test/install.sh
+
   # List Sublime Text info for debugging
   - sublime_text --version
 

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # If we are to install Sublime Text 2
 if test $SUBLIME_TEXT_VERSION = "2.0"; then
   # http://askubuntu.com/questions/172698/how-do-i-install-sublime-text-2
