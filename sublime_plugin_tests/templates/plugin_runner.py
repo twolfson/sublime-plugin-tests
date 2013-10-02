@@ -3,7 +3,6 @@ import sublime
 import sys
 import traceback
 
-
 class Test():
     def run(self, __dir__):
         # Placeholder for success and error info
