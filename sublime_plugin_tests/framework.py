@@ -110,11 +110,13 @@ class Base(object):
         subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
 
         # TODO: How does this work if `tmp_test` is theoretically run in parallel
+        import time; time.sleep(1)
 
         # Read in the output
         with open(output_file) as f:
             # Read, parse, and return the result
             result = f.read()
+            print 'aaa', result
             result_lines = result.split('\n')
             return {
                 'raw_result': result,

@@ -36,8 +36,9 @@ class Test():
             output = 'SUCCESS' if success else 'FAILURE'
             if err:
                 output += '\n%s' % err
-            with open('{{output_file}}', 'w') as f:
-                f.write(output)
+            f = open('{{output_file}}', 'w')
+            f.write(output)
+            f.close()
 
             {% if auto_kill_sublime %}
             # Automatically exit out of Sublime
