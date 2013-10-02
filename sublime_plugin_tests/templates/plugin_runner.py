@@ -9,6 +9,7 @@ class Test():
         # Placeholder for success and error info
         success = True
         err = None
+        print '{{output_file}}'
 
         # Attempt to perform actions and catch *any* exception
         try:
