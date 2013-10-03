@@ -35,7 +35,7 @@ class ScratchView:
         self.clear_content()
 
         # Set the content
-        edit = view.begin_edit()
+        edit = view.begin_edit(0, 'plugin_tests_set_content')
         view.insert(edit, 0, content)
         view.end_edit(edit)
 
