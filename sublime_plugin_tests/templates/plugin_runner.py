@@ -3,13 +3,12 @@ import sublime
 import sys
 import traceback
 
+
 class Test():
     def run(self, __dir__):
         # Placeholder for success and error info
         success = True
         err = None
-
-        print('waaa')
 
         # Attempt to perform actions and catch *any* exception
         try:
@@ -45,9 +44,8 @@ class Test():
             output = 'SUCCESS' if success else 'FAILURE'
             if err:
                 output += '\n%s' % err
-            f = open('{{output_file}}', 'w')
-            f.write(output)
-            f.close()
+            with open('{{output_file}}', 'w') as f:
+                f.write(output)
 
             {% if auto_kill_sublime %}
             # Automatically exit out of Sublime

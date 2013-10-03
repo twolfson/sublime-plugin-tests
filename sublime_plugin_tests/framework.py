@@ -95,7 +95,7 @@ class Base(object):
         plugin_runner = runner_template.render(output_file=output_file,
                                                auto_kill_sublime=auto_kill_sublime)
         f.close()
-        print(output_file)
+        print output_file
 
         # Output plugin_runner to directory
         f = open(cls._plugin_test_dir + '/plugin_runner.py', 'w')
