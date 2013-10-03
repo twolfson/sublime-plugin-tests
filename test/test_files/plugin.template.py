@@ -8,7 +8,7 @@ Region = sublime.Region
 
 def run():
     # Generate new scratch file
-    print('hi')
+    print('hi2')
     scratch_view = ScratchView()
     try:
         # Injection point for input variables
@@ -16,7 +16,9 @@ def run():
         target_sel = {{target_sel}}
 
         # Output single.input to scratch
+        print('setting')
         scratch_view.set_content(content)
+        print('set')
 
         # Update selection
         scratch_view.set_sel(target_sel)

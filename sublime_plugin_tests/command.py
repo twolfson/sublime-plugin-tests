@@ -21,6 +21,7 @@ class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
         if sublime.version() < '3000':
             execfile(__dir__ + '/plugin_runner.py', plugin_dict, plugin_dict)
         else:
+            # TODO: This importer definitely lags behind
             from .plugin_runner import Test
             plugin_dict['Test'] = Test
         test = plugin_dict['Test']()
