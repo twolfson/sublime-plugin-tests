@@ -17,13 +17,8 @@ class Test():
             # TODO: Make this feature detection
             # TODO: Something something try imputil, something something http://www.afpy.org/doc/python/2.7/library/imputil.html
             # if getattr(__builtins__, 'execfile', None):
-            if sublime.version() < '3000':
-                execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
-            else:
-                f = open(__dir__ + '/plugin.py')
-                plugin_py = compile(f.read(), __dir__ + '/plugin.py', 'exec')
-                f.close()
-                eval(plugin_py, plugin_dict, plugin_dict)
+            import runpy
+            runpy.run_path(__dir__ + '/plugin.py')
             plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
