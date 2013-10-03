@@ -22,9 +22,9 @@ class ScratchView:
         view = self.view
 
         # Generate an edit to clear out the view
-        edit = view.begin_edit()
-        view.erase(edit, Region(0, view.size()))
-        view.end_edit(edit)
+        # TODO: Make a plugin that is `replace_all`
+        view.run_command('select_all')
+        view.run_command('left_delete')
 
     def set_content(self, content):
         """ Set the view content """
