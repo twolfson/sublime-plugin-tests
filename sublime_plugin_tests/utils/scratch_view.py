@@ -18,13 +18,7 @@ class ScratchView:
 
     def clear_content(self):
         """ Clear out view content """
-        # Localize view
-        view = self.view
-
-        # Generate an edit to clear out the view
-        # TODO: Make a plugin that is `replace_all`
-        view.run_command('select_all')
-        view.run_command('left_delete')
+        self.set_content('')
 
     def set_content(self, content):
         """ Set the view content """
