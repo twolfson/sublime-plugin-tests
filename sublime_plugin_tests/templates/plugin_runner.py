@@ -30,6 +30,7 @@ class Test():
                 plugin_py = compile(f.read(), __dir__ + '/plugin.py', 'exec')
                 f.close()
                 eval(plugin_py, plugin_dict, plugin_dict)
+                print('om 2nom')
             plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
