@@ -8,7 +8,7 @@ import traceback
 class PluginTestsReplaceAllCommand(sublime_plugin.TextCommand):
     def run(self, edit, content=''):
         view = self.view
-        view.replace(edit, Region(0, view.size()), content)
+        view.replace(edit, sublime.Region(0, view.size()), content)
 
 
 class Test():

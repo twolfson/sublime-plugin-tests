@@ -25,13 +25,8 @@ class ScratchView:
         # Localize view
         view = self.view
 
-        # Clear out content
-        self.clear_content()
-
         # Set the content
-        edit = view.begin_edit(0, 'plugin_tests_set_content')
-        view.insert(edit, 0, content)
-        view.end_edit(edit)
+        view.run_command('plugin_tests_replace_all', {'content': content})
 
     def get_content(self):
         """ Get view content """
