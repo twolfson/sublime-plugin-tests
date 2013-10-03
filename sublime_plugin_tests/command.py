@@ -12,7 +12,11 @@ class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
         # On every run, re-import the test class
         # DEV: Sublime Text does not recognize changes to command.py.
         # DEV: Once it is loaded and run once via CLI, it is locked in memory until Sublime Text is restarted
-        plugin_dict = {}
+        plugin_dict = {
+            '__name__': 'plugin_runner',
+            '__file__': './plugin_runner.pyc',
+            '__package__': None
+        }
         # DEV: In Python 2.x, use execfile. In 3.x, use compile + exec.
         # http://stackoverflow.com/a/437857
         # TODO: Make this feature detection
