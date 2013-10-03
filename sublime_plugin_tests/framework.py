@@ -95,7 +95,7 @@ class Base(object):
         plugin_runner = runner_template.render(output_file=output_file,
                                                auto_kill_sublime=auto_kill_sublime)
         f.close()
-        print output_file
+        print(output_file)
 
         # Output plugin_runner to directory
         f = open(cls._plugin_test_dir + '/plugin_runner.py', 'w')
@@ -113,7 +113,7 @@ class Base(object):
         subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
 
         # Wait for the output file to exist
-        while (not os.path.exists(output_file)):
+        while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
             time.sleep(0.1)
 
         # Read in the output
