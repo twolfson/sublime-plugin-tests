@@ -2,12 +2,13 @@ from __future__ import absolute_import
 
 import sublime
 
-from utils.scratch_view import ScratchView
+from .utils.scratch_view import ScratchView
 
 Region = sublime.Region
 
 def run():
     # Generate new scratch file
+    print('hi')
     scratch_view = ScratchView()
     try:
         # Injection point for input variables
