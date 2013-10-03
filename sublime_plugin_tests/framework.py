@@ -2,6 +2,7 @@
 import os
 import shutil
 import subprocess
+import time
 import tempfile
 import unittest
 
@@ -35,7 +36,9 @@ def template(tmpl_path):
 class Base(object):
     # Determine the plugins directory
     # TODO: Programmatically sniff for this (https://github.com/twolfson/sublime-plugin-tests/issues/4)
-    _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-3/Packages/sublime-plugin-tests-tmp')
+    _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
+    if os.environ.get('SUBLIME_TEXT_VERSION', None) == '3.0':
+        _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-3/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
     def _ensure_plugin_test_dir(cls):
@@ -109,14 +112,14 @@ class Base(object):
         # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
         subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
 
-        # TODO: How does this work if `tmp_test` is theoretically run in parallel
-        import time; time.sleep(1)
+        # Wait for the output file to exist
+        while (not os.path.exists(output_file)):
+            time.sleep(0.1)
 
         # Read in the output
         with open(output_file) as f:
             # Read, parse, and return the result
             result = f.read()
-            print 'aaa', result
             result_lines = result.split('\n')
             return {
                 'raw_result': result,
