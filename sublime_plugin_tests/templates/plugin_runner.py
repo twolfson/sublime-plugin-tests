@@ -24,12 +24,9 @@ class Test():
             if sublime.version() < '3000':
                 execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
             else:
-                print('om nom')
-                f = open(__dir__ + '/plugin.py')
-                plugin_py = compile(f.read(), __dir__ + '/plugin.py', 'exec')
-                f.close()
-                eval(plugin_py, plugin_dict, plugin_dict)
-                print('om 2nom')
+                print('om nomx')
+                from .plugin import run
+                plugin_dict['run'] = run
             plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
