@@ -6,6 +6,9 @@ import sublime_plugin
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
+# TODO: IF YOU ARE DEBUGGING SUBLIME TEXT 3, RUN
+# export SUBLIME_TEXT_VERSION=3.0
+
 
 class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
     def run(self):
