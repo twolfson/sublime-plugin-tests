@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import sublime
 
-from .utils.scratch_view import ScratchView
+from utils.scratch_view import ScratchView
 
 Region = sublime.Region
 

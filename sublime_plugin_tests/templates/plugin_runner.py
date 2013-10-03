@@ -18,7 +18,7 @@ class Test():
             # TODO: Something something try imputil, something something http://www.afpy.org/doc/python/2.7/library/imputil.html
             # if getattr(__builtins__, 'execfile', None):
             import runpy
-            runpy.run_path(__dir__ + '/plugin.py')
+            plugin_dict = runpy.run_module('plugin')
             plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
