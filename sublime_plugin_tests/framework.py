@@ -37,6 +37,8 @@ class Base(object):
     # Determine the plugins directory
     # TODO: Programmatically sniff for this (https://github.com/twolfson/sublime-plugin-tests/issues/4)
     _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
+    if os.environ.get('SUBLIME_TEXT_VERSION', None) == '3.0':
+        _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-3/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
     def _ensure_plugin_test_dir(cls):
