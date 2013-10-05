@@ -110,7 +110,7 @@ class Base(object):
         # Start a subprocess to run the plugin
         # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
         # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
-        subprocess.call(['sublime_text3', '--command', 'sublime_plugin_test_tmp'])
+        subprocess.call(['sublime_text3', '--command', 'sublime_plugin_test_tmp', '--background'])
 
         # Wait for the output file to exist
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
