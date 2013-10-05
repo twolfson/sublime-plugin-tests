@@ -31,7 +31,10 @@ class Test():
             if sublime.version() < '3000':
                 execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
             else:
+                import importlib
+                importlib.invalidate_caches()
                 from .plugin import run
+                print('aaa')
                 plugin_dict['run'] = run
             plugin_dict['run']()
         except Exception:
@@ -50,6 +53,8 @@ class Test():
             f = open('{{output_file}}', 'w')
             f.write(output)
             f.close()
+
+            return
 
             import time
             time.sleep(1)
