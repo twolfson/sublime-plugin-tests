@@ -22,6 +22,8 @@ class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
             execfile(__dir__ + '/plugin_runner.py', plugin_dict, plugin_dict)
         else:
             # TODO: This importer definitely lags behind
+            # TODO: The reason the tests won't close is it is writing to the previous file.
+            # TODO: which means the current file never gets filled in and the test times out
             import sys
             del sys.modules['sublime-plugin-tests-tmp.plugin']
             from .plugin_runner import Test
