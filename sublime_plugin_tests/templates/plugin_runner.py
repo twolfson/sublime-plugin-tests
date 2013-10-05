@@ -34,7 +34,6 @@ class Test():
                 import importlib
                 importlib.invalidate_caches()
                 from .plugin import run
-                print('aaa')
                 plugin_dict['run'] = run
             plugin_dict['run']()
         except Exception:
@@ -48,13 +47,13 @@ class Test():
         # Always...
             # Write out success/failure and any meta data
             output = 'SUCCESS' if success else 'FAILURE'
+            print('www', output)
             if err:
                 output += '\n%s' % err
             f = open('{{output_file}}', 'w')
             f.write(output)
             f.close()
 
-            return
 
             import time
             time.sleep(1)
