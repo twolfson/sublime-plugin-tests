@@ -1,11 +1,24 @@
+import os
 import random
 import sublime_plugin
 
+__dir__ = os.path.dirname(os.path.abspath(__file__))
+
 class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 	def run(self):
-		# Generate and print a random string
-		print('abc')
+		# Generate and print a random number
+		num = random.randint(0, 10000)
+		print(num)
 
-		# Write out a new python file that prints out said random string
+		# Write out a new python file that prints out said random number
+		script = """
+def main():
+	print(%s)
+""" % num
+		f = open(__dir__ + '/test.py', 'w')
+		f.write(script)
+		f.close()
 
 		# Import and run command
+		from .test import main
+		main()
