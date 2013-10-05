@@ -17,6 +17,8 @@ class Test():
         success = True
         err = None
 
+        print('hello', '{{output_file}}')
+
         # Attempt to perform actions and catch *any* exception
         try:
             # DEV: Due to `import` not immediately picking up changes, we use `execfile` to run what is on disk

@@ -22,8 +22,7 @@ class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
             execfile(__dir__ + '/plugin_runner.py', plugin_dict, plugin_dict)
         else:
             # TODO: This importer definitely lags behind
-            import importlib
-            importlib.invalidate_caches()
+            print('abc', __import__('.plugin_runner', plugin_dict, plugin_dict))
             from .plugin_runner import Test
             plugin_dict['Test'] = Test
         test = plugin_dict['Test']()
