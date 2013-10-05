@@ -48,12 +48,12 @@ class Test():
             # Write out success/failure and any meta data
             output = 'SUCCESS' if success else 'FAILURE'
             print('www', output)
+            print('xxx', '{{output_file}}')
             if err:
                 output += '\n%s' % err
             f = open('{{output_file}}', 'w')
             f.write(output)
             f.close()
-
 
             import time
             time.sleep(1)
