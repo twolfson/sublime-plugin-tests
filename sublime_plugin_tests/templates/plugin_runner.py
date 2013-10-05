@@ -15,7 +15,7 @@ class Test():
             # DEV: Due to `import` not immediately picking up changes, we use `execfile` to run what is on disk
             plugin_dict = {
                 '__name__': 'plugin',
-                '__file__': './plugin.pyc',
+                '__file__': './plugin.py',
                 '__package__': None
             }
             # TODO: Make this feature detection
