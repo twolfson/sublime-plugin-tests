@@ -12,13 +12,12 @@ class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 
 		# Write out a new python file that prints out said random number
 		script = """
-def main():
-	print(%s)
+hello = %s
 """ % num
 		f = open(__dir__ + '/test.py', 'w')
 		f.write(script)
 		f.close()
 
 		# Import and run command
-		from .test import main
-		main()
+		from .test import hello
+		print(hello)
