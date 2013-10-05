@@ -31,7 +31,6 @@ class Test():
             if sublime.version() < '3000':
                 execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
             else:
-                print('om nomx')
                 from .plugin import run
                 plugin_dict['run'] = run
             plugin_dict['run']()
