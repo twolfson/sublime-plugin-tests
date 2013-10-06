@@ -36,7 +36,7 @@ hello = %s
 			'__builtins__': __builtins__,
 		}
 		local_dict = {}
-		exec(compile(script, 'test.py', 'exec'), global_dict, local_dict)
+		exec(compile(script, filepath, 'exec'), global_dict, local_dict)
 		print(local_dict['hello'], local_dict['x'])
 		# import importlib
 		# print(importlib)

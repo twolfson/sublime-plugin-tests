@@ -22,21 +22,22 @@ class Test():
         # Attempt to perform actions and catch *any* exception
         try:
             # DEV: Due to `import` not immediately picking up changes, we use `execfile` to run what is on disk
-            plugin_dict = {
-                '__name__': 'plugin',
-                '__file__': './plugin.pyc',
-                '__package__': None
-            }
-            # TODO: Make this feature detection
-            # TODO: Something something try imputil, something something http://www.afpy.org/doc/python/2.7/library/imputil.html
-            # if getattr(__builtins__, 'execfile', None):
-            if sublime.version() < '3000':
+            plugin_dict = {}
+            if globals().get('execfile', None):
                 execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
             else:
-                import importlib
-                importlib.invalidate_caches()
-                from .plugin import run
-                plugin_dict['run'] = run
+                filepath = __dir__ + '/plugin.py'
+                f = open(filepath)
+                script = f.read()
+                global_dict = {
+                    '__dir__': __dir__,
+                    '__file__': filepath,
+                    '__name__': '%s.plugin' % __package__,
+                    '__package__': __package__,
+                    '__builtins__': __builtins__,
+                }
+                plugin_dict = {}
+                exec(compile(script, filepath, 'exec'), global_dict, plugin_dict)
             plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
