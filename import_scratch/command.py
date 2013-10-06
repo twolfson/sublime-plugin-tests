@@ -26,6 +26,7 @@ hello = %s
 
 		# Import and run command
 		# from .test import hello
+		# TODO: One hack we could do for globals is to `import` then send to exec + compile since they are unlikely to change but it still isn't perfect
 		filepath = __dir__ + '/test.py'
 		f = open(filepath)
 		script = f.read()
@@ -35,7 +36,10 @@ hello = %s
 			'__name__': '%s.test' % __package__,
 			'__package__': __package__,
 			'__builtins__': __builtins__,
+			# '__loader__': __loader__,
 		}
+		for key, val in globals().items():
+			print(key, val)
 		local_dict = {}
 		exec(compile(script, filepath, 'exec'), global_dict, local_dict)
 		print(local_dict['hello'], local_dict['x'], global_dict['sys'])
