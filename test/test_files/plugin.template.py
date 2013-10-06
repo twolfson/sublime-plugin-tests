@@ -3,15 +3,9 @@ from __future__ import absolute_import
 import sublime
 from .utils.scratch_view import ScratchView
 
-print('globals1', globals())
-print('locals1', locals())
+Region = sublime.Region
 
 def run():
-    print('globals2', globals())
-    print('locals2', locals())
-    # import sublime
-    Region = sublime.Region
-
     # Generate new scratch file
     scratch_view = ScratchView()
     try:

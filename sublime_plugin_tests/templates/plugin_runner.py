@@ -36,8 +36,11 @@ class Test():
                     '__package__': __package__,
                     '__builtins__': __builtins__,
                 }
-                plugin_dict = {}
-                exec(compile(script, filepath, 'exec'), global_dict, plugin_dict)
+                plugin_dict = global_dict
+                # exec(compile(script, filepath, 'exec'), global_dict, plugin_dict)
+                import code
+                interpretter = code.InteractiveInterpreter(global_dict)
+                interpretter.runcode(compile(script, filepath, 'exec'))
             plugin_dict['run']()
         except Exception:
         # If an error occurs, record it
