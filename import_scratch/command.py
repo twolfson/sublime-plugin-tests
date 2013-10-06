@@ -18,6 +18,7 @@ class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 		# Write out a new python file that prints out said random number
 		__script = """
 from .world import x
+import sys
 hello = %s
 """ % num
 		write_file('world.py', 'x = 1')
@@ -37,7 +38,7 @@ hello = %s
 		}
 		local_dict = {}
 		exec(compile(script, filepath, 'exec'), global_dict, local_dict)
-		print(local_dict['hello'], local_dict['x'])
+		print(local_dict['hello'], local_dict['x'], global_dict['sys'])
 		# import importlib
 		# print(importlib)
 		# print(hello)

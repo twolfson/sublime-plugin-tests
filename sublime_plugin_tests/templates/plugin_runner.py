@@ -42,6 +42,8 @@ class Test():
         except Exception:
         # If an error occurs, record it
             success = False
+            import sys
+            import traceback
             exc_type, exc_value, exc_traceback = sys.exc_info()
             err = ''.join(traceback.format_exception(exc_type,
                                                      exc_value,
