@@ -4,6 +4,11 @@ import sublime_plugin
 
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
+def write_file(filename, content):
+	f = open(__dir__ + '/' + filename, 'w')
+	f.write(content)
+	f.close()
+
 class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 	def run(self):
 		# Generate and print a random number
@@ -14,17 +19,21 @@ class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 		__script = """
 hello = %s
 """ % num
-		__f = open(__dir__ + '/test.py', 'w')
-		__f.write(__script)
-		__f.close()
+		write_file('test.py', __script)
 
 		# Import and run command
 		# from .test import hello
-		f = open(__dir__ + '/test.py')
+		filepath = __dir__ + '/test.py'
+		f = open(filepath)
 		script = f.read()
-		python_dict = {}
-		exec(compile(script, 'test.py', 'exec'), python_dict, python_dict)
-		print(python_dict['hello'])
+		global_dict = {
+			'__file__': filepath,
+			'__name__': '__main__'
+		}
+		local_dict = {
+		}
+		exec(compile(script, 'test.py', 'exec'), global_dict, local_dict)
+		print(local_dict['hello'])
 		# import importlib
 		# print(importlib)
 		# print(hello)
