@@ -18,8 +18,6 @@ class Test():
         success = True
         err = None
 
-        print('hello', '{{output_file}}')
-
         # Attempt to perform actions and catch *any* exception
         try:
             # DEV: Due to `import` not immediately picking up changes, we use `execfile` to run what is on disk
@@ -42,8 +40,6 @@ class Test():
         except Exception:
         # If an error occurs, record it
             success = False
-            import sys
-            import traceback
             exc_type, exc_value, exc_traceback = sys.exc_info()
             err = ''.join(traceback.format_exception(exc_type,
                                                      exc_value,
@@ -52,8 +48,6 @@ class Test():
         # Always...
             # Write out success/failure and any meta data
             output = 'SUCCESS' if success else 'FAILURE'
-            print('www', output)
-            print('xxx', '{{output_file}}')
             if err:
                 output += '\n%s' % err
             f = open('{{output_file}}', 'w')

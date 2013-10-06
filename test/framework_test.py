@@ -48,9 +48,9 @@ class TestLeftDelete(framework.TestCase):
     def test_left_delete_single(self):
         return self.parse_io_files(__dir__ + '/test_files/single')
 
-    # def test_left_delete_multi(self):
-    #     return self.parse_io_files(__dir__ + '/test_files/multi')
+    def test_left_delete_multi(self):
+        return self.parse_io_files(__dir__ + '/test_files/multi')
 
-    # def test_left_delete_multi_collapse(self):
-    #     return self.parse_io_files(__dir__ + '/test_files/multi_collapse')
+    def test_left_delete_multi_collapse(self):
+        return self.parse_io_files(__dir__ + '/test_files/multi_collapse')
 
