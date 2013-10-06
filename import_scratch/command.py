@@ -17,8 +17,10 @@ class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 
 		# Write out a new python file that prints out said random number
 		__script = """
+from .world import x
 hello = %s
 """ % num
+		write_file('world.py', 'x = 1')
 		write_file('test.py', __script)
 
 		# Import and run command
