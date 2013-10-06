@@ -1,4 +1,5 @@
 
 from .world import x
 import sys
-hello = 8841
+print(globals()['sys'])
+hello = 8080

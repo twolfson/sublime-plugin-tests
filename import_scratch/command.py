@@ -19,6 +19,7 @@ class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 		__script = """
 from .world import x
 import sys
+print(globals()['sys'])
 hello = %s
 """ % num
 		write_file('world.py', 'x = 1')
@@ -41,8 +42,8 @@ hello = %s
 		for key, val in globals().items():
 			print(key, val)
 		local_dict = {}
-		exec(compile(script, filepath, 'exec'), None, local_dict)
-		print(local_dict['hello'], local_dict['x'], global_dict['sys'])
+		print(compile(script, filepath, 'exec'))
+		# print(local_dict['hello'], local_dict['x'])
 		# import importlib
 		# print(importlib)
 		# print(hello)
