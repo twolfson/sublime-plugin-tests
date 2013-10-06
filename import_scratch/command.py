@@ -44,7 +44,9 @@ hello = %s
 		local_dict = {}
 		# print('www', exec(compile(script, filepath, 'exec'), global_dict, {}))
 		import code
-		code.runcode(compile(script, filepath, 'exec'))
+		interpretter = code.InteractiveInterpreter(global_dict)
+		interpretter.runcode(compile(script, filepath, 'exec'))
+		print(global_dict['sys'])
 		print('www', compile(script, filepath, 'exec').__class__)
 		# print(local_dict['hello'], local_dict['x'])
 		# import importlib
