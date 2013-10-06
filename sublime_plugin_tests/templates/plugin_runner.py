@@ -15,6 +15,10 @@ class PluginTestsReplaceAllCommand(sublime_plugin.TextCommand):
 
 class Test():
     def run(self, __dir__):
+        f = open('/tmp/hi', 'w')
+        f.write('hello')
+        f.close()
+
         # Placeholder for success and error info
         success = True
         err = None

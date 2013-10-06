@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # TODO: See if we can get a plugin to output a simple file
-# TODO: See if it will run in a VM
+# TODO: See if it will run in a VM (totally fine)
 # TODO: What happens if we connect an x11-forwarding?
 
 # If we are to install Sublime Text 2
