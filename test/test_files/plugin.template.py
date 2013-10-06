@@ -1,7 +1,11 @@
 from __future__ import absolute_import
 
 import sublime
-from .utils.scratch_view import ScratchView
+try:
+    from utils.scratch_view import ScratchView
+except ImportError:
+    from .utils.scratch_view import ScratchView
+
 
 Region = sublime.Region
 
@@ -42,4 +46,3 @@ def run():
     finally:
         # No matter what happens, close the view
         scratch_view.destroy()
-

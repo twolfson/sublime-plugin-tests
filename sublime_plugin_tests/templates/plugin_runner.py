@@ -30,7 +30,7 @@ class Test():
                 '__package__': __package__,
                 '__builtins__': __builtins__,
             }
-            if globals().get('execfile', None):
+            if getattr(__builtins__, 'execfile', None):
                 execfile(filepath, plugin_dict, plugin_dict)
             else:
                 f = open(filepath)
