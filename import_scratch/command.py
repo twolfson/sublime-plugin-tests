@@ -28,17 +28,14 @@ hello = %s
 		filepath = __dir__ + '/test.py'
 		f = open(filepath)
 		script = f.read()
-		_globals = globals()
-		global_dict['__dir__'] = __dir__
-		global_dict['__file__'] = filepath
-		global_dict['__name__'] = 'import-scratch-dev.test'
-		global_dict['__package__'] = 'import-scratch-dev'
-		del global_dict['SublimeImportDevCommand']
-
-		for key, val in global_dict.items():
-			print(key, val)
-		local_dict = {
+		global_dict = {
+			'__dir__': __dir__,
+			'__file__': filepath,
+			'__name__': '%s.test' % __package__,
+			'__package__': __package__,
+			'__builtins__': __builtins__,
 		}
+		local_dict = {}
 		exec(compile(script, 'test.py', 'exec'), global_dict, local_dict)
 		print(local_dict['hello'])
 		# import importlib
