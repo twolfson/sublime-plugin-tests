@@ -1,3 +1,4 @@
+import code
 import os
 import sublime
 import sublime_plugin
@@ -22,24 +23,20 @@ class Test():
         # Attempt to perform actions and catch *any* exception
         try:
             # DEV: Due to `import` not immediately picking up changes, we use `execfile` to run what is on disk
-            plugin_dict = {}
+            filepath = __dir__ + '/plugin.py'
+            plugin_dict = {
+                '__dir__': __dir__,
+                '__file__': filepath,
+                '__name__': '%s.plugin' % __package__,
+                '__package__': __package__,
+                '__builtins__': __builtins__,
+            }
             if globals().get('execfile', None):
-                execfile(__dir__ + '/plugin.py', plugin_dict, plugin_dict)
+                execfile(filepath, plugin_dict, plugin_dict)
             else:
-                filepath = __dir__ + '/plugin.py'
                 f = open(filepath)
                 script = f.read()
-                global_dict = {
-                    '__dir__': __dir__,
-                    '__file__': filepath,
-                    '__name__': '%s.plugin' % __package__,
-                    '__package__': __package__,
-                    '__builtins__': __builtins__,
-                }
-                plugin_dict = global_dict
-                # exec(compile(script, filepath, 'exec'), global_dict, plugin_dict)
-                import code
-                interpretter = code.InteractiveInterpreter(global_dict)
+                interpretter = code.InteractiveInterpreter(plugin_dict)
                 interpretter.runcode(compile(script, filepath, 'exec'))
             plugin_dict['run']()
         except Exception:
