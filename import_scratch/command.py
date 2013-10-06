@@ -28,11 +28,15 @@ hello = %s
 		filepath = __dir__ + '/test.py'
 		f = open(filepath)
 		script = f.read()
-		global_dict = {
-			'__file__': filepath,
-			'__name__': '__main__',
-			'__package__': 'import-scratch-dev'
-		}
+		_globals = globals()
+		global_dict['__dir__'] = __dir__
+		global_dict['__file__'] = filepath
+		global_dict['__name__'] = 'import-scratch-dev.test'
+		global_dict['__package__'] = 'import-scratch-dev'
+		del global_dict['SublimeImportDevCommand']
+
+		for key, val in global_dict.items():
+			print(key, val)
 		local_dict = {
 		}
 		exec(compile(script, 'test.py', 'exec'), global_dict, local_dict)
