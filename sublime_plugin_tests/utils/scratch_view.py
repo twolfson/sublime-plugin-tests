@@ -26,7 +26,6 @@ class ScratchView:
         view = self.view
 
         # Set the content
-        print('hello', content)
         view.run_command('plugin_tests_replace_all', {'content': content})
 
     def get_content(self):
