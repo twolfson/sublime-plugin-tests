@@ -41,7 +41,7 @@ hello = %s
 		for key, val in globals().items():
 			print(key, val)
 		local_dict = {}
-		exec(compile(script, filepath, 'exec'), global_dict, local_dict)
+		exec(compile(script, filepath, 'exec'), None, local_dict)
 		print(local_dict['hello'], local_dict['x'], global_dict['sys'])
 		# import importlib
 		# print(importlib)
