@@ -55,9 +55,6 @@ class Test():
             f.write(output)
             f.close()
 
-            import time
-            time.sleep(1)
-
             {% if auto_kill_sublime %}
             # Automatically exit out of Sublime
             # DEV: If `sublime_text` is not currently running, then we need to automatically kill the process
