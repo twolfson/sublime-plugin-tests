@@ -30,7 +30,8 @@ hello = %s
 		script = f.read()
 		global_dict = {
 			'__file__': filepath,
-			'__name__': '__main__'
+			'__name__': '__main__',
+			'__package__': 'import-scratch-dev'
 		}
 		local_dict = {
 		}
