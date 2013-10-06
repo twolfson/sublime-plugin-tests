@@ -19,11 +19,11 @@ class SublimeImportDevCommand(sublime_plugin.ApplicationCommand):
 		__script = """
 from .world import x
 import sys
-print(globals()['sys'])
+print(globals()['sys'], __name__)
 hello = %s
 """ % num
-		write_file('world.py', 'x = 1')
-		write_file('test.py', __script)
+		# write_file('world.py', 'x = 1')
+		# write_file('test.py', __script)
 
 		# Import and run command
 		# from .test import hello
@@ -39,10 +39,13 @@ hello = %s
 			'__builtins__': __builtins__,
 			# '__loader__': __loader__,
 		}
-		for key, val in globals().items():
-			print(key, val)
+		# for key, val in globals().items():
+		# 	print(key, val)
 		local_dict = {}
-		print(compile(script, filepath, 'exec'))
+		# print('www', exec(compile(script, filepath, 'exec'), global_dict, {}))
+		import code
+		code.runcode(compile(script, filepath, 'exec'))
+		print('www', compile(script, filepath, 'exec').__class__)
 		# print(local_dict['hello'], local_dict['x'])
 		# import importlib
 		# print(importlib)
