@@ -5,6 +5,12 @@
 # TODO: See if it will run in a VM (totally fine)
 # TODO: What happens if we connect an x11-forwarding?
 
+# Made progress with --wait option
+# (sublime_text:4947): Gtk-WARNING **: cannot open display: :99.0
+
+# Fixed up Xvfb invocation and --wait is working @_@
+# /usr/bin/Xvfb :99 -ac -screen 0 1024x768x24 &
+
 # If we are to install Sublime Text 2
 if test $SUBLIME_TEXT_VERSION = "2.0"; then
   # http://askubuntu.com/questions/172698/how-do-i-install-sublime-text-2
