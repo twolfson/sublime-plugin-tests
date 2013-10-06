@@ -23,7 +23,8 @@ class SublimePluginTestTmpCommand(sublime_plugin.ApplicationCommand):
         }
 
         # DEV: In Python 2.x, use execfile. In 3.x, use compile + exec.
-        if getattr(__builtins__, 'execfile', None):
+        # if getattr(__builtins__, 'execfile', None):
+        if sublime.version() < '3000':
             execfile(filepath, plugin_dict, plugin_dict)
         else:
             f = open(filepath)
