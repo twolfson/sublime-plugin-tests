@@ -19,5 +19,9 @@ hello = %s
 		f.close()
 
 		# Import and run command
-		from .test import hello
-		print(hello)
+		# from .test import hello
+		f = open(__dir__ + '/test.py')
+		print(f.read())
+		# import importlib
+		# print(importlib)
+		# print(hello)
