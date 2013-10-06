@@ -113,6 +113,7 @@ class Base(object):
 
         # Wait for the output file to exist
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
+            print('waiting', output_file)
             time.sleep(0.1)
 
         # Read in the output
