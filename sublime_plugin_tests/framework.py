@@ -113,8 +113,8 @@ class Base(object):
         subprocess.call(['sublime_text3', '--command', 'sublime_plugin_test_tmp', '--background'])
 
         # Wait for the output file to exist
-        # while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
-        #     time.sleep(0.1)
+        while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
+            time.sleep(0.1)
 
         # Read in the output
         with open(output_file) as f:

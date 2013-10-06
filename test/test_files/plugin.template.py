@@ -1,12 +1,14 @@
 from __future__ import absolute_import
 
-import sublime
 
-from .utils.scratch_view import ScratchView
 
-Region = sublime.Region
+
 
 def run():
+    import sublime
+    from .utils.scratch_view import ScratchView
+    Region = sublime.Region
+
     # Generate new scratch file
     scratch_view = ScratchView()
     try:
