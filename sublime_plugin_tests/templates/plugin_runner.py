@@ -6,6 +6,7 @@ import sys
 import traceback
 
 
+# TODO: Figure out where to put this
 class PluginTestsReplaceAllCommand(sublime_plugin.TextCommand):
     def run(self, edit, content=''):
         view = self.view
