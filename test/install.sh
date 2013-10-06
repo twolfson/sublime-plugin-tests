@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# TODO: See if we can get a plugin to output a simple file
+# TODO: See if we can get a plugin to output a simple file (works in VM, not in Vagrant -- requires ST3 to be started first)
 # TODO: See if it will run in a VM (totally fine)
 # TODO: What happens if we connect an x11-forwarding?
 
