@@ -9,11 +9,6 @@ Vagrant.configure("2") do |config|
   # sublime_text --wait &
   # ps ax | grep sublime
 
-  # VAGRANT: --wait combined with & seems like a poor idea in retrospect (it anticipates stdin input)
-  # TODO: How do we get stdin to pass data to Sublime Text?
-  # 5345 pts/0    Sl     0:01 /opt/sublime_text/sublime_text --wait
-  # 5353 pts/0    Sl     0:00 /opt/sublime_text/plugin_host 5345
-
   # VAGRANT: --add . opens new instances no matter what (Vagrant)
   # 5363 ?        Ssl    0:00 /opt/sublime_text/sublime_text --add .
   # 5371 ?        Sl     0:00 /opt/sublime_text/plugin_host 5363
@@ -24,4 +19,8 @@ Vagrant.configure("2") do |config|
   # 26029 pts/3    Sl     0:03 sublime_text3 --wait
   # 26067 pts/3    Sl     0:00 /home/todd/Downloads/sublime_text_3/plugin_host 26029
   # 26170 pts/3    RNl    0:05 /home/todd/Downloads/sublime_text_3/sublime_text --crawl 26029:crawl:2
+
+  # --wait returns only when Sublime is closed. Normally, it starts another process on the side.
+  # This might be practical over the sleep loop.
+  # If Sublime is already open, it does not wait to return
 end
