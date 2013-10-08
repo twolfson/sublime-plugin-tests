@@ -7,4 +7,5 @@ Vagrant.configure("2") do |config|
   # export DISPLAY=:99.0
   # /usr/bin/Xvfb $DISPLAY -screen 0 1024x768x24 &
   # sublime_text --wait &
+  # ps ax | grep sublime
 end
