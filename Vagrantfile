@@ -4,6 +4,8 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  # export TERM=xterm
+
   # export DISPLAY=:99.0
   # /usr/bin/Xvfb $DISPLAY -screen 0 1024x768x24 &
   # sublime_text --wait &
@@ -23,4 +25,6 @@ Vagrant.configure("2") do |config|
   # --wait returns only when Sublime is closed. Normally, it starts another process on the side.
   # This might be practical over the sleep loop.
   # If Sublime is already open, it does not wait to return
+
+  # Okay... so command line invocation doesn't work. Maybe we can try the technique of package control?
 end
