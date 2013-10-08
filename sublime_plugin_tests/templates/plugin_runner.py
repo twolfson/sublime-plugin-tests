@@ -13,12 +13,15 @@ class PluginTestsReplaceAllCommand(sublime_plugin.TextCommand):
         view.replace(edit, sublime.Region(0, view.size()), content)
 
 
-class Test():
-    def run(self, __dir__):
+class TmpTestHiCommand(sublime_plugin.ApplicationCommand):
+    def run(self):
         f = open('/tmp/hi', 'w')
         f.write('hello')
         f.close()
 
+
+class Test():
+    def run(self, __dir__):
         # Placeholder for success and error info
         success = True
         err = None
