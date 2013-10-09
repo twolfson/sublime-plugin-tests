@@ -160,6 +160,9 @@ class Base(object):
                 # and launch sublime_text
                 subprocess.call(['sublime_text'])
 
+                # Mark the init to prevent double launch
+                running_via_init = True
+
         # Otherwise, use `--command` trigger
         # TODO: Can we consolidate these? `init` might work in *all* cases and allow us to move around the plugin locking in as with `--command`
         if not running_via_init:
