@@ -146,11 +146,12 @@ class Base(object):
             # TODO: This could be subl, sublime_text, or other
             sublime_is_running = False
             for process in ps_list.split('\n'):
-                if 'sublime_text' in process:
+                if 'sublime_text' in process and '<defunct>' not in process:
                     sublime_is_running = True
                     break
 
             # If sublime isn't running, use our init trigger
+            print(ps_list, sublime_is_running)
             if not sublime_is_running:
                 # Install the init trigger
                 cls._install_init_launcher()
