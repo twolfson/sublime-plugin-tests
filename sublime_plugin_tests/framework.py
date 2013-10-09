@@ -59,6 +59,9 @@ class Base(object):
 
     @classmethod
     def _install_command_launcher(cls):
+        # Guarantee the plugin test dir exists
+        cls._ensure_plugin_test_dir()
+
         # If command launcher doesn't exist, copy it
         orig_command_path = __dir__ + '/launchers/command.py'
         dest_command_path = cls._plugin_test_dir + '/command_launcher.py'
@@ -90,6 +93,9 @@ class Base(object):
 
     @classmethod
     def _install_init_launcher(cls):
+        # Guarantee the plugin test dir exists
+        cls._ensure_plugin_test_dir()
+
         # Clean up any past instances of init launcher
         cls._remove_init_launcher()
 
@@ -101,7 +107,7 @@ class Base(object):
     @classmethod
     def _run_test(cls, test_str, auto_kill_sublime=False):
         # Guarantee there is an output directory and launcher
-        cls._ensure_launcher()
+        cls._ensure_utils()
 
         # Reserve an output file
         output_file = tempfile.mkstemp()[1]
