@@ -177,6 +177,9 @@ class Base(object):
         # Wait for the output file to exist
         print('waiting', output_file)
 
+        # Wait a second
+        time.sleep(1)
+
 
         child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
         ps_list = child.stdout.read()
