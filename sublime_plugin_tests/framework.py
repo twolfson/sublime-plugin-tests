@@ -48,18 +48,25 @@ class Base(object):
             os.makedirs(cls._plugin_test_dir)
 
     @classmethod
-    def _ensure_launcher(cls):
+    def _ensure_utils(cls):
         # Ensure the plugin test directory exists
         cls._ensure_plugin_test_dir()
 
-        # If command.py doesn't exist, copy it
+        # TODO: Use similar copy model minus the exception
+        # TODO: If we overwrite utils, be sure to wait so that changes for import get picked up
+        if not os.path.exists(cls._plugin_test_dir + '/utils'):
+            shutil.copytree(__dir__ + '/utils', cls._plugin_test_dir + '/utils')
+
+    @classmethod
+    def _install_command_launcher(cls):
+        # If command launcher doesn't exist, copy it
         orig_command_path = __dir__ + '/launchers/command.py'
-        dest_command_path = cls._plugin_test_dir + '/command.py'
+        dest_command_path = cls._plugin_test_dir + '/command_launcher.py'
         if not os.path.exists(dest_command_path):
             shutil.copyfile(orig_command_path, dest_command_path)
         else:
         # Otherwise...
-            # If there are updates for command.py
+            # If there are updates for command launcher
             expected_command = None
             with open(orig_command_path) as f:
                 expected_command = f.read()
@@ -73,13 +80,23 @@ class Base(object):
                 # and notify the user we must restart Sublime
                 raise Exception('We had to update the test launcher plugin. You must close or restart Sublime to continue testing.')
 
-        # TODO: Use similar copy model minus the exception
-        # TODO: If we overwrite utils, be sure to wait so that changes for import get picked up
-        if not os.path.exists(cls._plugin_test_dir + '/utils'):
-            shutil.copytree(__dir__ + '/utils', cls._plugin_test_dir + '/utils')
+    _init_launcher_path = _plugin_test_dir + '/init_launcher.py'
 
-        # Notify the user that the launcher exists
-        return True
+    @classmethod
+    def _remove_init_launcher(cls):
+        # If the init launcher exists, delete it
+        if os.path.exists(cls._init_launcher_path):
+            os.unlink(cls._init_launcher_path)
+
+    @classmethod
+    def _install_init_launcher(cls):
+        # Clean up any past instances of init launcher
+        cls._remove_init_launcher()
+
+        # Install a new one
+        # TODO: Verify this doesn't have any double invocation consequences
+        orig_command_path = __dir__ + '/launchers/init.py'
+        shutil.copyfile(orig_command_path, cls._init_launcher_path)
 
     @classmethod
     def _run_test(cls, test_str, auto_kill_sublime=False):
@@ -129,11 +146,18 @@ class Base(object):
 
             # If sublime isn't running, use our init trigger
             if not sublime_is_running:
-                print('hi')
+                # Install the init trigger
+                cls._install_init_launcher()
+
+                # and launch sublime_text
+                subprocess.call(['sublime_text'])
 
         # Otherwise, use `--command` trigger
         # TODO: Can we consolidate these? `init` might work in *all* cases and allow us to move around the plugin locking in as with `--command`
         if not running_via_init:
+            # Install the command launcher
+            cls._install_command_launcher()
+
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
@@ -144,6 +168,10 @@ class Base(object):
         print('waiting', output_file)
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
             time.sleep(0.1)
+
+        # If we used the init command, clean up
+        if running_via_init:
+            cls._remove_init_launcher()
 
         # Read in the output
         with open(output_file) as f:
