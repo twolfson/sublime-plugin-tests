@@ -173,6 +173,13 @@ class Base(object):
 
         # Wait for the output file to exist
         print('waiting', output_file)
+
+
+        child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
+        ps_list = child.stdout.read()
+        child.kill()
+        print(ps_list)
+
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
             time.sleep(0.1)
 
