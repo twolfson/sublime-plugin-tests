@@ -11,6 +11,7 @@ from jinja2 import Template
 
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
+SUBLIME_TEXT_VERSION = os.environ.get('SUBLIME_TEXT_VERSION', None)
 
 
 # Set up helper fn
@@ -37,7 +38,7 @@ class Base(object):
     # Determine the plugins directory
     # TODO: Programmatically sniff for this (https://github.com/twolfson/sublime-plugin-tests/issues/4)
     _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-2/Packages/sublime-plugin-tests-tmp')
-    if os.environ.get('SUBLIME_TEXT_VERSION', None) == '3.0':
+    if SUBLIME_TEXT_VERSION == '3.0':
         _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-3/Packages/sublime-plugin-tests-tmp')
 
     @classmethod
@@ -52,7 +53,7 @@ class Base(object):
         cls._ensure_plugin_test_dir()
 
         # If command.py doesn't exist, copy it
-        orig_command_path = __dir__ + '/command.py'
+        orig_command_path = __dir__ + '/launchers/command.py'
         dest_command_path = cls._plugin_test_dir + '/command.py'
         if not os.path.exists(dest_command_path):
             shutil.copyfile(orig_command_path, dest_command_path)
@@ -106,10 +107,28 @@ class Base(object):
         f.write(test_str)
         f.close()
 
-        # Start a subprocess to run the plugin
-        # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
-        # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
-        subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
+        # TODO: These commands should go in a launching harness
+        # If we are running Sublime Text 3 and it has not yet started, use `init`
+        running_cmd = False
+        if SUBLIME_TEXT_VERSION == '3.0':
+            # TODO: Use tasklist for Windows
+            # Get process list
+            child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
+            ps_list = child.stdout.read()
+
+            # Kill the child
+            child.kill()
+
+            print ps_list
+
+        # Otherwise, use `--command` trigger
+        # TODO: Can we consolidate these? `init` might work in *all* cases and allow us to move around the plugin locking in as with `--command`
+        if not running_cmd:
+            # Start a subprocess to run the plugin
+            # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
+            # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
+            # subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
+            pass
 
         # Wait for the output file to exist
         print('waiting', output_file)
