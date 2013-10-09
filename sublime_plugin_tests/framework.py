@@ -8,7 +8,6 @@ import unittest
 
 # Load in 3rd party dependencies
 from jinja2 import Template
-import psutil
 
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
@@ -112,11 +111,10 @@ class Base(object):
         # If we are running Sublime Text 3 and it has not yet started, use `init`
         running_cmd = False
         if SUBLIME_TEXT_VERSION == '3.0':
-            # Determine is Sublime Text is running
-            # TODO: This could be subl, sublime_text or the other aliases
-            sublime_text_running = False
-            for process in psutil.process_iter():
-                print process
+            # TODO: Use tasklist for Windows
+            # Get process list
+            child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
+            ps_list = child.stdout.read()
 
             # Kill the child
             child.kill()
