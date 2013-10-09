@@ -109,7 +109,7 @@ class Base(object):
 
         # TODO: These commands should go in a launching harness
         # If we are running Sublime Text 3 and it has not yet started, use `init`
-        running_cmd = False
+        running_via_init = False
         if SUBLIME_TEXT_VERSION == '3.0':
             # TODO: Use tasklist for Windows
             # Get process list
@@ -119,11 +119,21 @@ class Base(object):
             # Kill the child
             child.kill()
 
-            print ps_list
+            # Determine if Sublime Text is running
+            # TODO: This could be subl, sublime_text, or other
+            sublime_is_running = False
+            for process in ps_list.split('\n'):
+                if 'sublime_text' in process:
+                    sublime_is_running = True
+                    break
+
+            # If sublime isn't running, use our init trigger
+            if not sublime_is_running:
+                print('hi')
 
         # Otherwise, use `--command` trigger
         # TODO: Can we consolidate these? `init` might work in *all* cases and allow us to move around the plugin locking in as with `--command`
-        if not running_cmd:
+        if not running_via_init:
             # Start a subprocess to run the plugin
             # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
             # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
