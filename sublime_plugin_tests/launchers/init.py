@@ -32,4 +32,5 @@ def run():
     test.run(__dir__)
 
 # TODO: Set timeout loop that checks if `run` has set a global variable
+# TODO: This thought was along side a plugin hook so we can guarantee most plugins are loaded
 sublime.set_timeout(run, 1000)
