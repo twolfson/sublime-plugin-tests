@@ -183,6 +183,11 @@ class Base(object):
         child.kill()
         print(ps_list)
 
+        child = subprocess.Popen(["ls", "/tmp/hi"], stdout=subprocess.PIPE)
+        tmp_list = child.stdout.read()
+        child.kill()
+        print(tmp_list)
+
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
             time.sleep(0.1)
 
