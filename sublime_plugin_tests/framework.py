@@ -147,7 +147,7 @@ class Base(object):
             sublime_is_running = False
             for process in ps_list.split('\n'):
                 # TODO: <defunct> is a bit of a hack and not sure how Windows will react. These are processes that are in the process of terminating
-                if 'sublime_text3' in process and '<defunct>' not in process:
+                if 'sublime_text' in process and '<defunct>' not in process:
                     sublime_is_running = True
                     break
 
@@ -158,7 +158,7 @@ class Base(object):
                 cls._install_init_launcher()
 
                 # and launch sublime_text
-                subprocess.call(['sublime_text3'])
+                subprocess.call(['sublime_text'])
 
                 # Mark the init to prevent double launch
                 running_via_init = True
