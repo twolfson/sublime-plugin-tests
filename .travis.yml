@@ -17,10 +17,10 @@ install:
 
 before_script:
   # Generate a screen buffer to collect Sublime Text window
-  - uname --all
-  - env
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - uname --all
+  - env
 
 script:
   # Run our tests
