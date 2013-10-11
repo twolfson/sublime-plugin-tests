@@ -9,8 +9,8 @@ Vagrant.configure("2") do |config|
 
   # Set up variables
   # TODO: Figure out how to *permanently* export variables
-  config.vm.provision "shell", inline: "export TERM=xterm"
-  config.vm.provision "shell", inline: "export SUBLIME_TEXT_VERSION=3.0"
+  config.vm.provision "shell", inline: "echo 'TERM=xterm' >> ~/.bashrc"
+  config.vm.provision "shell", inline: "echo 'SUBLIME_TEXT_VERSION=3.0' >> ~/.bashrc"
 
   $install_sublime = <<SCRIPT
     export SUBLIME_TEXT_VERSION=3.0
