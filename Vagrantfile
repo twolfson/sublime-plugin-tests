@@ -6,24 +6,46 @@ Vagrant.configure("2") do |config|
   # http://about.travis-ci.org/docs/user/ci-environment/#CI-environment-OS
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-  export TERM=xterm
-  export SUBLIME_TEXT_VERSION=3.0
 
-  # If Sublime Text isn't installed, install it
-    # Preparation for install script
-    # sudo apt-get update
-    # sudo apt-get install python-software-properties -y
-    # sudo mkdir -p /usr/share/icons/hicolor/16x16/apps/
-    # sudo mkdir -p /usr/share/icons/hicolor/32x32/apps/
-    # sudo mkdir -p /usr/share/icons/hicolor/48x48/apps/
-    # sudo mkdir -p /usr/share/icons/hicolor/128x128/apps/
-    # sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
+  # Set up variables
+  config.vm.provision "shell", inline: "export TERM=xterm"
+  config.vm.provision "shell", inline: "export SUBLIME_TEXT_VERSION=3.0"
 
-    # Install S
-    # ./test/install.sh
+  $install_sublime = <<SCRIPT
+    # If Sublime Text isn't installed, install it
+    if test -z "$(which sublime_text)"; then
+      # Preparation for install script
+      sudo apt-get update
+      sudo apt-get install python-software-properties -y
+      sudo mkdir -p /usr/share/icons/hicolor/16x16/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/32x32/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/48x48/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/128x128/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
 
+      # Install Sublime Text
+      ./test/install.sh
+    fi
+SCRIPT
+config.vm.provision "shell", inline: $install_sublime
+
+  $install_xvfb = <<SCRIPT
+    # If Sublime Text isn't installed, install it
+    if test -z "$(which sublime_text)"; then
+      # Preparation for install script
+      sudo apt-get update
+      sudo apt-get install python-software-properties -y
+      sudo mkdir -p /usr/share/icons/hicolor/16x16/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/32x32/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/48x48/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/128x128/apps/
+      sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
+
+      # Install Sublime Text
+      ./test/install.sh
+    fi
+SCRIPT
   # sudo apt-get install xvfb libgtk2.0-0 -y
-
 
   # cd /vagrant
   # ./test/install.sh
