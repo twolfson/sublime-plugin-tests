@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "export SUBLIME_TEXT_VERSION=3.0"
 
   $install_sublime = <<SCRIPT
+    export SUBLIME_TEXT_VERSION=3.0
+
     # If Sublime Text isn't installed, install it
     if test -z "$(which sublime_text)"; then
       # Preparation for install script
