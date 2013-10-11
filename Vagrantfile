@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Set up variables
-  config.vm.provision "shell", inline: "export TERM=xterm"
+  # TODO: Figure out how to *permanently* export variables
   config.vm.provision "shell", inline: "export TERM=xterm"
   config.vm.provision "shell", inline: "export SUBLIME_TEXT_VERSION=3.0"
 
@@ -25,6 +25,7 @@ Vagrant.configure("2") do |config|
       sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
 
       # Install Sublime Text
+      cd /vagrant
       ./test/install.sh
 
       # Output the version
