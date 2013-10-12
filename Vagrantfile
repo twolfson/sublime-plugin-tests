@@ -13,6 +13,11 @@ Vagrant.configure("2") do |config|
     if ! grep TERM /etc/environment > /dev/null; then
       echo "TERM=xterm" >> /etc/environment
     fi
+
+    # Automatically terminate sublime for test runs
+    if ! grep SUBLIME_TESTS_AUTO_KILL /etc/environment > /dev/null; then
+      echo "SUBLIME_TESTS_AUTO_KILL=TRUE" >> /etc/environment
+    fi
 SCRIPT
   config.vm.provision "shell", inline: $install_user_vars
 
