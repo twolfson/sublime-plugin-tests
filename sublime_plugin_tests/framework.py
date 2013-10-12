@@ -152,7 +152,6 @@ class Base(object):
                     break
 
             # If sublime isn't running, use our init trigger
-            print(ps_list, sublime_is_running)
             if not sublime_is_running:
                 # Install the init trigger
                 cls._install_init_launcher()
@@ -175,36 +174,35 @@ class Base(object):
             subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
 
         # Wait for the output file to exist
-        print('waiting', output_file)
-
-        import os
-        print(os.environ)
-
-        child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
-        ps_list = child.stdout.read()
-        child.kill()
-        print(ps_list)
-
-        # Wait a second
-        time.sleep(1)
-
-
-        child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
-        ps_list = child.stdout.read()
-        child.kill()
-        print(ps_list)
-
-        child = subprocess.Popen(["ls", "/tmp/hi"], stdout=subprocess.PIPE)
-        tmp_list = child.stdout.read()
-        child.kill()
-        print(tmp_list)
-
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
             time.sleep(0.1)
 
-        # If we used the init command, clean up
+        # If we used the init command
         if running_via_init:
+            # Clean up
             cls._remove_init_launcher()
+
+            # and if Sublime was not running, wait for it to terminate
+            if sublime_is_running:
+                while True:
+                    sublime_is_still_running = False
+                    # TODO: Modularize this
+                    child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
+                    ps_list = child.stdout.read()
+
+                    # Kill the child
+                    child.kill()
+
+                    for process in ps_list.split('\n'):
+                        # TODO: <defunct> is a bit of a hack and not sure how Windows will react. These are processes that are in the process of terminating
+                        if 'sublime_text' in process:
+                            sublime_is_still_running = True
+
+                    if not sublime_is_still_running:
+                        break
+                    else:
+                        print 'Waiting for sublime to terminate...'
+                        time.sleep(0.1)
 
         # Read in the output
         with open(output_file) as f:
@@ -248,4 +246,3 @@ class TestCase(unittest.TestCase, Base):
 
         # Return the wrapped function
         return wrapped_fn
-
