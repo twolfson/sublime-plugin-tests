@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
   # Set up variables
   # TODO: Figure out how to *permanently* export variables
   $install_env_vars = <<SCRIPT
+    echo "$TERM"
     if test "$TERM" != "xterm"; then
       echo 'TERM=xterm' >> /etc/environment
     fi
