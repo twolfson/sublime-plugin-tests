@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   # TODO: Figure out how to *permanently* export variables
   $install_env_vars = <<SCRIPT
     if test "$TERM" != "xterm"; then
-      echo 'TERM=xterm' >> /etc/environment"
+      echo 'TERM=xterm' >> /etc/environment
     fi
 
     if test -z "$SUBLIME_TEXT_VERSION"; then
