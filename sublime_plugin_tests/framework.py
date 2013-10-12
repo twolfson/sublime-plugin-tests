@@ -183,7 +183,7 @@ class Base(object):
             cls._remove_init_launcher()
 
             # and if Sublime was not running, wait for it to terminate
-            if sublime_is_running:
+            if not sublime_is_running:
                 while True:
                     sublime_is_still_running = False
                     # TODO: Modularize this
@@ -193,6 +193,7 @@ class Base(object):
                     # Kill the child
                     child.kill()
 
+                    print ps_list
                     for process in ps_list.split('\n'):
                         # TODO: <defunct> is a bit of a hack and not sure how Windows will react. These are processes that are in the process of terminating
                         if 'sublime_text' in process:
