@@ -193,7 +193,8 @@ class Base(object):
                     # Kill the child
                     child.kill()
 
-                    print ps_list
+                    # TODO: Output ps_list to a debug file
+
                     for process in ps_list.split('\n'):
                         # TODO: <defunct> is a bit of a hack and not sure how Windows will react. These are processes that are in the process of terminating
                         if 'sublime_text' in process:
@@ -202,7 +203,8 @@ class Base(object):
                     if not sublime_is_still_running:
                         break
                     else:
-                        print 'Waiting for sublime to terminate...'
+                        # TODO: Output to a debug file
+                        # print 'Waiting for sublime to terminate...'
                         time.sleep(0.1)
 
         # Read in the output
