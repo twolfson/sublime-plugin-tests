@@ -146,8 +146,7 @@ class Base(object):
             # TODO: This could be subl, sublime_text, or other
             sublime_is_running = False
             for process in ps_list.split('\n'):
-                # TODO: <defunct> is a bit of a hack and not sure how Windows will react. These are processes that are in the process of terminating
-                if 'sublime_text' in process and '<defunct>' not in process:
+                if 'sublime_text' in process:
                     sublime_is_running = True
                     break
 
