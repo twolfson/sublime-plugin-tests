@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   $install_user_vars = <<SCRIPT
     # Set the term to be xterm for SSH sessions
     if ! grep TERM /etc/environment > /dev/null; then
-      echo 'TERM=xterm' >> /etc/environment
+      echo "TERM=xterm" >> /etc/environment
     fi
 SCRIPT
   config.vm.provision "shell", inline: $install_user_vars
@@ -20,7 +20,7 @@ SCRIPT
     # Set and persist SUBLIME_TEXT_VERSION
     export SUBLIME_TEXT_VERSION=3.0
     if ! grep SUBLIME_TEXT_VERSION /etc/environment > /dev/null; then
-      echo 'SUBLIME_TEXT_VERSION=$SUBLIME_TEXT_VERSION' >> /etc/environment
+      echo "SUBLIME_TEXT_VERSION=$SUBLIME_TEXT_VERSION" >> /etc/environment
     fi
 
     # If Sublime Text isn't installed, install it
@@ -64,7 +64,7 @@ SCRIPT
     # Set and persist DISPLAY to :99.0
     export DISPLAY=:99.0
     if ! grep DISPLAY /etc/environment > /dev/null; then
-      echo 'DISPLAY=$DISPLAY' >> /etc/environment
+      echo "DISPLAY=$DISPLAY" >> /etc/environment
     fi
 
     # Set up Xvfb
