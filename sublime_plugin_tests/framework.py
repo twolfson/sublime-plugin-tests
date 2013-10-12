@@ -14,6 +14,18 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 SUBLIME_TEXT_VERSION = os.environ.get('SUBLIME_TEXT_VERSION', None)
 
 
+# TODO: Consider using a proper logger
+class Logger(object):
+    def debug(self, msg):
+        pass
+
+    def info(self, msg):
+        pass
+
+    def warn(self, msg):
+        pass
+logger = Logger()
+
 # Set up helper fn
 def template(tmpl_path):
     """ Decorator that templates the returned content. """
@@ -151,11 +163,13 @@ class Base(object):
                     break
 
             # If sublime isn't running, use our init trigger
+            logger.debug('Current process list: %s' % ps_list)
             if not sublime_is_running:
                 # Install the init trigger
                 cls._install_init_launcher()
 
                 # and launch sublime_text
+                logger.info('Launching sublime_text via init')
                 subprocess.call(['sublime_text'])
 
                 # Mark the init to prevent double launch
@@ -168,12 +182,12 @@ class Base(object):
             cls._install_command_launcher()
 
             # Start a subprocess to run the plugin
-            # TODO: We might want a development mode (runs commands inside local sublime window) and a testing mode (calls out to Vagrant box)
-            # TODO: or at least 2 plugin hooks, one for CLI based testing and one for internal dev
+            logger.info('Launching sublime_text via --command')
             subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
 
         # Wait for the output file to exist
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
+            logger.debug('Waiting for %s to exist / have size' % output_file)
             time.sleep(0.1)
 
         # If we used the init command
@@ -193,17 +207,16 @@ class Base(object):
                     child.kill()
 
                     # TODO: Output ps_list to a debug file
+                    logger.debug('Current process list: %s' % ps_list)
 
                     for process in ps_list.split('\n'):
-                        # TODO: <defunct> is a bit of a hack and not sure how Windows will react. These are processes that are in the process of terminating
                         if 'sublime_text' in process:
                             sublime_is_still_running = True
 
                     if not sublime_is_still_running:
                         break
                     else:
-                        # TODO: Output to a debug file
-                        # print 'Waiting for sublime to terminate...'
+                        logger.debug('Waiting for sublime_text to terminate')
                         time.sleep(0.1)
 
         # Read in the output
