@@ -8,15 +8,16 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Set up variables
-  # TODO: Figure out how to *permanently* export variables
   $install_env_vars = <<SCRIPT
-    echo "$TERM"
-    if test "$TERM" != "xterm"; then
+    # Set the term to be xterm for SSH sessions
+    if ! grep TERM /etc/environment ; then
       echo 'TERM=xterm' >> /etc/environment
     fi
 
-    if test -z "$SUBLIME_TEXT_VERSION"; then
-      echo 'SUBLIME_TEXT_VERSION=3.0' >> /etc/environment
+    # If SUBLIME_TEXT_VERSION hasn't been set, set and persist it
+    export SUBLIME_TEXT_VERSION=3.0
+    if ! grep SUBLIME_TEXT_VERSION /etc/environment; then
+      echo 'SUBLIME_TEXT_VERSION=$SUBLIME_TEXT_VERSION' >> /etc/environment
     fi
 SCRIPT
   config.vm.provision "shell", inline: $install_env_vars
@@ -59,7 +60,13 @@ SCRIPT
   config.vm.provision "shell", inline: $install_package
 
   $launch_xvfb = <<SCRIPT
+    # Set and persist DISPLAY to :99.0
     export DISPLAY=:99.0
+    if ! grep DISPLAY /etc/environment ; then
+      echo 'DISPLAY=$DISPLAY' >> /etc/environment
+    fi
+
+    # Set up Xvfb
     /usr/bin/Xvfb $DISPLAY -screen 0 1024x768x24 &
 SCRIPT
   config.vm.provision "shell", inline: $launch_xvfb
