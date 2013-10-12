@@ -8,21 +8,21 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Set up variables
-  $install_env_vars = <<SCRIPT
+  $install_user_vars = <<SCRIPT
     # Set the term to be xterm for SSH sessions
     if ! grep TERM /etc/environment ; then
       echo 'TERM=xterm' >> /etc/environment
     fi
+SCRIPT
+  config.vm.provision "shell", inline: $install_user_vars
 
-    # If SUBLIME_TEXT_VERSION hasn't been set, set and persist it
+  $install_sublime = <<SCRIPT
+    # Set and persist SUBLIME_TEXT_VERSION
     export SUBLIME_TEXT_VERSION=3.0
     if ! grep SUBLIME_TEXT_VERSION /etc/environment; then
       echo 'SUBLIME_TEXT_VERSION=$SUBLIME_TEXT_VERSION' >> /etc/environment
     fi
-SCRIPT
-  config.vm.provision "shell", inline: $install_env_vars
 
-  $install_sublime = <<SCRIPT
     # If Sublime Text isn't installed, install it
     if test -z "$(which sublime_text)"; then
       # Preparation for install script
@@ -53,6 +53,7 @@ SCRIPT
   config.vm.provision "shell", inline: $install_xvfb
 
   $install_package = <<SCRIPT
+    # Install pip and our package for development
     cd /vagrant
     sudo apt-get install python-pip -y
     python setup.py develop
