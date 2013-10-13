@@ -16,6 +16,7 @@ setup(
     author='Todd Wolfson',
     author_email='todd@twolfson.com',
     url='https://github.com/twolfson/sublime-plugin-tests',
+    download_url='https://github.com/twolfson/sublime-plugin-tests/archive/master.zip',
     packages=find_packages(),
     license='UNLICENSE',
     install_requires=open('requirements.txt').readlines(),
