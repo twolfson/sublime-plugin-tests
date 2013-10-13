@@ -5,7 +5,10 @@ setup(
     name='sublime_plugin_tests',
     version='0.2.7',
     description='Testing framework for Sublime Text plugins',
-    long_description=open('README.rst').read(),
+    long_description=(open('README.rst').read()
+        .replace(': docs/test.png', ': http://rawgithub.com/twolfson/sublime-plugin-tests/master/docs/test.png')
+        .replace(': UNLICENSE', ': http://rawgithub.com/twolfson/sublime-plugin-tests/master/UNLICENSE')
+    ),
     keywords=[
         'sublime text',
         'plugin',
