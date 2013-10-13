@@ -1,4 +1,6 @@
 # sublime-plugin-tests changelog
+0.2.3 - Moved README from Markdown to reStructuedText for better viewing in PyPI
+
 0.2.2 - Removed subpackage dependencies
 
 0.2.1 - Added documentation for developing under Vagrant
