@@ -48,6 +48,7 @@ SCRIPT
     fi
 SCRIPT
   # config.vm.provision "shell", inline: $install_sublime
+  config.vm.provision "shell", inline: "sudo apt-get update"
 
   $install_xvfb = <<SCRIPT
     # If xvfb isn't installed, install it
