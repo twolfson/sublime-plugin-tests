@@ -3,7 +3,7 @@ sublime-plugin-tests |Build status|
 
 .. |Build status| image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master
    :target: https://travis-ci.org/twolfson/sublime-plugin-tests
-   :alt: Built Status
+   :alt: Build Status
 
 Testing framework for Sublime Text plugins
 
@@ -160,9 +160,10 @@ When initialized, Sublime Text will open a new file in the active window (not sa
 
 ScratchView#run_command
 .......................
-Run a command in the context of a ``ScratchView``. The function signature is the same as in the [Sublime Text documentation][view-docs].
+Run a command in the context of a ``ScratchView``. The function signature is the same as in the `Sublime Text documentation`_.
 
-[view-docs]: http://www.sublimetext.com/docs/2/api_reference.html#sublime.View
+.. _`Sublime Text documentation`:
+.. _view_docs: http://www.sublimetext.com/docs/2/api_reference.html#sublime.View
 
 .. code:: python
 
@@ -211,7 +212,9 @@ Closes scratch view for clean up. This also guarantees no pop-up will be run whe
 
 ScratchView#view
 .....................................................
-If you would like to access the underlying [`sublime.View`][view-docs], it can be accessed via the ``view`` attr.
+If you would like to access the underlying `sublime.View`_, it can be accessed via the ``view`` attr.
+
+.. _`sublime.View`: `view_docs`_
 
 .. code:: python
 
@@ -229,11 +232,11 @@ Contributing
 ------------
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via ``./test.sh``.
 
-If you would like to headlessly run the tests, this repository can be used with [Vagrant][].
+If you would like to headlessly run the tests, this repository can be used with `Vagrant`_.
 
 > Currently, it is only configured for Sublime Text 3.
 
-[Vagrant]: http://vagrantup.com/
+.. _Vagrant: http://vagrantup.com/
 
 .. code:: bash
 
@@ -251,17 +254,19 @@ If you would like to headlessly run the tests, this repository can be used with 
 
 Donating
 --------
-Support this project and [others by twolfson][gittip] via [gittip][].
+Support this project and `others by twolfson`_ via `gittip`_.
 
-[![Support via Gittip][gittip-badge]][gittip]
+.. image:: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
+   :target: `gittip`_
+   :alt: Support via Gittip
 
-[gittip-badge]: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
-[gittip]: https://www.gittip.com/twolfson/
+.. _`others by twolfson`:
+.. _gittip: https://www.gittip.com/twolfson/
 
 Unlicense
 ---------
 As of Sep 05 2013, Todd Wolfson has released this repository and its contents to the public domain.
 
-It has been released under the [UNLICENSE][].
+It has been released under the `UNLICENSE`_.
 
-[UNLICENSE]: UNLICENSE
+.. _UNLICENSE: UNLICENSE
