@@ -54,6 +54,9 @@ class Base(object):
     if SUBLIME_TEXT_VERSION == '3.0':
         _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-3/Packages/sublime-plugin-tests-tmp')
 
+    # TODO: Fallback should be determined by sublime_info package
+    _sublime_command = os.environ.get('SUBLIME_TESTS_AUTO_KILL', 'sublime_text')
+
     @classmethod
     def _ensure_plugin_test_dir(cls):
         # If the plugin test directory does not exist, create it
@@ -159,7 +162,7 @@ class Base(object):
             # TODO: This could be subl, sublime_text, or other
             sublime_is_running = False
             for process in ps_list.split('\n'):
-                if 'sublime_text' in process:
+                if cls._sublime_command in process:
                     sublime_is_running = True
                     break
 
@@ -170,8 +173,8 @@ class Base(object):
                 cls._install_init_launcher()
 
                 # and launch sublime_text
-                logger.info('Launching sublime_text via init')
-                subprocess.call(['sublime_text'])
+                logger.info('Launching %s via init' % cls._sublime_command)
+                subprocess.call([cls._sublime_command])
 
                 # Mark the init to prevent double launch
                 running_via_init = True
@@ -184,7 +187,7 @@ class Base(object):
 
             # Start a subprocess to run the plugin
             logger.info('Launching sublime_text via --command')
-            subprocess.call(['sublime_text', '--command', 'sublime_plugin_test_tmp'])
+            subprocess.call([cls._sublime_command, '--command', 'sublime_plugin_test_tmp'])
 
         # Wait for the output file to exist
         while (not os.path.exists(output_file) or os.stat(output_file).st_size == 0):
@@ -211,13 +214,13 @@ class Base(object):
                     logger.debug('Current process list: %s' % ps_list)
 
                     for process in ps_list.split('\n'):
-                        if 'sublime_text' in process:
+                        if cls._sublime_command in process:
                             sublime_is_still_running = True
 
                     if not sublime_is_still_running:
                         break
                     else:
-                        logger.debug('Waiting for sublime_text to terminate')
+                        logger.debug('Waiting for %s to terminate' % cls._sublime_command)
                         time.sleep(0.1)
 
         # Read in the output
