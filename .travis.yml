@@ -2,27 +2,40 @@ language: python
 python:
   - "2.7"
 env:
-  - SUBLIME_TEXT_VERSION="2.0"
-  # - SUBLIME_TEXT_VERSION="3.0"
+  # - SUBLIME_TEXT_VERSION="2.0"
+  - SUBLIME_TEXT_VERSION="3.0"
 
 install:
+  - export SUBLIME_TESTS_AUTO_KILL=TRUE
+  - sudo apt-get update
+  - sudo apt-get install python-software-properties -y
+  - sudo mkdir -p /usr/share/icons/hicolor/16x16/apps/
+  - sudo mkdir -p /usr/share/icons/hicolor/32x32/apps/
+  - sudo mkdir -p /usr/share/icons/hicolor/48x48/apps/
+  - sudo mkdir -p /usr/share/icons/hicolor/128x128/apps/
+  - sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
+
   # Install Sublime Text
   - ./test/install.sh
 
   # List Sublime Text info for debugging
   - sublime_text --version
 
+  - sudo apt-get install xvfb libgtk2.0-0 -y
+
   # Install `sublime_plugin_tests`
-  - python setup.py install
+  - sudo apt-get install python-pip -y
+  - python setup.py develop
 
 before_script:
   # Generate a screen buffer to collect Sublime Text window
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  - /usr/bin/Xvfb $DISPLAY -screen 0 1024x768x24 &
 
 script:
   # Run our tests
-  - SUBLIME_TESTS_AUTO_KILL=TRUE ./test.sh
+  - echo "$SUBLIME_TEXT_VERSION" "$SUBLIME_TESTS_AUTO_KILL" "$DISPLAY"
+  - ./test.sh
 
 notifications:
   email: false
