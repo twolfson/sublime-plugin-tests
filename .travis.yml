@@ -37,6 +37,8 @@ script:
   - echo "$SUBLIME_TEXT_VERSION" "$SUBLIME_TESTS_AUTO_KILL" "$DISPLAY"
   - sublime_text
   - ps ax | grep sublime
+  - sleep 1
+  - ps ax | grep sublime
   - ./test.sh
 
 notifications:
