@@ -48,6 +48,5 @@ def run():
     # If it did not run (plugin_host has not loaded), then try again in 100ms
     global plugin_host_loaded
     if not plugin_host_loaded:
-        print('waiting')
         sublime.set_timeout(run, 100)
 run()
