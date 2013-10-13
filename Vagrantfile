@@ -79,5 +79,5 @@ SCRIPT
 
   # When done, vagrant ssh
   # cd /vagrant
-  # SUBLIME_TESTS_AUTO_KILL=TRUE ./test.sh
+  # ./test.sh
 end
