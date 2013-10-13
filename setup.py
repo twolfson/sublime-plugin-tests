@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sublime_plugin_tests',
-    version='0.2.7',
+    version='0.2.9',
     description='Testing framework for Sublime Text plugins',
     long_description=open('README.rst').read(),
     keywords=[
