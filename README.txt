@@ -1,5 +1,5 @@
-sublime-plugin-tests `|Build status| <https://travis-ci.org/twolfson/sublime-plugin-tests>`_
-============================================================================================
+sublime-plugin-tests .. image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master   :target: https://travis-ci.org/twolfson/sublime-plugin-tests   :alt: Built Status
+==============================================================================================================================================================================================
 
 Testing framework for Sublime Text plugins
 
