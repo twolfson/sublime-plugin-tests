@@ -1,13 +1,16 @@
-sublime-plugin-tests .. image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master   :target: https://travis-ci.org/twolfson/sublime-plugin-tests   :alt: Built Status
-==============================================================================================================================================================================================
+sublime-plugin-tests |Build Status|
+===================================
+
+.. |Build status| image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master
+   :target: https://travis-ci.org/twolfson/sublime-plugin-tests
+   :alt: Built Status
 
 Testing framework for Sublime Text plugins
 
 This was built to create a platform to test plugins against multiple
 versions of Sublime Text.
 
-.. figure:: docs/tests.png
-   :align: center
+.. image:: docs/tests.png
    :alt: Screenshot of tests running
 
 Getting Started
@@ -17,7 +20,7 @@ Install the module with: ``pip install sublime_plugin_tests``
 
 Then, write your tests:
 
-::
+::  python
 
     # Load in test framework
     from sublime_plugin_tests import framework
@@ -276,5 +279,4 @@ contents to the public domain.
 
 It has been released under the `UNLICENSE <UNLICENSE>`_.
 
-.. |Build status| image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master
 .. |Support via Gittip| image:: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
