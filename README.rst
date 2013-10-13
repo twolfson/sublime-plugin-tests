@@ -69,7 +69,7 @@ To run your tests against Sublime Text 2 in `Travis CI`_, put this in your ``.tr
 
 .. _Travis CI: https://travis-ci.org/
 
-.. code::yml
+.. code:: yaml
 
     language: python
     python:
