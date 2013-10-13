@@ -202,6 +202,29 @@ The test harness generates a temporary Sublime Text plugin which runs your test 
 
 The output and assertions of each test function are reported back to `nosetests` which prints to `stdout` and exits.
 
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via `./test.sh`.
+
+If you would like to headlessly run the tests, this repository can be used with [Vagrant][].
+
+> Currently, it is only configured for Sublime Text 3.
+
+[Vagrant]: http://vagrantup.com/
+
+```bash
+$ vagrant up
+[default] Importing base box 'precise64'...
+...
+$ vagrant ssh
+vagrant@precise64:~$ cd /vagrant
+vagrant@precise64:/vagrant$ ./test.sh
+...
+----------------------------------------------------------------------
+Ran 3 tests in 2.651s
+
+OK
+```
+
 ## Donating
 Support this project and [others by twolfson][gittip] via [gittip][].
 
@@ -209,9 +232,6 @@ Support this project and [others by twolfson][gittip] via [gittip][].
 
 [gittip-badge]: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
 [gittip]: https://www.gittip.com/twolfson/
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via `./test.sh`.
 
 ## Unlicense
 As of Sep 05 2013, Todd Wolfson has released this repository and its contents to the public domain.
