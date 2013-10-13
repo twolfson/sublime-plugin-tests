@@ -1,7 +1,7 @@
-sublime-plugin-tests |Build status|
-===================================
+sublime-plugin-tests
+====================
 
-.. |Build status| image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master
+.. image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master
    :target: https://travis-ci.org/twolfson/sublime-plugin-tests
    :alt: Build Status
 
