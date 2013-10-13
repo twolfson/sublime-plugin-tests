@@ -55,7 +55,8 @@ class Base(object):
         _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-3/Packages/sublime-plugin-tests-tmp')
 
     # TODO: Fallback should be determined by sublime_info package
-    _sublime_command = os.environ.get('SUBLIME_TESTS_AUTO_KILL', 'sublime_text')
+    _sublime_command = os.environ.get('SUBLIME_COMMAND', 'sublime_text')
+    print _sublime_command
 
     @classmethod
     def _ensure_plugin_test_dir(cls):
@@ -186,7 +187,7 @@ class Base(object):
             cls._install_command_launcher()
 
             # Start a subprocess to run the plugin
-            logger.info('Launching sublime_text via --command')
+            logger.info('Launching %s via --command' % cls._sublime_command)
             subprocess.call([cls._sublime_command, '--command', 'sublime_plugin_test_tmp'])
 
         # Wait for the output file to exist
