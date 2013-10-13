@@ -56,7 +56,6 @@ class Base(object):
 
     # TODO: Fallback should be determined by sublime_info package
     _sublime_command = os.environ.get('SUBLIME_COMMAND', 'sublime_text')
-    print _sublime_command
 
     @classmethod
     def _ensure_plugin_test_dir(cls):
