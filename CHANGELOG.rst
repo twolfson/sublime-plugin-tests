@@ -1,4 +1,5 @@
-# sublime-plugin-tests changelog
+sublime-plugin-tests changelog
+==============================
 0.2.3 - Moved README from Markdown to reStructuedText for better viewing in PyPI
 
 0.2.2 - Removed subpackage dependencies
