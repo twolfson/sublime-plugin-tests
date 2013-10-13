@@ -3,12 +3,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='sublime_plugin_tests',
-    version='0.2.8',
+    version='0.2.7',
     description='Testing framework for Sublime Text plugins',
-    long_description=(open('README.rst').read()
-        .replace(': docs/test.png', ': http://rawgithub.com/twolfson/sublime-plugin-tests/master/docs/test.png')
-        .replace(': UNLICENSE', ': http://rawgithub.com/twolfson/sublime-plugin-tests/master/UNLICENSE')
-    ),
+    long_description=open('README.rst').read(),
     keywords=[
         'sublime text',
         'plugin',

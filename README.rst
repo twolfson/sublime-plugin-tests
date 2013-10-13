@@ -9,7 +9,7 @@ Testing framework for Sublime Text plugins
 
 This was built to create a platform to test plugins against multiple versions of Sublime Text.
 
-.. image:: docs/tests.png
+.. image:: https://rawgithub.com/twolfson/sublime-plugin-tests/master/docs/tests.png
    :alt: Screenshot of tests running
 
 Getting Started
@@ -271,4 +271,4 @@ As of Sep 05 2013, Todd Wolfson has released this repository and its contents to
 
 It has been released under the `UNLICENSE`_.
 
-.. _UNLICENSE: UNLICENSE
+.. _UNLICENSE: https://rawgithub.com/twolfson/sublime-plugin-tests/master/UNLICENSE
