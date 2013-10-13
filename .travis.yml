@@ -35,7 +35,7 @@ before_script:
 script:
   # Run our tests
   - echo "$SUBLIME_TEXT_VERSION" "$SUBLIME_TESTS_AUTO_KILL" "$DISPLAY"
-  - sublime_text
+  - sublime_text --wait
   - ps ax | grep sublime
   - sleep 1
   - ps ax | grep sublime
