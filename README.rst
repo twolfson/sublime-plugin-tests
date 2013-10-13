@@ -14,7 +14,7 @@ This was built to create a platform to test plugins against multiple versions of
 
 Getting Started
 ---------------
-Install the module with: `pip install sublime_plugin_tests`
+Install the module with: ``pip install sublime_plugin_tests``
 
 Then, write your tests:
 
@@ -65,7 +65,7 @@ Travis CI integration
 
 Currently, only Sublime Text 2 is supported via `Travis CI`_. Sublime Text 3 test cases are currently functioning locally and inside of Vagrant but not inside of Travis.
 
-To run your tests against Sublime Text 2 in `Travis CI`_, put this in your `.travis.yml`:
+To run your tests against Sublime Text 2 in `Travis CI`_, put this in your ``.travis.yml``:
 
 .. _Travis CI: https://travis-ci.org/
 
@@ -105,12 +105,13 @@ Documentation
 -------------
 framework.TestCase
 ''''''''''''''''''
-`framework.TestCase` extends [Python's unittest.TestCase][testcase]. Tests can be skipped and set up/torn down as you normally would. The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
+``framework.TestCase`` extends `Python's unittest.TestCase`_. Tests can be skipped and set up/torn down as you normally would. The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
 
-[testcase]: http://docs.python.org/2/library/unittest.html#unittest.TestCase
+.. _`Python's unittest.TestCase`: http://docs.python.org/2/library/unittest.html#unittest.TestCase
 
-### utils.selection.split_selection
-`utils.selection.split_selection` break up a string by selection markers into `content` and `selection`.
+utils.selection.split_selection
+'''''''''''''''''''''''''''''''
+``utils.selection.split_selection`` break up a string by selection markers into ``content`` and ``selection``.
 
 .. code:: python
 
@@ -146,18 +147,20 @@ Output:
       'selection': [(7, 7), (18, 18)]
     }
 
-### utils.scratch_view.ScratchView
-`utils.scratch_view.ScratchView` is a class for creating a temporary view to work on. This is meant to run in the context of Sublime Text and not in the framework.
+utils.scratch_view.ScratchView
+''''''''''''''''''''''''''''''
+``utils.scratch_view.ScratchView`` is a class for creating a temporary view to work on. This is meant to run in the context of Sublime Text and not in the framework.
 
-When initialized, Sublime Text will open a new file in the active window (not saved to local disk). When you are done, it is strongly encouraged to run `ScratchView#destroy` to clean up your Sublime Text window.
+When initialized, Sublime Text will open a new file in the active window (not saved to local disk). When you are done, it is strongly encouraged to run ``ScratchView#destroy`` to clean up your Sublime Text window.
 
 .. code:: python
 
     # Open temporary file inside of Sublime Text's active window
     tmp_view = ScratchView()
 
-#### ScratchView#run_command
-Run a command in the context of a `ScratchView`. The function signature is the same as in the [Sublime Text documentation][view-docs].
+ScratchView#run_command
+.......................
+Run a command in the context of a ``ScratchView``. The function signature is the same as in the [Sublime Text documentation][view-docs].
 
 [view-docs]: http://www.sublimetext.com/docs/2/api_reference.html#sublime.View
 
@@ -166,8 +169,9 @@ Run a command in the context of a `ScratchView`. The function signature is the s
     # Run `left_delete` command inside of `tmp_view`
     tmp_view.run_command('left_delete')
 
-#### ScratchView#set_content, #get_content, #clear_content
-Methods to adjust the content of a `ScratchView`.
+ScratchView#set_content, #get_content, #clear_content
+.....................................................
+Methods to adjust the content of a ``ScratchView``.
 
 .. code:: python
 
@@ -180,8 +184,9 @@ Methods to adjust the content of a `ScratchView`.
     # `clear_content` deletes all of the content.
     tmp_view.clear_content()
 
-#### ScratchView#set_sel, #get_sel, #clear_sel
-Methods to adjust the selection of a `ScratchView`.
+ScratchView#set_sel, #get_sel, #clear_sel
+.........................................
+Methods to adjust the selection of a ``ScratchView``.
 
 .. code:: python
 
@@ -195,7 +200,8 @@ Methods to adjust the selection of a `ScratchView`.
     # `clear_sel` deselects everything.
     tmp_view.clear_sel()
 
-#### ScratchView#destroy
+ScratchView#destroy
+...................
 Closes scratch view for clean up. This also guarantees no pop-up will be run when closing.
 
 .. code:: python
@@ -203,22 +209,25 @@ Closes scratch view for clean up. This also guarantees no pop-up will be run whe
     # Close `tmp_view`
     tmp_view.destroy()
 
-#### ScratchView#view
-If you would like to access the underlying [`sublime.View`][view-docs], it can be accessed via the `view` attr.
+ScratchView#view
+.....................................................
+If you would like to access the underlying [`sublime.View`][view-docs], it can be accessed via the ``view`` attr.
 
 .. code:: python
 
     tmp_view.view # sublime.View instance
 
-## Architecture
+Architecture
+------------
 Framework takes each test function, wraps it in a test harness, runs it, and asserts whether the harness saw an error or not.
 
 The test harness generates a temporary Sublime Text plugin which runs your test in the context of Sublime. This harness is launched via a CLI invocation of Sublime Text.
 
-The output and assertions of each test function are reported back to `nosetests` which prints to `stdout` and exits.
+The output and assertions of each test function are reported back to ``nosetests`` which prints to ``stdout`` and exits.
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via `./test.sh`.
+Contributing
+------------
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via ``./test.sh``.
 
 If you would like to headlessly run the tests, this repository can be used with [Vagrant][].
 
@@ -240,7 +249,8 @@ If you would like to headlessly run the tests, this repository can be used with 
 
     OK
 
-## Donating
+Donating
+--------
 Support this project and [others by twolfson][gittip] via [gittip][].
 
 [![Support via Gittip][gittip-badge]][gittip]
@@ -248,7 +258,8 @@ Support this project and [others by twolfson][gittip] via [gittip][].
 [gittip-badge]: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
 [gittip]: https://www.gittip.com/twolfson/
 
-## Unlicense
+Unlicense
+---------
 As of Sep 05 2013, Todd Wolfson has released this repository and its contents to the public domain.
 
 It has been released under the [UNLICENSE][].
