@@ -234,6 +234,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 If you would like to headlessly run the tests, this repository can be used with `Vagrant`_.
 
+..
+
     Currently, it is only configured for Sublime Text 3.
 
 .. _Vagrant: http://vagrantup.com/
