@@ -271,4 +271,4 @@ As of Sep 05 2013, Todd Wolfson has released this repository and its contents to
 
 It has been released under the `UNLICENSE`_.
 
-.. _UNLICENSE: https://rawgithub.com/twolfson/sublime-plugin-tests/master/UNLICENSE
+.. _UNLICENSE: https://github.com/twolfson/sublime-plugin-tests/master/UNLICENSE
