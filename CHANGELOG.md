@@ -1,4 +1,6 @@
 # sublime-plugin-tests changelog
+0.2.0 - Added Sublime Text 3 support and Vagrantfile for Sublime Text 3
+
 0.1.6 - Add __init__.py to templates to fully fix nested directory issues
 
 0.1.5 - Using `find_packages` due to published nested directory issues
