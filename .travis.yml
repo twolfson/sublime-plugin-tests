@@ -39,6 +39,7 @@ script:
   - ps ax | grep sublime
   - sleep 1
   - ps ax | grep sublime
+  - uname --all
   - ./test.sh
 
 notifications:
