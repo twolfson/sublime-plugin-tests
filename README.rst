@@ -276,7 +276,5 @@ contents to the public domain.
 
 It has been released under the `UNLICENSE <UNLICENSE>`_.
 
-.. |Build
-status| image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master
-.. |Support via
-Gittip| image:: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
+.. |Build status| image:: https://travis-ci.org/twolfson/sublime-plugin-tests.png?branch=master
+.. |Support via Gittip| image:: https://rawgithub.com/twolfson/gittip-badge/master/dist/gittip.png
