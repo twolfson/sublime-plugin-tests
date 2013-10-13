@@ -1,15 +1,11 @@
 from setuptools import setup, find_packages
 
 
-def read_requirements(filename='requirements.txt'):
-    with open(filename) as f:
-        return f.readlines()
-
-
 setup(
     name='sublime_plugin_tests',
     version='0.2.2',
     description='Testing framework for Sublime Text plugins',
+    long_description=open('README.rst').read(),
     keywords=[
         'sublime text',
         'plugin',
@@ -22,7 +18,7 @@ setup(
     url='https://github.com/twolfson/sublime-plugin-tests',
     packages=find_packages(),
     license='UNLICENSE',
-    install_requires=read_requirements(),
+    install_requires=open('requirements.txt').readlines(),
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
