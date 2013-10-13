@@ -65,7 +65,7 @@ Travis CI integration
 
 Currently, only Sublime Text 2 is supported via `Travis CI`_. Sublime Text 3 test cases are currently functioning locally and inside of Vagrant but not inside of Travis.
 
-To run your tests against Sublime Text 2 in [Travis CI], put this in your `.travis.yml`:
+To run your tests against Sublime Text 2 in `Travis CI`_, put this in your `.travis.yml`:
 
 .. _Travis CI: https://travis-ci.org/
 
@@ -126,6 +126,7 @@ Example
 .......
 
 Input:
+
 .. code:: python
 
     split_selection("""
@@ -134,6 +135,7 @@ Input:
     """)
 
 Output:
+
 .. code:: python
 
     {
