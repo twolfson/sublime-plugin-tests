@@ -30,15 +30,6 @@ SCRIPT
 
     # If Sublime Text isn't installed, install it
     if test -z "$(which sublime_text)"; then
-      # Preparation for install script
-      sudo apt-get update
-      sudo apt-get install python-software-properties -y
-      sudo mkdir -p /usr/share/icons/hicolor/16x16/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/32x32/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/48x48/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/128x128/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
-
       # Install Sublime Text
       cd /vagrant
       ./test/install.sh
@@ -53,6 +44,7 @@ SCRIPT
   $install_xvfb = <<SCRIPT
     # If xvfb isn't installed, install it
     if ! test -f /usr/bin/Xvfb; then
+      sudo apt-get update
       sudo apt-get install xvfb libgtk2.0-0 -y
     fi
 SCRIPT
