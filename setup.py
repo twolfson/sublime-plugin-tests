@@ -5,7 +5,7 @@ setup(
     name='sublime_plugin_tests',
     version='0.2.5',
     description='Testing framework for Sublime Text plugins',
-    long_description=open('README.rst').read(),
+    long_description=open('README.txt').read(),
     keywords=[
         'sublime text',
         'plugin',
