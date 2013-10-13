@@ -53,6 +53,45 @@ Ran 1 test in 0.076s
 OK
 ```
 
+### Travis CI integration
+Currently, only Sublime Text 2 is supported via [Travis CI]. Sublime Text 3 test cases are currently functioning locally and inside of Vagrant but not inside of Travis.
+
+To run your tests against Sublime Text 2 in [Travis CI], put this in your `.travis.yml`:
+
+[Travis CI]: https://travis-ci.org/
+
+```yml
+language: python
+python:
+  - "2.7"
+
+install:
+  # Install Sublime Text 2
+  - sudo add-apt-repository ppa:webupd8team/sublime-text-2 -y
+  - sudo apt-get update
+  - sudo apt-get install sublime-text -y
+  - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
+
+  # List Sublime Text info for debugging
+  - sublime_text --version
+
+  # Install dev dependencies
+  - pip install sublime-plugin-tests
+
+  # Install our plugin
+  - mkdir -p ~/.config/sublime-text-2/Packages/
+  - ln -s $PWD ~/.config/sublime-text-2/Packages/YOUR_PLUGIN_NAME
+
+before_script:
+  # Generate a screen buffer to collect Sublime Text window
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+script:
+  # Run our tests
+  - SUBLIME_TESTS_AUTO_KILL=TRUE ./test.sh
+```
+
 ## Documentation
 ### framework.TestCase
 `framework.TestCase` extends [Python's unittest.TestCase][testcase]. Tests can be skipped and set up/torn down as you normally would. The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
