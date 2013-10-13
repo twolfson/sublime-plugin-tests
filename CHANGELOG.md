@@ -1,4 +1,6 @@
 # sublime-plugin-tests changelog
+0.2.2 - Removed subpackage dependencies
+
 0.2.1 - Added documentation for developing under Vagrant
 
 0.2.0 - Added Sublime Text 3 support and Vagrantfile for Sublime Text 3
