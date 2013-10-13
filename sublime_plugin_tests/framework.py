@@ -26,6 +26,7 @@ class Logger(object):
         pass
 logger = Logger()
 
+
 # Set up helper fn
 def template(tmpl_path):
     """ Decorator that templates the returned content. """
