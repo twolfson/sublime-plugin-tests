@@ -39,12 +39,12 @@ SCRIPT
       sudo mkdir -p /usr/share/icons/hicolor/128x128/apps/
       sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
 
-      # Install Sublime Text
-      cd /vagrant
-      ./test/install.sh
+      # # Install Sublime Text
+      # cd /vagrant
+      # ./test/install.sh
 
-      # Output the version
-      sublime_text --version
+      # # Output the version
+      # sublime_text --version
     fi
 SCRIPT
   config.vm.provision "shell", inline: $install_sublime
@@ -58,9 +58,19 @@ SCRIPT
   config.vm.provision "shell", inline: $install_xvfb
 
   $install_package = <<SCRIPT
-    # Install pip and our package for development
-    cd /vagrant
-    sudo apt-get install python-pip -y
+    # For Python 3 development, install Python 3
+    sudo apt-get install python3 -y
+    sudo rm /usr/bin/python
+    sudo ln -s python3.2 /usr/bin/python
+
+    # and use distribute over pip
+    wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+    sudo python ez_setup.py
+
+    # # Install pip and our package for development
+    # cd /vagrant
+    # sudo apt-get install python-pip -y
+
     python setup.py develop
 SCRIPT
   config.vm.provision "shell", inline: $install_package
