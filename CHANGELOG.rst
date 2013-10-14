@@ -1,5 +1,7 @@
 sublime-plugin-tests changelog
 ==============================
+0.3.0 - Added Sublime Text 3 support for Travis CI
+
 0.2.4 - Fixing typo in README
 
 0.2.3 - Moved README from Markdown to reStructuedText for better viewing in PyPI
@@ -10,9 +12,9 @@ sublime-plugin-tests changelog
 
 0.2.0 - Added Sublime Text 3 support and Vagrantfile for Sublime Text 3
 
-0.1.6 - Add __init__.py to templates to fully fix nested directory issues
+0.1.6 - Add ``__init__.py`` to templates to fully fix nested directory issues
 
-0.1.5 - Using `find_packages` due to published nested directory issues
+0.1.5 - Using ``find_packages`` due to published nested directory issues
 
 0.1.4 - Documented 0.1.1 - 0.1.4 in CHANGELOG
 
