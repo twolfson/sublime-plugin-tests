@@ -1,5 +1,7 @@
 sublime-plugin-tests changelog
 ==============================
+0.4.0 - Added Python 3 support
+
 0.3.0 - Added Sublime Text 3 support for Travis CI
 
 0.2.4 - Fixing typo in README
