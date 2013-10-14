@@ -38,13 +38,11 @@ SCRIPT
       sublime_text --version
     fi
 SCRIPT
-  # config.vm.provision "shell", inline: $install_sublime
-  config.vm.provision "shell", inline: "sudo apt-get update"
+  config.vm.provision "shell", inline: $install_sublime
 
   $install_xvfb = <<SCRIPT
     # If xvfb isn't installed, install it
     if ! test -f /usr/bin/Xvfb; then
-      sudo apt-get update
       sudo apt-get install xvfb libgtk2.0-0 -y
     fi
 SCRIPT
