@@ -55,7 +55,7 @@ class Base(object):
         _plugin_test_dir = os.path.expanduser('~/.config/sublime-text-3/Packages/sublime-plugin-tests-tmp')
 
     # TODO: Fallback should be determined by sublime_info package
-    _sublime_command = os.environ.get('SUBLIME_COMMAND', 'sublime_text')
+    _sublime_command = os.environ.get('SUBLIME_TEXT_PATH', 'sublime_text')
 
     @classmethod
     def _ensure_plugin_test_dir(cls):
