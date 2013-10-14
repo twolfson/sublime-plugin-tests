@@ -59,7 +59,7 @@ SCRIPT
 
   $install_package = <<SCRIPT
     # For Python 3 development
-    if true; then
+    if false; then
       # Install Python 3
       # DEV: Unfortunately, apt-get flavor is 3.2 which doesn't support our packages to well
       wget http://www.python.org/ftp/python/3.3.2/Python-3.3.2.tar.xz
@@ -77,14 +77,14 @@ SCRIPT
       sudo python ez_setup.py
     else
     # Otherwise, install pip
-      # cd /vagrant
-      # sudo apt-get install python-pip -y
+      cd /vagrant
+      sudo apt-get install python-pip -y
     fi
 
     # Install our package for development
     python setup.py develop
 SCRIPT
-  # config.vm.provision "shell", inline: $install_package
+  config.vm.provision "shell", inline: $install_package
 
   $launch_xvfb = <<SCRIPT
     # Set and persist DISPLAY to :99.0
