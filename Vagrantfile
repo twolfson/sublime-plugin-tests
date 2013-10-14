@@ -58,27 +58,33 @@ SCRIPT
   config.vm.provision "shell", inline: $install_xvfb
 
   $install_package = <<SCRIPT
-    # For Python 3 development, install Python 3
-    # DEV: Unfortunately, apt-get flavor is 3.2 which doesn't support our packages to well
-    wget http://www.python.org/ftp/python/3.3.2/Python-3.3.2.tar.xz
-    tar xvf Python-3.3.2.tar.xz
-    sudo apt-get install make -y
-    ./configure
-    make
-    sudo make install
-    sudo rm /usr/bin/python
-    sudo ln -s $PWD/python /usr/bin/python
+    # For Python 3 development
+    if true; then
+      # Install Python 3
+      # DEV: Unfortunately, apt-get flavor is 3.2 which doesn't support our packages to well
+      wget http://www.python.org/ftp/python/3.3.2/Python-3.3.2.tar.xz
+      tar xvf Python-3.3.2.tar.xz
+      cd Python-3.3.2
+      sudo apt-get install make -y
+      ./configure
+      make
+      sudo make install
+      sudo rm /usr/bin/python
+      sudo ln -s $PWD/python /usr/bin/python
 
-    # and use distribute over pip
-    wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-    sudo python ez_setup.py
+      # and use distribute over pip
+      wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+      sudo python ez_setup.py
+    else
+    # Otherwise, install pip
+      # cd /vagrant
+      # sudo apt-get install python-pip -y
+    fi
 
-    # # Install pip and our package for development
-    # cd /vagrant
-    # sudo apt-get install python-pip -y
+    # Install our package for development
     python setup.py develop
 SCRIPT
-  config.vm.provision "shell", inline: $install_package
+  # config.vm.provision "shell", inline: $install_package
 
   $launch_xvfb = <<SCRIPT
     # Set and persist DISPLAY to :99.0

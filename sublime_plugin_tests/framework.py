@@ -154,6 +154,7 @@ class Base(object):
             # Get process list
             child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
             ps_list = child.stdout.read()
+            print('hiiii')
 
             # Kill the child
             child.kill()
