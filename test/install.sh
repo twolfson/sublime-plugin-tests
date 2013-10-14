@@ -11,4 +11,12 @@ elif test "$SUBLIME_TEXT_VERSION" = "3.0"; then
   wget http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3047_amd64.deb
   sudo dpkg --install sublime-text_build-3047_amd64.deb
   sudo ln -s /usr/bin/subl /usr/bin/sublime_text
+
+  # If we are in Travis, update shm. Fixes 'Unable to init shm' from `sublime_text --wait`
+  # https://travis-ci.org/twolfson/sublime-plugin-tests/builds/12500309
+  # https://github.com/travis-ci/travis-core/issues/187
+  if test -n "$TRAVIS"; then
+    sudo rmdir /dev/shm
+    sudo ln -Tsf /{run,dev}/shm
+  fi
 fi

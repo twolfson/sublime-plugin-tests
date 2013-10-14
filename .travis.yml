@@ -27,9 +27,6 @@ install:
   - sudo apt-get install python-pip -y
   - python setup.py develop
 
-  - sudo rmdir /dev/shm
-  - sudo ln -Tsf /{run,dev}/shm
-
 before_script:
   # Generate a screen buffer to collect Sublime Text window
   - export DISPLAY=:99.0
@@ -37,7 +34,6 @@ before_script:
 
 script:
   # Run our tests
-  - echo "$SUBLIME_TEXT_VERSION" "$SUBLIME_TESTS_AUTO_KILL" "$DISPLAY"
   - ./test.sh
 
 notifications:
