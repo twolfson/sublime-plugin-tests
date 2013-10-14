@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # If we are to install Sublime Text 2
 if test "$SUBLIME_TEXT_VERSION" = "2.0"; then
