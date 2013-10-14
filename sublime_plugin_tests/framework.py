@@ -153,8 +153,7 @@ class Base(object):
             # TODO: Use tasklist for Windows
             # Get process list
             child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
-            ps_list = child.stdout.read()
-            print('hiiii')
+            ps_list = str(child.stdout.read())
 
             # Kill the child
             child.kill()
@@ -206,7 +205,7 @@ class Base(object):
                     sublime_is_still_running = False
                     # TODO: Modularize this
                     child = subprocess.Popen(["ps", "ax"], stdout=subprocess.PIPE)
-                    ps_list = child.stdout.read()
+                    ps_list = str(child.stdout.read())
 
                     # Kill the child
                     child.kill()
