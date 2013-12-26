@@ -5,9 +5,11 @@ sublime-plugin-tests
    :target: https://travis-ci.org/twolfson/sublime-plugin-tests
    :alt: Build Status
 
-Testing framework for Sublime Text plugins
+Testing framework for `Sublime Text`_ plugins
 
-This was built to create a platform to test plugins against multiple versions of Sublime Text.
+This was built to create a platform to test plugins against multiple versions of `Sublime Text`_.
+
+.. _`Sublime Text`: http://sublimetext.com/
 
 .. image:: https://rawgithub.com/twolfson/sublime-plugin-tests/master/docs/tests.png
    :alt: Screenshot of tests running
@@ -63,9 +65,7 @@ Then, write your tests:
 Travis CI integration
 '''''''''''''''''''''
 
-Currently, only Sublime Text 2 is supported via `Travis CI`_. Sublime Text 3 test cases are currently functioning locally and inside of Vagrant but not inside of Travis.
-
-To run your tests against Sublime Text 2 in `Travis CI`_, put this in your ``.travis.yml``:
+To run your tests against Sublime Text 2/3 in `Travis CI`_, put this in your ``.travis.yml``:
 
 .. _Travis CI: https://travis-ci.org/
 
@@ -73,45 +73,57 @@ To run your tests against Sublime Text 2 in `Travis CI`_, put this in your ``.tr
 
     language: python
     python:
-    - "2.7"
+      - "2.7"
+    env:
+      - SUBLIME_TEXT_VERSION="2"
+      - SUBLIME_TEXT_VERSION="3"
 
     install:
-    # Install Sublime Text 2
-    - sudo add-apt-repository ppa:webupd8team/sublime-text-2 -y
-    - sudo apt-get update
-    - sudo apt-get install sublime-text -y
-    - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
+      # Install Sublime Text and output version
+      - curl http://rawgithub.com/twolfson/sublime-installer/0.1.1/install.sh | sh -s $SUBLIME_TEXT_VERSION
+      - subl --version
 
-    # List Sublime Text info for debugging
-    - sublime_text --version
+      # Install `sublime_plugin_tests`
+      - python setup.py develop
 
-    # Install dev dependencies
-    - pip install sublime-plugin-tests
+      # Install dev requirements
+      - if test -f requirements-dev.txt; then pip install -r requirements-dev.txt; fi
 
-    # Install our plugin
-    - mkdir -p ~/.config/sublime-text-2/Packages/
-    - ln -s $PWD ~/.config/sublime-text-2/Packages/YOUR_PLUGIN_NAME
+      # TODO: Remove this
+      # Symlink `subl` to `sublime_text`
+      - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
 
     before_script:
-    # Generate a screen buffer to collect Sublime Text window
-    - export DISPLAY=:99.0
-    - sh -e /etc/init.d/xvfb start
+      # Generate a screen buffer to collect Sublime Text window
+      - export DISPLAY=:99.0
+      - sh -e /etc/init.d/xvfb start
+
+      # Ensure the scripts self-terminate
+      - export SUBLIME_AUTO_KILL=TRUE
 
     script:
-    # Run our tests
-    - SUBLIME_TESTS_AUTO_KILL=TRUE ./test.sh
+      # Run our tests
+      - nosetests --nocapture --verbose --stop
 
 Documentation
 -------------
-framework.TestCase
-''''''''''''''''''
-``framework.TestCase`` extends `Python's unittest.TestCase`_. Tests can be skipped and set up/torn down as you normally would. The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
+``sublime_plugin_tests`` exposes ``TestCase`` and ``utils`` as its exports.
+
+TestCase
+''''''''
+``TestCase`` extends `Python's unittest.TestCase`_. Tests can be skipped and set up/torn down as you normally would.
+
+It is expected that each test case returns a ``String``. This string will be run inside of the context of ``
+
+The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
 
 .. _`Python's unittest.TestCase`: http://docs.python.org/2/library/unittest.html#unittest.TestCase
 
-utils.selection.split_selection
-'''''''''''''''''''''''''''''''
-``utils.selection.split_selection`` break up a string by selection markers into ``content`` and ``selection``.
+It is expeced
+
+utils.split_selection
+'''''''''''''''''''''
+``sublime_plugin_tests.utils.split_selection`` break up a string by selection markers into ``content`` and ``selection``.
 
 .. code:: python
 
