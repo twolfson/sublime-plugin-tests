@@ -15,7 +15,7 @@ install:
   - python setup.py develop
 
   # Install dev requirements
-  - pip install -r requirements-dev.txt
+  - if test -f requirements-dev.txt; then pip install -r requirements-dev.txt; fi
 
   # TODO: Remove this
   # Symlink `subl` to `sublime_text`

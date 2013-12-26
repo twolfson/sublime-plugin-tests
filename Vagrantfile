@@ -63,7 +63,9 @@ SCRIPT
     python setup.py develop
 
     # Install dev dependencies
-    pip install -r requirements-dev.txt
+    if test -f requirements-dev.txt; then
+      pip install -r requirements-dev.txt
+    fi
 SCRIPT
   config.vm.provision "shell", inline: $install_package
 
