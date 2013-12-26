@@ -11,11 +11,15 @@ install:
   - curl http://rawgithub.com/twolfson/sublime-installer/0.1.1/install.sh | sh -s $SUBLIME_TEXT_VERSION
   - subl --version
 
-  # Install `sublime_harness`
+  # Install `sublime_plugin_tests`
   - python setup.py develop
 
   # Install dev requirements
   - pip install -r requirements-dev.txt
+
+  # TODO: Remove this
+  # Symlink `subl` to `sublime_text`
+  - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
 
 before_script:
   # Generate a screen buffer to collect Sublime Text window
