@@ -1,1 +1,1 @@
-nosetests --nocapture
+nosetests --nocapture --verbose --stop
