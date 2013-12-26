@@ -1,5 +1,7 @@
 sublime-plugin-tests changelog
 ==============================
+1.0.0 - Moved to sublime-plugin-tests-base making a neatly fragmented architecture
+
 0.4.0 - Added Python 3 support
 
 0.3.0 - Added Sublime Text 3 support for Travis CI
