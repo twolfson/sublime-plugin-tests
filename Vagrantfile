@@ -15,43 +15,21 @@ Vagrant.configure("2") do |config|
     fi
 
     # Automatically terminate sublime for test runs
-    if ! grep SUBLIME_TESTS_AUTO_KILL /etc/environment > /dev/null; then
-      echo "SUBLIME_TESTS_AUTO_KILL=TRUE" >> /etc/environment
+    if ! grep SUBLIME_AUTO_KILL /etc/environment > /dev/null; then
+      echo "SUBLIME_AUTO_KILL=TRUE" >> /etc/environment
+    fi
+
+    # Specify the environment as Vagrant
+    if ! grep VAGRANT /etc/environment > /dev/null; then
+      echo "VAGRANT=TRUE" >> /etc/environment
     fi
 SCRIPT
   config.vm.provision "shell", inline: $install_user_vars
 
-  $install_sublime = <<SCRIPT
-    # Set and persist SUBLIME_TEXT_VERSION
-    export SUBLIME_TEXT_VERSION=3.0
-    if ! grep SUBLIME_TEXT_VERSION /etc/environment > /dev/null; then
-      echo "SUBLIME_TEXT_VERSION=$SUBLIME_TEXT_VERSION" >> /etc/environment
-    fi
-
-    # If Sublime Text isn't installed, install it
-    if test -z "$(which sublime_text)"; then
-      # Preparation for install script
-      sudo apt-get update
-      sudo apt-get install python-software-properties -y
-      sudo mkdir -p /usr/share/icons/hicolor/16x16/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/32x32/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/48x48/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/128x128/apps/
-      sudo mkdir -p /usr/share/icons/hicolor/256x256/apps/
-
-      # # Install Sublime Text
-      # cd /vagrant
-      # ./test/install.sh
-
-      # # Output the version
-      # sublime_text --version
-    fi
-SCRIPT
-  config.vm.provision "shell", inline: $install_sublime
-
   $install_xvfb = <<SCRIPT
     # If xvfb isn't installed, install it
     if ! test -f /usr/bin/Xvfb; then
+      sudo apt-get update
       sudo apt-get install xvfb libgtk2.0-0 -y
     fi
 SCRIPT
@@ -83,6 +61,9 @@ SCRIPT
 
     # Install our package for development
     python setup.py develop
+
+    # Install dev dependencies
+    pip install -r requirements-dev.txt
 SCRIPT
   config.vm.provision "shell", inline: $install_package
 
@@ -97,6 +78,48 @@ SCRIPT
     /usr/bin/Xvfb $DISPLAY -screen 0 1024x768x24 &
 SCRIPT
   config.vm.provision "shell", inline: $launch_xvfb
+
+  $install_sublime = <<SCRIPT
+    # If Sublime Text isn't installed, install it
+    source /etc/environment
+    if test -z "$(which subl)"; then
+      if test -z "$(which add-apt-repository)"; then
+        sudo apt-get install python-software-properties -y
+      fi
+      if test -z "$(which curl)"; then
+        sudo apt-get install curl -y
+      fi
+      curl http://rawgithub.com/twolfson/sublime-installer/0.1.1/install.sh | sh -s $SUBLIME_TEXT_VERSION
+
+      # Output the version
+      subl --version
+    fi
+SCRIPT
+
+  config.vm.define "st2" do |st2|
+    $configure_st2 = <<SCRIPT
+      # Set and persist SUBLIME_TEXT_VERSION
+      export SUBLIME_TEXT_VERSION=2
+      if ! grep SUBLIME_TEXT_VERSION /etc/environment > /dev/null; then
+        echo "SUBLIME_TEXT_VERSION=$SUBLIME_TEXT_VERSION" >> /etc/environment
+      fi
+SCRIPT
+    st2.vm.provision "shell", inline: $configure_st2
+    st2.vm.provision "shell", inline: $install_sublime
+  end
+
+  config.vm.define "st3" do |st3|
+    $configure_st3 = <<SCRIPT
+      # Set and persist SUBLIME_TEXT_VERSION
+      export SUBLIME_TEXT_VERSION=3
+      if ! grep SUBLIME_TEXT_VERSION /etc/environment > /dev/null; then
+        echo "SUBLIME_TEXT_VERSION=$SUBLIME_TEXT_VERSION" >> /etc/environment
+      fi
+SCRIPT
+    st3.vm.provision "shell", inline: $configure_st3
+    st3.vm.provision "shell", inline: $install_sublime
+  end
+
 
   # When done, vagrant ssh
   # cd /vagrant
