@@ -10,7 +10,6 @@ Region = sublime.Region
 
 def run():
     # Generate new scratch file
-    print 'hiii'
     scratch_view = ScratchView()
     try:
         # Injection point for input variables
