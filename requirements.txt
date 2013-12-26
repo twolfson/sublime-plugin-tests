@@ -1,2 +1,3 @@
 Jinja2==2.7.1
 nose==1.3.0
+sublime-plugin-tests-base==0.1.0
