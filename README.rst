@@ -25,10 +25,10 @@ Then, write your tests:
 
     # Define a TestCase
     class TestLeftDelete(framework.TestCase):
-      def test_left_delete_single(self):
-          # Each test function *must* return Python with a `run` function
-          # `run` will be run inside Sublime Text. Perform your assertions etc there.
-          return """
+        def test_left_delete_single(self):
+            # Each test function *must* return Python with a `run` function
+            # `run` will be run inside Sublime Text. Perform your assertions etc there.
+            return """
     # Use ScratchView utility provided by `sublime_plugin_tests`
     from utils.scratch_view import ScratchView
 
