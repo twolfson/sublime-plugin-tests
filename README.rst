@@ -63,7 +63,7 @@ Then, write your tests:
     OK
 
 Travis CI integration
-'''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^
 
 To run your tests against Sublime Text 2/3 in `Travis CI`_, put this in your ``.travis.yml``:
 
