@@ -86,13 +86,6 @@ To run your tests against Sublime Text 2/3 in `Travis CI`_, put this in your ``.
       # Install `sublime_plugin_tests`
       - python setup.py develop
 
-      # Install dev requirements
-      - if test -f requirements-dev.txt; then pip install -r requirements-dev.txt; fi
-
-      # TODO: Remove this
-      # Symlink `subl` to `sublime_text`
-      - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
-
     before_script:
       # Generate a screen buffer to collect Sublime Text window
       - export DISPLAY=:99.0

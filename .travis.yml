@@ -17,10 +17,6 @@ install:
   # Install dev requirements
   - if test -f requirements-dev.txt; then pip install -r requirements-dev.txt; fi
 
-  # TODO: Remove this
-  # Symlink `subl` to `sublime_text`
-  - sudo ln -s /usr/bin/subl /usr/bin/sublime_text
-
 before_script:
   # Generate a screen buffer to collect Sublime Text window
   - export DISPLAY=:99.0
