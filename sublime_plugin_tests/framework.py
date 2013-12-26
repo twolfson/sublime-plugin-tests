@@ -25,7 +25,7 @@ class TestCase(unittest.TestCase):
     def _get_base(self):
         base = getattr(self, 'base', None)
         if not base:
-            base = Base(auto_kill_sublime=os.environ.get('SUBLIME_TESTS_AUTO_KILL', False))
+            base = Base(auto_kill_sublime=os.environ.get('SUBLIME_AUTO_KILL', False))
             self.base = base
         return base
 
