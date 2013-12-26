@@ -2,6 +2,9 @@
 import os
 import unittest
 
+# Load in 3rd party dependencies
+from sublime_plugin_tests_base import Base
+
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
@@ -19,6 +22,13 @@ class TestCase(unittest.TestCase):
         # Call the original function
         unittest.TestCase.__call__(self, result)
 
+    def _get_base(self):
+        base = getattr(self, 'base', None)
+        if not base:
+            base = Base(auto_kill_sublime=os.environ.get('SUBLIME_TESTS_AUTO_KILL', False))
+            self.base = base
+        return base
+
     # TODO: Use functools.wrap
     def _wrap_test(self, test_fn):
         # Generate a wrapped function
@@ -27,8 +37,7 @@ class TestCase(unittest.TestCase):
             test_str = test_fn(*args, **kwargs)
 
             # Run the test and process the result
-            result = self._run_test(test_str,
-                                    auto_kill_sublime=os.environ.get('SUBLIME_TESTS_AUTO_KILL', False))
+            result = self._get_base().run_test(test_str)
             success = result['success']
             failure_reason = result['meta_info'] or 'Test failed'
 
