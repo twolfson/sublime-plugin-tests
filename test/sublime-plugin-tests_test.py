@@ -5,16 +5,15 @@ import os
 from jinja2 import Template
 
 # Load in local dependencies
-from sublime_plugin_tests import framework
-from sublime_plugin_tests.utils.selection import split_selection
+from sublime_plugin_tests import TestCase
+from sublime_plugin_tests.utils import split_selection
 
 # Set up constants
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 
 # Define our class
-class TestLeftDelete(framework.TestCase):
-    # @framework.template(__dir__ + '/test_files/plugin.template.py')
+class TestLeftDelete(TestCase):
     def parse_io_files(self, base_path):
         # Load in input
         with open('%s.input.py' % base_path) as f:
