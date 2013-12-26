@@ -83,8 +83,12 @@ To run your tests against Sublime Text 2/3 in `Travis CI`_, put this in your ``.
       - curl http://rawgithub.com/twolfson/sublime-installer/0.1.1/install.sh | sh -s $SUBLIME_TEXT_VERSION
       - subl --version
 
-      # Install `sublime_plugin_tests`
-      - python setup.py develop
+      # Install dev dependencies
+      - pip install sublime-plugin-tests
+
+      # Install our plugin
+      - mkdir -p '~/.config/sublime-text-'$SUBLIME_TEXT_VERSION'/Packages/'
+      - ln -s $PWD '~/.config/sublime-text-'$SUBLIME_TEXT_VERSION'/Packages/YOUR_PLUGIN_NAME'
 
     before_script:
       # Generate a screen buffer to collect Sublime Text window
