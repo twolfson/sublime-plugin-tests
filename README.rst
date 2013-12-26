@@ -104,22 +104,38 @@ To run your tests against Sublime Text 2/3 in `Travis CI`_, put this in your ``.
 
 Documentation
 -------------
-``sublime_plugin_tests`` exposes ``TestCase`` and ``utils`` as its exports.
+``sublime-plugin-tests`` consists of two pieces: test framework code (outside Sublime Text) and test helpers (inside Sublime Text).
 
+The test framework code is run in your normal development environment (e.g. where ``nosetests`` lives). The test helpers live inside of Sublime text to make your testing life easier.
+
+Test framework
+^^^^^^^^^^^^^^
 TestCase
-''''''''
+""""""""
 ``TestCase`` extends `Python's unittest.TestCase`_. Tests can be skipped and set up/torn down as you normally would.
 
-It is expected that each test case returns a ``String``. This string will be run inside of the context of ``
+It is expected that each test case returns ``test_str``, a ``String`` that is  run inside of the context of `Sublime Text`_. Additionally, it will have access to the test helpers.
 
-The key difference is the string you return **will not** be run in the same context and not have access to the assertions (yet...).
+``test_str`` must have a ``run`` function such that we can hook into it.
 
 .. _`Python's unittest.TestCase`: http://docs.python.org/2/library/unittest.html#unittest.TestCase
 
-It is expeced
+.. code:: python
 
+    class TestLeftDelete(TestCase):
+        def test_left_delete_single(self):
+            return """
+    import sublime
+
+    def run():
+        # I am run inside of Sublime Text
+        assert sublime.active_window().active_view()
+    """
+
+Test helpers
+^^^^^^^^^^^^
 utils.split_selection
-'''''''''''''''''''''
+"""""""""""""""""""""
 ``sublime_plugin_tests.utils.split_selection`` break up a string by selection markers into ``content`` and ``selection``.
 
 .. code:: python
@@ -157,7 +173,7 @@ Output:
     }
 
 utils.scratch_view.ScratchView
-''''''''''''''''''''''''''''''
+""""""""""""""""""""""""""""""
 ``utils.scratch_view.ScratchView`` is a class for creating a temporary view to work on. This is meant to run in the context of Sublime Text and not in the framework.
 
 When initialized, Sublime Text will open a new file in the active window (not saved to local disk). When you are done, it is strongly encouraged to run ``ScratchView#destroy`` to clean up your Sublime Text window.
