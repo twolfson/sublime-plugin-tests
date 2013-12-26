@@ -1,1 +1,0 @@
-workon sublime-plugin-tests
