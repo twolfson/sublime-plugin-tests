@@ -38,6 +38,7 @@ class TestCase(unittest.TestCase):
 
             # Run the test and process the result
             result = self._get_base().run_test(test_str)
+            print result
             success = result['success']
             failure_reason = result['meta_info'] or 'Test failed'
 
