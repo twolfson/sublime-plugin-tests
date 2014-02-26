@@ -91,7 +91,7 @@ SCRIPT
       if test -z "$(which curl)"; then
         sudo apt-get install curl -y
       fi
-      curl http://rawgithub.com/twolfson/sublime-installer/0.1.1/install.sh | sh -s $SUBLIME_TEXT_VERSION
+      curl https://raw.github.com/twolfson/sublime-installer/0.1.1/install.sh | sh -s $SUBLIME_TEXT_VERSION
 
       # Output the version
       subl --version
