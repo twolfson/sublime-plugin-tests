@@ -32,7 +32,10 @@ Then, write your tests:
             # `run` will be run inside Sublime Text. Perform your assertions etc there.
             return """
     # Use ScratchView utility provided by `sublime_plugin_tests`
-    from utils.scratch_view import ScratchView
+    try:
+      from utils.scratch_view import ScratchView
+    except ImportError:
+      from .utils.scratch_view import ScratchView
 
     def run():
       # Generate new scratch file
