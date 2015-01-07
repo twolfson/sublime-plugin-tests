@@ -1,6 +1,8 @@
 sublime-plugin-tests changelog
 ==============================
-1.0.3 - Added fix for `.travis.yml`
+1.0.4 - Updated documentation for `.travis.yml` via @GeeF in #30
+
+1.0.3 - Added fix for `.travis.yml` via @GeeF in #31
 
 1.0.2 - Corrected `ScratchView` documentation via @randy3k in #29
 
