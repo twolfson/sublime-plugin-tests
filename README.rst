@@ -83,7 +83,7 @@ To run your tests against Sublime Text 2/3 in `Travis CI`_, put this in your ``.
 
     install:
       # Install Sublime Text and output version
-      - curl https://raw.github.com/twolfson/sublime-installer/0.1.1/install.sh | sh -s $SUBLIME_TEXT_VERSION
+      - curl https://raw.githubusercontent.com/twolfson/sublime-installer/0.1.3/install.sh | sh -s $SUBLIME_TEXT_VERSION
       - subl --version
 
       # Install dev dependencies
