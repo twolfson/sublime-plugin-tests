@@ -16,7 +16,7 @@ This was built to create a platform to test plugins against multiple versions of
 
 Deprecation notice
 ==================
-We have decided to deprecate ``sublime-plugin-tests`` in favor of using `randy3k/UnitTesting`_.
+We have decided to deprecate ``sublime-plugin-tests`` in favor of `randy3k/UnitTesting`_.
 
 It has greater platform support and a less brittle design for local development.
 
