@@ -1,5 +1,7 @@
 sublime-plugin-tests changelog
 ==============================
+1.0.5 - Added foundry for release
+
 1.0.4 - Updated documentation for `.travis.yml` via @GeeF in #30
 
 1.0.3 - Added fix for `.travis.yml` via @GeeF in #31
