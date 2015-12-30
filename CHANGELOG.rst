@@ -1,14 +1,16 @@
 sublime-plugin-tests changelog
 ==============================
+2.0.0 - Deprecated ``sublime-plugin-tests``
+
 1.0.5 - Added foundry for release
 
-1.0.4 - Updated documentation for `.travis.yml` via @GeeF in #30
+1.0.4 - Updated documentation for ``.travis.yml`` via @GeeF in #30
 
-1.0.3 - Added fix for `.travis.yml` via @GeeF in #31
+1.0.3 - Added fix for ``.travis.yml`` via @GeeF in #31
 
-1.0.2 - Corrected `ScratchView` documentation via @randy3k in #29
+1.0.2 - Corrected ``ScratchView`` documentation via @randy3k in #29
 
-1.0.1 - Corrected `rawgithub.com` URLs to `raw.github.com` to reflect `rawgithub.com's` whitelist rules
+1.0.1 - Corrected ``rawgithub.com`` URLs to ``raw.github.com`` to reflect ``rawgithub.com's`` whitelist rules
 
 1.0.0 - Moved to sublime-plugin-tests-base making a neatly fragmented architecture
 
