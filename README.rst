@@ -14,6 +14,16 @@ This was built to create a platform to test plugins against multiple versions of
 .. image:: https://rawgithub.com/twolfson/sublime-plugin-tests/master/docs/tests.png
    :alt: Screenshot of tests running
 
+Deprecation notice
+==================
+We have decided to deprecate ``sublime-plugin-tests`` in favor of `randy3k/UnitTesting`_.
+
+It has greater platform support and a less brittle design for local development.
+
+https://github.com/randy3k/UnitTesting
+
+.. _`randy3k/UnitTesting`: https://github.com/randy3k/UnitTesting
+
 Getting Started
 ---------------
 Install the module with: ``pip install sublime_plugin_tests``
